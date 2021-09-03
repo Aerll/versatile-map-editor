@@ -91,10 +91,7 @@
     <QtMoc Include="include\editor\dockwindow.hpp">
       <Filter>Header Files\editor</Filter>
     </QtMoc>
-    <QtMoc Include="include\editor\lpanel.hpp">
-      <Filter>Header Files\editor</Filter>
-    </QtMoc>
-    <QtMoc Include="include\editor\resizer.hpp">
+    <QtMoc Include="include\editor\sidebar.hpp">
       <Filter>Header Files\editor</Filter>
     </QtMoc>
   </ItemGroup>
@@ -138,10 +135,7 @@
     <ClCompile Include="source\editor\dockwindow.cpp">
       <Filter>Source Files\editor</Filter>
     </ClCompile>
-    <ClCompile Include="source\editor\lpanel.cpp">
-      <Filter>Source Files\editor</Filter>
-    </ClCompile>
-    <ClCompile Include="source\editor\resizer.cpp">
+    <ClCompile Include="source\editor\sidebar.cpp">
       <Filter>Source Files\editor</Filter>
     </ClCompile>
   </ItemGroup>

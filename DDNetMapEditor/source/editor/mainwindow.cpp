@@ -6,11 +6,12 @@
 #include <editor/tablabel.hpp>
 #include <editor/closebutton.hpp>
 #include <editor/menu.hpp>
-#include <editor/lpanel.hpp>
+#include <editor/sidebar.hpp>
 
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QMenuBar>
+#include <QSplitter>
 #include <QVBoxLayout>
 
 #include <windows.h>
@@ -30,19 +31,19 @@ MainWindow::MainWindow(QWidget* parent)
 
     addToolBar(tool_bar);
 
-    editor::LPanel* lpanel_test = new editor::LPanel{ this };
+    QSplitter* splitter = new QSplitter{ this };
+
+    editor::Sidebar* left_sidebar = new editor::Sidebar{ this };
+    editor::Sidebar* right_sidebar = new editor::Sidebar{ this };
+
+    splitter->addWidget(left_sidebar);
+    splitter->addWidget(tab_widget);
+    splitter->addWidget(right_sidebar);
 
     QHBoxLayout* main_layout = new QHBoxLayout;
-    main_layout->setSpacing(3);
+    main_layout->setSpacing(0);
     main_layout->setContentsMargins(0, 0, 0, 0);
-    main_layout->addWidget(lpanel_test);
-
-    QVBoxLayout* workspace_layout = new QVBoxLayout;
-    workspace_layout->addWidget(tab_widget);
-    workspace_layout->setSpacing(0);
-    workspace_layout->setContentsMargins(0, 0, 0, 0);
-
-    main_layout->addLayout(workspace_layout);
+    main_layout->addWidget(splitter);
 
     centralWidget()->setLayout(main_layout);
 
