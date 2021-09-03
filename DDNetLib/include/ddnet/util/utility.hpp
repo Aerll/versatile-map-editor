@@ -61,11 +61,11 @@ inline constexpr _UnderlyingType toUnderlying(_EnumType value) noexcept {
 }
 
 inline constexpr qint32 floatToFixed(float value) noexcept { 
-    return static_cast<int>(value * static_cast<float>(1 << 10)); 
+    return static_cast<int>(value * static_cast<float>(1 << constants::_fractional_bits)); 
 }
 
 inline constexpr float fixedToFloat(qint32 value) noexcept { 
-    return value * (1.f / (1 << 10));
+    return value * (1.f / (1 << constants::_fractional_bits));
 }
 
 } // ddnet::util::

@@ -3,8 +3,9 @@
 #include <QtGlobal>
 
 namespace ddnet::constants {
-    
+
 constexpr qint32 _notfound = -1;
+constexpr qint32 _fractional_bits = 10;
 
 } // ddnet::constants::
 
