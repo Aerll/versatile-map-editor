@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ddnet/util/concepts.hpp>
+#include <ddnet/util/constants.hpp>
 
 #include <QtGlobal>
 #include <QDataStream>
