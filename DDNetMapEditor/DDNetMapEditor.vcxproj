@@ -140,8 +140,7 @@
     <ClCompile Include="source\editor\dockwindow.cpp" />
     <ClCompile Include="source\editor\closebutton.cpp" />
     <ClCompile Include="source\editor\dockpanel.cpp" />
-    <ClCompile Include="source\editor\resizer.cpp" />
-    <ClCompile Include="source\editor\lpanel.cpp" />
+    <ClCompile Include="source\editor\sidebar.cpp" />
     <ClCompile Include="source\editor\main.cpp" />
     <ClCompile Include="source\editor\mainwindow.cpp" />
     <ClCompile Include="source\editor\menu.cpp" />
@@ -161,8 +160,7 @@
     <ClInclude Include="include\editor\constants.hpp" />
     <QtMoc Include="include\editor\menu.hpp" />
     <QtMoc Include="include\editor\dockpanel.hpp" />
-    <QtMoc Include="include\editor\lpanel.hpp" />
-    <QtMoc Include="include\editor\resizer.hpp" />
+    <QtMoc Include="include\editor\sidebar.hpp" />
     <ClInclude Include="include\editor\resourcemanager.hpp" />
     <QtMoc Include="include\editor\toolbar.hpp" />
     <QtMoc Include="include\editor\closebutton.hpp" />

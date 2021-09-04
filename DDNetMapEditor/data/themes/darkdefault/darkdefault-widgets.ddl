@@ -75,6 +75,16 @@ Qt = :QMenu::right-arrow
 	background-color = :transparent
 }
 
+Qt = :QSplitter::handle:horizontal
+{
+    background-color = :palette(base)
+}
+
+Qt = :QSplitter::handle:pressed
+{
+    background-color = :#d15a15
+}
+
 /******************************************************************************
  * Custom widgets
  *
