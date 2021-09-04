@@ -10,7 +10,6 @@ Sidebar::Sidebar(QWidget* parent)
 {
     setBackgroundRole(QPalette::Window);
     setAutoFillBackground(true);
-    setVisible(true);
 
     widget = new QWidget{ this };
 
