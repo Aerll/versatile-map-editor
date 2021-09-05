@@ -1,9 +1,9 @@
 #pragma once
 
 #include <ddnet/map/tile.hpp>
-#include <ddnet/util/types.hpp>
 
 #include <QtGlobal>
+#include <QPoint>
 
 namespace ddnet {
 
@@ -23,7 +23,7 @@ enum class Mirror {
 
 namespace ddnet::util {
 
-inline constexpr util::Point toTilesetCoords(quint8 index) noexcept {
+inline constexpr QPoint toTilesetCoords(quint8 index) noexcept {
     return { index / 16, index % 16 };
 }
 
