@@ -48,9 +48,6 @@
     <Filter Include="Header Files\ddnet\map">
       <UniqueIdentifier>{75e5e65c-e3e5-4dd5-8939-a040cbd5b163}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ddnet\map">
-      <UniqueIdentifier>{8fa03b99-e5d4-4f15-8e68-e2c8b84c91ba}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ddnet\debug\error_codes.hpp">
@@ -143,9 +140,6 @@
     </ClCompile>
     <ClCompile Include="source\ddnet\util\graphics.cpp">
       <Filter>Source Files\ddnet\util</Filter>
-    </ClCompile>
-    <ClCompile Include="source\ddnet\map\tile.cpp">
-      <Filter>Source Files\ddnet\map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -41,7 +41,6 @@
     <ClCompile Include="source\ddnet\io\ddlparser.cpp" />
     <ClCompile Include="source\ddnet\io\ddltokenizer.cpp" />
     <ClCompile Include="source\ddnet\io\mapfilestream.cpp" />
-    <ClCompile Include="source\ddnet\map\tile.cpp" />
     <ClCompile Include="source\ddnet\util\graphics.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
