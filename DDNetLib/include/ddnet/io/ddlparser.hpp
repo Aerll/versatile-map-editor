@@ -26,12 +26,6 @@ protected:
     void errorUnexpectedToken(const std::pair<util::Token, qint32>& token);
 
 public:
-    inline DDLParser() = default;
-    inline DDLParser(const DDLParser&) = default;
-    inline DDLParser(DDLParser&&) = default;
-    inline DDLParser& operator=(const DDLParser&) = default;
-    inline DDLParser& operator=(DDLParser&&) = default;
-
     void parse(const tokenlist_type& tokens);
 
 public:

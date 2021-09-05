@@ -28,10 +28,8 @@ namespace ddnet::map {
 
 class Tile {
 public:
-    inline Tile(const Tile&) = default;
-    inline Tile(Tile&&) = default;
-    inline Tile& operator=(const Tile&) = default;
-    inline Tile& operator=(Tile&&) = default;
+    DEFAULT_COPY_(Tile);
+    DEFAULT_MOVE_(Tile);
 
     inline Tile()
         : index{ 0 }
@@ -57,10 +55,8 @@ public:
 
 class TeleTile {
 public:
-    inline TeleTile(const TeleTile&) = default;
-    inline TeleTile(TeleTile&&) = default;
-    inline TeleTile& operator=(const TeleTile&) = default;
-    inline TeleTile& operator=(TeleTile&&) = default;
+    DEFAULT_COPY_(TeleTile);
+    DEFAULT_MOVE_(TeleTile);
 
     inline TeleTile()
         : index{ 0 }
@@ -83,10 +79,8 @@ public:
 
 class TuneTile {
 public:
-    inline TuneTile(const TuneTile&) = default;
-    inline TuneTile(TuneTile&&) = default;
-    inline TuneTile& operator=(const TuneTile&) = default;
-    inline TuneTile& operator=(TuneTile&&) = default;
+    DEFAULT_COPY_(TuneTile);
+    DEFAULT_MOVE_(TuneTile);
 
     inline TuneTile()
         : index{ 0 }
@@ -109,10 +103,8 @@ public:
 
 class SpeedupTile {
 public:
-    inline SpeedupTile(const SpeedupTile&) = default;
-    inline SpeedupTile(SpeedupTile&&) = default;
-    inline SpeedupTile& operator=(const SpeedupTile&) = default;
-    inline SpeedupTile& operator=(SpeedupTile&&) = default;
+    DEFAULT_COPY_(SpeedupTile);
+    DEFAULT_MOVE_(SpeedupTile);
 
     inline SpeedupTile()
         : index{ 0 }
@@ -141,10 +133,8 @@ public:
 
 class SwitchTile {
 public:
-    inline SwitchTile(const SwitchTile&) = default;
-    inline SwitchTile(SwitchTile&&) = default;
-    inline SwitchTile& operator=(const SwitchTile&) = default;
-    inline SwitchTile& operator=(SwitchTile&&) = default;
+    DEFAULT_COPY_(SwitchTile);
+    DEFAULT_MOVE_(SwitchTile);
 
     inline SwitchTile()
         : index{ 0 }

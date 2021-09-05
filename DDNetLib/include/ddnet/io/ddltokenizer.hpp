@@ -20,12 +20,6 @@ protected:
     void validate();
 
 public:
-    inline DDLTokenizer() = default;
-    inline DDLTokenizer(const DDLTokenizer&) = default;
-    inline DDLTokenizer(DDLTokenizer&&) = default;
-    inline DDLTokenizer& operator=(const DDLTokenizer&) = default;
-    inline DDLTokenizer& operator=(DDLTokenizer&&) = default;
-
     void tokenize(QTextStream& text_stream);
 
 public:
