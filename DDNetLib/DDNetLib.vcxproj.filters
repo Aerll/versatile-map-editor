@@ -101,7 +101,7 @@
     <ClInclude Include="include\ddnet\map\quad.hpp">
       <Filter>Header Files\ddnet\map</Filter>
     </ClInclude>
-    <ClInclude Include="include\ddnet\map\sound.hpp">
+    <ClInclude Include="include\ddnet\map\sound_source.hpp">
       <Filter>Header Files\ddnet\map</Filter>
     </ClInclude>
     <ClInclude Include="include\ddnet\util\tile.hpp">
