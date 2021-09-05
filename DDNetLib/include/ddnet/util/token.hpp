@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ddnet/util/macros.hpp>
+
 #include <QString>
 
 namespace ddnet::util {
@@ -14,11 +16,8 @@ enum class TokenType {
     Close      = 1 << 6,
     Terminal   = 1 << 7,
 };
-
-inline TokenType operator&(TokenType lhs, TokenType rhs) { return static_cast<TokenType>(static_cast<qint32>(lhs) & static_cast<qint32>(rhs)); }
-inline TokenType operator&=(TokenType& lhs, TokenType rhs) { lhs = lhs & rhs; return lhs; }
-inline TokenType operator|(TokenType lhs, TokenType rhs) { return static_cast<TokenType>(static_cast<qint32>(lhs) | static_cast<qint32>(rhs)); }
-inline TokenType operator|=(TokenType& lhs, TokenType rhs) { lhs = lhs | rhs; return lhs; }
+ENUM_DEFINE_AND_(TokenType);
+ENUM_DEFINE_OR_(TokenType);
 
 
 
