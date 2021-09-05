@@ -2,7 +2,7 @@
 
 namespace ddnet::debug {
 
-enum class ErrorCode {
+enum class [[nodiscard]] ErrorCode {
     NoError = 0,
 
     // file
@@ -96,7 +96,7 @@ enum class ErrorCode {
     Resource_Lang_FailedToReadTranslations,
 };
 
-inline constexpr bool failed(ErrorCode error_code) noexcept {
+[[nodiscard]] inline constexpr bool failed(ErrorCode error_code) noexcept {
     return error_code != ErrorCode::NoError;
 }
 

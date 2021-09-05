@@ -313,8 +313,7 @@ debug::ErrorCode ResourceManager::initTranslationStrings() {
     if (count != util::toUnderlying(StringIndex::TotalCount))
         return debug::ErrorCode::Resource_Lang_FailedToReadTranslations;
 
-    createTranslationStrings(language_ddl.data);
-    return debug::ErrorCode::NoError;
+    return createTranslationStrings(language_ddl.data);
 }
 
 
