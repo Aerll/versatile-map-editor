@@ -1,7 +1,6 @@
 #include <editor/app.hpp>
 
 #include <editor/mainwindow.hpp>
-#include <ddnet/io/mapfilestream.hpp>
 
 #include <QApplication>
 #include <QStyleFactory>
