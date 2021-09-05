@@ -45,6 +45,12 @@
     <Filter Include="Source Files\ddnet\util">
       <UniqueIdentifier>{36cc3fa2-e372-435b-b1db-d236364a543f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ddnet\map">
+      <UniqueIdentifier>{75e5e65c-e3e5-4dd5-8939-a040cbd5b163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ddnet\map">
+      <UniqueIdentifier>{8fa03b99-e5d4-4f15-8e68-e2c8b84c91ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ddnet\debug\error_codes.hpp">
@@ -92,6 +98,18 @@
     <ClInclude Include="include\ddnet\util\graphics.hpp">
       <Filter>Header Files\ddnet\util</Filter>
     </ClInclude>
+    <ClInclude Include="include\ddnet\map\tile.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\quad.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\sound.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\util\tile.hpp">
+      <Filter>Header Files\ddnet\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="libs\singleapplication\singleapplication.h">
@@ -125,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="source\ddnet\util\graphics.cpp">
       <Filter>Source Files\ddnet\util</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ddnet\map\tile.cpp">
+      <Filter>Source Files\ddnet\map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

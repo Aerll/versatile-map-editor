@@ -19,7 +19,11 @@
     <ClInclude Include="include\ddnet\io\ddltokenizer.hpp" />
     <ClInclude Include="include\ddnet\io\mapdata.hpp" />
     <ClInclude Include="include\ddnet\io\mapfilestream.hpp" />
+    <ClInclude Include="include\ddnet\map\quad.hpp" />
+    <ClInclude Include="include\ddnet\map\sound.hpp" />
+    <ClInclude Include="include\ddnet\map\tile.hpp" />
     <ClInclude Include="include\ddnet\util\graphics.hpp" />
+    <ClInclude Include="include\ddnet\util\tile.hpp" />
     <ClInclude Include="include\ddnet\util\token.hpp" />
     <ClInclude Include="include\ddnet\util\concepts.hpp" />
     <ClInclude Include="include\ddnet\util\constants.hpp" />
@@ -37,6 +41,7 @@
     <ClCompile Include="source\ddnet\io\ddlparser.cpp" />
     <ClCompile Include="source\ddnet\io\ddltokenizer.cpp" />
     <ClCompile Include="source\ddnet\io\mapfilestream.cpp" />
+    <ClCompile Include="source\ddnet\map\tile.cpp" />
     <ClCompile Include="source\ddnet\util\graphics.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
