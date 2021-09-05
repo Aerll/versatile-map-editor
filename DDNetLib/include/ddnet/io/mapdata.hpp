@@ -295,9 +295,9 @@ struct TuneTileInfo {
 };
 
 struct Quad {
-    std::array<util::Point<qint32>, 5> points;
+    std::array<util::Point, 5> points;
     std::array<util::Color, 4> colors;
-    std::array<util::Point<qint32>, 4> tex_coords;
+    std::array<util::Point, 4> tex_coords;
 
     qint32 position_envelope_index;
     qint32 position_envelope_offset;
@@ -312,7 +312,7 @@ struct SoundShape {
 };
 
 struct SoundSource {
-    util::Point<qint32> position;
+    util::Point position;
     qint32 is_looped;
     qint32 has_panning;
     qint32 time_delay_sec;

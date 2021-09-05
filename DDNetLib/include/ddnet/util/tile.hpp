@@ -23,7 +23,7 @@ enum class Mirror {
 
 namespace ddnet::util {
 
-inline constexpr util::Point<qint32> toTilesetCoords(quint8 index) noexcept {
+inline constexpr util::Point toTilesetCoords(quint8 index) noexcept {
     return { index / 16, index % 16 };
 }
 

@@ -4,20 +4,18 @@
 
 namespace ddnet::util {
 
-template <typename _Type>
 struct Point {
     inline bool operator==(const Point&) const = default;
 
-    _Type x;
-    _Type y;
+    qint32 x;
+    qint32 y;
 };
 
-template <typename _Type>
 struct Size {
     inline bool operator==(const Size&) const = default;
 
-    _Type width;
-    _Type height;
+    qint32 width;
+    qint32 height;
 };
 
 struct Color {
@@ -30,7 +28,7 @@ struct Color {
 
 
 // aliases
-using RectangleSize = Size<qint32>;
+using RectangleSize = Size;
 using CircleRadius = qint32;
 
 } // ddnet::util::
