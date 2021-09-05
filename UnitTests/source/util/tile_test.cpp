@@ -5,11 +5,11 @@
 using namespace ddnet;
 
 TEST_CASE("util::toTilesetCoords") {
-    constexpr QPoint coords11 = util::toTilesetCoords(17);
-    constexpr QPoint coords69 = util::toTilesetCoords(105);
+    constexpr util::Point coords11 = util::toTilesetCoords(17);
+    constexpr util::Point coords69 = util::toTilesetCoords(105);
 
-    CHECK(coords11 == QPoint{ 1, 1 });
-    CHECK(coords69 == QPoint{ 6, 9 });
+    CHECK(coords11 == util::Point{ 1, 1 });
+    CHECK(coords69 == util::Point{ 6, 9 });
 }
 
 TEST_CASE("util::rotateTile") {

@@ -5,11 +5,15 @@
 namespace ddnet::util {
 
 struct Point {
+    inline bool operator==(const Point&) const = default;
+
     qint32 x;
     qint32 y;
 };
 
 struct Size {
+    inline bool operator==(const Size&) const = default;
+
     qint32 width;
     qint32 height;
 };

@@ -3,7 +3,6 @@
 #include <ddnet/util/macros.hpp>
 
 #include <QtGlobal>
-#include <QPoint>
 
 namespace ddnet {
 

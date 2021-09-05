@@ -107,6 +107,9 @@
     <ClInclude Include="include\ddnet\util\tile.hpp">
       <Filter>Header Files\ddnet\util</Filter>
     </ClInclude>
+    <ClInclude Include="include\ddnet\map\tilemap.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="libs\singleapplication\singleapplication.h">
