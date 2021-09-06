@@ -28,30 +28,25 @@ namespace ddnet::map {
 struct Tile {
     quint8 index;
     Rotation rotation;
-    bool is_opaque;
+    bool is_selected;
 };
 
-struct TeleTile {
-    quint8 index;
+struct TeleTile : Tile {
     quint8 id;
 };
 
-struct TuneTile {
-    quint8 index;
+struct TuneTile : Tile {
     quint8 id;
 };
 
-struct SpeedupTile {
-    quint8 index;
+struct SpeedupTile : Tile {
     quint8 force;
     quint8 max_speed;
     qint16 angle;
 };
 
-struct SwitchTile {
-    quint8 index;
+struct SwitchTile : Tile {
     quint8 id;
-    Rotation rotation;
     quint8 delay;
 };
 
