@@ -19,7 +19,6 @@ struct SoundSource {
 
     bool is_looped;
     bool has_panning;
-
 };
 
 struct SoundSourceCircle : SoundSource {

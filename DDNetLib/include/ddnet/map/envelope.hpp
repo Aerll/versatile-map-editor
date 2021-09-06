@@ -2,7 +2,11 @@
 
 namespace ddnet::map {
 
-class Tilemap {
+struct EnvelopePoint {
+    // TODO
+};
+
+class Envelope {
     // TODO
 };
 

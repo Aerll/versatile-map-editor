@@ -31,21 +31,15 @@ struct Tile {
     bool is_opaque;
 };
 
-
-
 struct TeleTile {
     quint8 index;
     quint8 id;
 };
 
-
-
 struct TuneTile {
     quint8 index;
     quint8 id;
 };
-
-
 
 struct SpeedupTile {
     quint8 index;
@@ -53,8 +47,6 @@ struct SpeedupTile {
     quint8 max_speed;
     qint16 angle;
 };
-
-
 
 struct SwitchTile {
     quint8 index;

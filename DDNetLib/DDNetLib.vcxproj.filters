@@ -107,8 +107,44 @@
     <ClInclude Include="include\ddnet\util\tile.hpp">
       <Filter>Header Files\ddnet\util</Filter>
     </ClInclude>
+    <ClInclude Include="include\ddnet\map\tileset.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\layer.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\node.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
     <ClInclude Include="include\ddnet\map\tilemap.hpp">
       <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\envelope.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\layer_properties.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\asset.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\group.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\group_properties.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\map.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\map_properties.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\io\ddmdata.hpp">
+      <Filter>Header Files\ddnet\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\io\ddmfilestream.hpp">
+      <Filter>Header Files\ddnet\io</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +179,12 @@
     </ClCompile>
     <ClCompile Include="source\ddnet\util\graphics.cpp">
       <Filter>Source Files\ddnet\util</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ddnet\io\ddmdata.cpp">
+      <Filter>Source Files\ddnet\io</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ddnet\io\ddmfilestream.cpp">
+      <Filter>Source Files\ddnet\io</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

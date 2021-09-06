@@ -2,7 +2,7 @@
 
 namespace ddnet::map {
 
-class Tilemap {
+class Node {
     // TODO
 };
 

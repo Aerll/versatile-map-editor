@@ -7,7 +7,7 @@
 
 namespace ddnet::map {
 
-class QuadVertex {
+struct QuadVertex {
     QPointF position;
     QPoint tex_coord;
     QColor color;
