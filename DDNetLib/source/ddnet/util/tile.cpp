@@ -42,4 +42,41 @@ bool isSpeedupEntity(const map::Tile& tile) noexcept {
     return false;
 }
 
+void rotateTile(map::Tile& tile, Rotate direction) noexcept {
+    switch (direction) {
+        case Rotate::Clockwise:
+            if (static_cast<bool>(tile.rotation & Rotation::R))
+                tile.rotation ^= Rotation::VH;
+
+            break;
+
+        case Rotate::CounterClockwise:
+            if (!static_cast<bool>(tile.rotation & Rotation::R))
+                tile.rotation ^= Rotation::VH;
+
+            break;
+    }
+    tile.rotation ^= Rotation::R;
+}
+
+void mirrorTile(map::Tile& tile, Mirror axis) noexcept {
+    switch (axis) {
+        case Mirror::VerticalAxis:
+            if (static_cast<bool>(tile.rotation & Rotation::R))
+                tile.rotation ^= Rotation::H;
+            else
+                tile.rotation ^= Rotation::V;
+
+            break;
+
+        case Mirror::HorizontalAxis:
+            if (static_cast<bool>(tile.rotation & Rotation::R))
+                tile.rotation ^= Rotation::V;
+            else
+                tile.rotation ^= Rotation::H;
+
+            break;
+    }
+}
+
 } // ddnet::util::
