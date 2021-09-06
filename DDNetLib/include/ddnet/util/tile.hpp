@@ -17,11 +17,26 @@ enum class Mirror {
     HorizontalAxis,
 };
 
+enum class EntityLayer {
+    Game = 0,
+    Front = Game,
+    Tele,
+    Tune,
+    Switch,
+    Speedup,
+};
+
 } // ddnet::
 
 
 
 namespace ddnet::util {
+
+bool canRotate(const map::Tile& tile) noexcept;
+bool canMirror(const map::Tile& tile) noexcept;
+bool isEntity(const map::Tile& tile, EntityLayer entity_layer) noexcept;
+
+
 
 inline constexpr QPoint toTilesetCoords(quint8 index) noexcept {
     return { index / 16, index % 16 };

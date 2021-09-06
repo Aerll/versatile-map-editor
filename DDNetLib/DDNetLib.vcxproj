@@ -57,6 +57,7 @@
     <ClCompile Include="source\ddnet\io\ddmfilestream.cpp" />
     <ClCompile Include="source\ddnet\io\mapfilestream.cpp" />
     <ClCompile Include="source\ddnet\util\graphics.cpp" />
+    <ClCompile Include="source\ddnet\util\tile.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D4CDFBA4-3D72-4510-B174-22F8914EDF40}</ProjectGuid>

@@ -186,5 +186,8 @@
     <ClCompile Include="source\ddnet\io\ddmfilestream.cpp">
       <Filter>Source Files\ddnet\io</Filter>
     </ClCompile>
+    <ClCompile Include="source\ddnet\util\tile.cpp">
+      <Filter>Source Files\ddnet\util</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
