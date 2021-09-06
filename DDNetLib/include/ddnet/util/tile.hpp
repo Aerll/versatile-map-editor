@@ -17,15 +17,6 @@ enum class Mirror {
     HorizontalAxis,
 };
 
-enum class EntityLayer {
-    Game = 0,
-    Front = Game,
-    Tele,
-    Tune,
-    Switch,
-    Speedup,
-};
-
 } // ddnet::
 
 
@@ -34,7 +25,12 @@ namespace ddnet::util {
 
 bool canRotate(const map::Tile& tile) noexcept;
 bool canMirror(const map::Tile& tile) noexcept;
-bool isEntity(const map::Tile& tile, EntityLayer entity_layer) noexcept;
+bool isGameEntity(const map::Tile& tile) noexcept;
+bool isFrontEntity(const map::Tile& tile) noexcept;
+bool isTeleEntity(const map::Tile& tile) noexcept;
+bool isTuneEntity(const map::Tile& tile) noexcept;
+bool isSwitchEntity(const map::Tile& tile) noexcept;
+bool isSpeedupEntity(const map::Tile& tile) noexcept;
 
 
 

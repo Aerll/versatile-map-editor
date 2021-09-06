@@ -12,9 +12,34 @@ bool canMirror(const map::Tile& tile) noexcept {
     return {};
 }
 
-bool isEntity(const map::Tile& tile, EntityLayer entity_layer) noexcept {
+bool isGameEntity(const map::Tile& tile) noexcept {
     // TODO
-    return {};
+    return false;
+}
+
+bool isFrontEntity(const map::Tile& tile) noexcept {
+    // TODO
+    return false;
+}
+
+bool isTeleEntity(const map::Tile& tile) noexcept {
+    // TODO
+    return false;
+}
+
+bool isTuneEntity(const map::Tile& tile) noexcept {
+    // TODO
+    return false;
+}
+
+bool isSwitchEntity(const map::Tile& tile) noexcept {
+    // TODO
+    return false;
+}
+
+bool isSpeedupEntity(const map::Tile& tile) noexcept {
+    // TODO
+    return false;
 }
 
 } // ddnet::util::
