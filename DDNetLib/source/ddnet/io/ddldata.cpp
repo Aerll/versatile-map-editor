@@ -2,7 +2,6 @@
 
 #include <ddnet/util/constants.hpp>
 
-#include <algorithm>
 #include <iterator>
 
 namespace ddnet::io {

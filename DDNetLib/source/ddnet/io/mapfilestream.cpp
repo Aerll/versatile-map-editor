@@ -8,7 +8,6 @@
 #include <QFile>
 #include <QFileInfo>
 
-#include <algorithm>
 #include <utility>
 #include <zlib.h>
 

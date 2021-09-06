@@ -17,7 +17,7 @@ using namespace ddnet;
 namespace test_util {
 
 bool hasError(const io::DDLParser& parser, debug::ErrorCode code) {
-    auto it = std::find_if(std::begin(parser.errors), std::end(parser.errors), [code](const debug::Error& error) {
+    auto it = std::ranges::find_if(parser.errors, [code](const auto& error) {
         return error.code == code;
     });
     return it != std::end(parser.errors);

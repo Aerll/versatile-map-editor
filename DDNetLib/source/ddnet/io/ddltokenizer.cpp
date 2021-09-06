@@ -3,7 +3,6 @@
 #include <QTextStream>
 
 #include <cassert>
-#include <algorithm>
 
 namespace ddnet::io {
 

@@ -362,7 +362,7 @@ private:
     inline qint32 layersCountImpl() const {
         qint32 result = 0;
         for (const auto& group : groups) {
-            result += std::count_if(std::cbegin(group.layers), std::cend(group.layers), [](const decltype(group.layers)::value_type& layer) {
+            result += std::ranges::count_if(group.layers, [](const auto& layer) {
                 return layer.index() == util::typeIndex<_Type>(layer);
             });
         }
