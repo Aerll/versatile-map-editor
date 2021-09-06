@@ -31,7 +31,9 @@
     <ClInclude Include="include\ddnet\map\map_properties.hpp" />
     <ClInclude Include="include\ddnet\map\quad.hpp" />
     <ClInclude Include="include\ddnet\map\asset.hpp" />
+    <ClInclude Include="include\ddnet\map\quad_properties.hpp" />
     <ClInclude Include="include\ddnet\map\sound_source.hpp" />
+    <ClInclude Include="include\ddnet\map\sound_source_properties.hpp" />
     <ClInclude Include="include\ddnet\map\tile.hpp" />
     <ClInclude Include="include\ddnet\map\tilemap.hpp" />
     <ClInclude Include="include\ddnet\map\tileset.hpp" />

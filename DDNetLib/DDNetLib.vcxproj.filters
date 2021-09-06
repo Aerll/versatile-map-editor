@@ -146,6 +146,12 @@
     <ClInclude Include="include\ddnet\io\ddmfilestream.hpp">
       <Filter>Header Files\ddnet\io</Filter>
     </ClInclude>
+    <ClInclude Include="include\ddnet\map\quad_properties.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\map\sound_source_properties.hpp">
+      <Filter>Header Files\ddnet\map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="libs\singleapplication\singleapplication.h">
