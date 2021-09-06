@@ -20,7 +20,7 @@ bool hasError(const io::DDLParser& parser, debug::ErrorCode code) {
     auto it = std::ranges::find_if(parser.errors, [code](const auto& error) {
         return error.code == code;
     });
-    return it != std::end(parser.errors);
+    return it != parser.errors.end();
 }
 
 } // test_util::
@@ -68,7 +68,7 @@ TEST_CASE("io::DDLData") {
         CHECK(data.property({ "Prop1", "Value1" })->first.value == "Value1");
         CHECK(data.property({ "Prop2", "Value2" })->first.value == "Value2");
         CHECK(data.property({ "Prop3", "Value3" })->first.value == "Value3");
-        CHECK(data.property({ "invalid", "invalid" }) == std::cend(data));
+        CHECK(data.property({ "invalid", "invalid" }) == data.cend());
     }
 }
 

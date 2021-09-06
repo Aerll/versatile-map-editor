@@ -14,7 +14,7 @@ void DDLTokenizer::finalize() {
                 tokens[i + 3].first.type == util::TokenType::Literal
                 ) {
                 tokens[i + 1].first.string += tokens[i + 3].first.string;
-                tokens.erase(std::begin(tokens) + (i + 2), std::begin(tokens) + (i + 4));
+                tokens.erase(tokens.begin() + (i + 2), tokens.begin() + (i + 4));
                 --i;
             }
         }

@@ -9,6 +9,7 @@
 #include <QDirIterator>
 #include <QDir>
 
+#include <algorithm>
 #include <tuple>
 
 namespace ddnet::editor {
@@ -95,10 +96,10 @@ debug::ErrorCode ResourceManager::initResources() {
 
 QString ResourceManager::relativePath(ResourceType resource_type, const QString& file_name) {
     auto& file_paths = resource_files[resource_type];
-    auto file_path = std::find_if(std::begin(file_paths), std::end(file_paths), [&file_name](const QString& file_path) {
+    auto file_path = std::ranges::find_if(file_paths, [&file_name](const auto& file_path) {
         return file_path.lastIndexOf(file_name) != -1;
     });
-    if (file_path == std::end(file_paths))
+    if (file_path == file_paths.end())
         return {};
     return *file_path;
 }
