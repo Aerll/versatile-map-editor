@@ -122,22 +122,13 @@
     <ClInclude Include="include\ddnet\map\envelope.hpp">
       <Filter>Header Files\ddnet\map</Filter>
     </ClInclude>
-    <ClInclude Include="include\ddnet\map\layer_properties.hpp">
-      <Filter>Header Files\ddnet\map</Filter>
-    </ClInclude>
     <ClInclude Include="include\ddnet\map\asset.hpp">
       <Filter>Header Files\ddnet\map</Filter>
     </ClInclude>
     <ClInclude Include="include\ddnet\map\group.hpp">
       <Filter>Header Files\ddnet\map</Filter>
     </ClInclude>
-    <ClInclude Include="include\ddnet\map\group_properties.hpp">
-      <Filter>Header Files\ddnet\map</Filter>
-    </ClInclude>
     <ClInclude Include="include\ddnet\map\map.hpp">
-      <Filter>Header Files\ddnet\map</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ddnet\map\map_properties.hpp">
       <Filter>Header Files\ddnet\map</Filter>
     </ClInclude>
     <ClInclude Include="include\ddnet\io\ddmdata.hpp">
@@ -145,12 +136,6 @@
     </ClInclude>
     <ClInclude Include="include\ddnet\io\ddmfilestream.hpp">
       <Filter>Header Files\ddnet\io</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ddnet\map\quad_properties.hpp">
-      <Filter>Header Files\ddnet\map</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ddnet\map\sound_source_properties.hpp">
-      <Filter>Header Files\ddnet\map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
