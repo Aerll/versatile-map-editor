@@ -30,7 +30,6 @@
     <ClInclude Include="include\ddnet\map\asset.hpp" />
     <ClInclude Include="include\ddnet\map\sound_source.hpp" />
     <ClInclude Include="include\ddnet\map\tile.hpp" />
-    <ClInclude Include="include\ddnet\map\tilemap.hpp" />
     <ClInclude Include="include\ddnet\map\tileset.hpp" />
     <ClInclude Include="include\ddnet\util\graphics.hpp" />
     <ClInclude Include="include\ddnet\util\tile.hpp" />

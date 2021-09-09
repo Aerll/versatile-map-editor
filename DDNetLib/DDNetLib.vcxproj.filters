@@ -116,9 +116,6 @@
     <ClInclude Include="include\ddnet\map\node.hpp">
       <Filter>Header Files\ddnet\map</Filter>
     </ClInclude>
-    <ClInclude Include="include\ddnet\map\tilemap.hpp">
-      <Filter>Header Files\ddnet\map</Filter>
-    </ClInclude>
     <ClInclude Include="include\ddnet\map\envelope.hpp">
       <Filter>Header Files\ddnet\map</Filter>
     </ClInclude>

@@ -1,9 +1,11 @@
 #pragma once
 
+#include <QFileInfo>
+
 namespace ddnet::map {
 
 class Asset {
-    // TODO
+    QFileInfo file_info;
 };
 
 class ImageAsset : public Asset {

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <ddnet/map/node.hpp>
+#include <ddnet/map/quad.hpp>
+#include <ddnet/map/sound_source.hpp>
 
 #include <QFileInfo>
 #include <QColor>
@@ -12,7 +14,20 @@
 
 namespace ddnet::map {
 
-class BaseTileLayer {
+class Asset;
+
+
+
+class BaseLayer {
+public:
+    bool is_visible = false;
+    bool is_detail = false;
+
+protected:
+    Asset* asset = nullptr;
+};
+
+class BaseTileLayer : public BaseLayer {
     using node_iterator = std::vector<std::shared_ptr<Node>>::iterator;
 
 public:
@@ -31,10 +46,6 @@ public:
 protected:
     std::vector<std::shared_ptr<Node>> nodes;
     QSize size = { 0, 0 };
-    quint16 group_id = 0;
-    quint16 id = 0;
-    QFileInfo asset_path;
-    bool is_detail = false;
 };
 
 class TileLayer : public BaseTileLayer {
@@ -53,22 +64,17 @@ class SpeedupLayer : public BaseTileLayer {};
 
 
 
-class QuadLayer {
+class QuadLayer : public BaseLayer {
 public:
-    quint16 group_id = 0;
-    quint16 id = 0;
-    QFileInfo asset_path;
-    bool is_detail = false;
+    std::vector<Quad> quads;
 };
 
 
 
-class SoundLayer {
+class SoundLayer : public BaseLayer {
 public:
-    quint16 group_id = 0;
-    quint16 id = 0;
-    QFileInfo asset_path;
-    bool is_detail = false;
+    std::vector<SoundSourceCircle> circle_sound_sources;
+    std::vector<SoundSourceRectangle> rectangle_sound_sources;
 };
 
 } // ddnet::map::
