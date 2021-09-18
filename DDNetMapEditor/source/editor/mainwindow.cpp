@@ -68,60 +68,60 @@ MainWindow::MainWindow(QWidget* parent)
 void MainWindow::initActions() {
     // file menu
     action_new = new QAction{ App::resources.string(StringIndex::MenuFileNew), this };
-    action_new->setShortcut(Qt::CTRL + Qt::Key_N);
+    action_new->setShortcut(QKeySequence{ Qt::CTRL | Qt::Key_N });
     action_new->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon16_Normal_NewFile)));
 
     action_open = new QAction{ App::resources.string(StringIndex::MenuFileOpen), this };
-    action_open->setShortcut(Qt::CTRL + Qt::Key_O);
+    action_open->setShortcut(QKeySequence{ Qt::CTRL | Qt::Key_O });
     action_open->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon16_Normal_OpenFile)));
           
     action_save = new QAction{ App::resources.string(StringIndex::MenuFileSave), this };
-    action_save->setShortcut(Qt::CTRL + Qt::Key_S);
+    action_save->setShortcut(QKeySequence{ Qt::CTRL | Qt::Key_S });
     action_save->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon16_Normal_SaveFile)));
           
     action_save_as = new QAction{ App::resources.string(StringIndex::MenuFileSaveAs), this };
           
     action_save_all = new QAction{ App::resources.string(StringIndex::MenuFileSaveAll), this };
-    action_save_all->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_S);
+    action_save_all->setShortcut(QKeySequence{ Qt::CTRL | Qt::SHIFT | Qt::Key_S });
           
     action_import = new QAction{ App::resources.string(StringIndex::MenuFileImport), this };
-    action_import->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_I);
+    action_import->setShortcut(QKeySequence{ Qt::CTRL | Qt::SHIFT | Qt::Key_I });
     action_import->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon16_Normal_Import)));
           
     action_export = new QAction{ App::resources.string(StringIndex::MenuFileExport), this };
-    action_export->setShortcut(Qt::CTRL + Qt::Key_E);
+    action_export->setShortcut(QKeySequence{ Qt::CTRL | Qt::Key_E });
     action_export->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon16_Normal_Export)));
           
     action_export_as = new QAction{ App::resources.string(StringIndex::MenuFileExportAs), this };
-    action_export_as->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_E);
+    action_export_as->setShortcut(QKeySequence{ Qt::CTRL | Qt::SHIFT | Qt::Key_E });
           
     action_exit = new QAction{ App::resources.string(StringIndex::MenuFileExit), this };
-    action_exit->setShortcut(Qt::ALT + Qt::Key_F4);
+    action_exit->setShortcut(QKeySequence{ Qt::ALT | Qt::Key_F4 });
 
     // edit menu
     action_undo = new QAction{ App::resources.string(StringIndex::MenuEditUndo), this };
-    action_undo->setShortcut(Qt::CTRL + Qt::Key_Z);
+    action_undo->setShortcut(QKeySequence{ Qt::CTRL | Qt::Key_Z });
     action_undo->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon16_Normal_Undo)));
           
     action_redo = new QAction{ App::resources.string(StringIndex::MenuEditRedo), this };
-    action_redo->setShortcut(Qt::CTRL + Qt::Key_Y);
+    action_redo->setShortcut(QKeySequence{ Qt::CTRL | Qt::Key_Y });
     action_redo->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon16_Normal_Redo)));
           
     action_cut = new QAction{ App::resources.string(StringIndex::MenuEditCut), this };
-    action_cut->setShortcut(Qt::CTRL + Qt::Key_X);
+    action_cut->setShortcut(QKeySequence{ Qt::CTRL | Qt::Key_X });
           
     action_copy = new QAction{ App::resources.string(StringIndex::MenuEditCopy), this };
-    action_copy->setShortcut(Qt::CTRL + Qt::Key_C);
+    action_copy->setShortcut(QKeySequence{ Qt::CTRL | Qt::Key_C });
           
     action_paste = new QAction{ App::resources.string(StringIndex::MenuEditPaste), this };
-    action_paste->setShortcut(Qt::CTRL + Qt::Key_V);
+    action_paste->setShortcut(QKeySequence{ Qt::CTRL | Qt::Key_V });
           
     action_delete = new QAction{ App::resources.string(StringIndex::MenuEditDelete), this };
     action_delete->setShortcut(Qt::Key_Delete);
     action_delete->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon16_Normal_Delete)));
     
     action_select_all = new QAction{ App::resources.string(StringIndex::MenuEditSelectAll), this };
-    action_select_all->setShortcut(Qt::CTRL + Qt::Key_A);
+    action_select_all->setShortcut(QKeySequence{ Qt::CTRL | Qt::Key_A });
 
     // view menu
     action_show_tool_bar = new QAction{ App::resources.string(StringIndex::SubMenuViewToolBar), this };
@@ -263,10 +263,10 @@ void MainWindow::connectSignals() {
 }
 
 
-
+/* TODO singleapplication replacement
 void MainWindow::HandleMessage_(quint32 instance_id, QByteArray message) {
     QString strMessage = message.data();
-    QStringList args = strMessage.split(", ", QString::SkipEmptyParts);
+    QStringList args = strMessage.split(", ", Qt::SkipEmptyParts);
 
     QString filePath;
     for (const auto& arg : args) {
@@ -277,7 +277,7 @@ void MainWindow::HandleMessage_(quint32 instance_id, QByteArray message) {
     }
     // TODO openFile
 }
-
+*/
 
 
 void MainWindow::New_() {

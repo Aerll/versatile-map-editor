@@ -9,6 +9,7 @@
 #include <cstddef>
 #include <utility>
 #include <variant>
+#include <vector>
 
 namespace ddnet::concepts::detail {
 

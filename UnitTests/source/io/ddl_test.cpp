@@ -736,7 +736,7 @@ TEST_CASE("io::DDLFileStream") {
         { // test 1
             // load
             io::DDLFileStream file_stream;
-            auto error_code = file_stream.loadFile({ "data/ddl/input_file1.ddl" });
+            auto error_code = file_stream.loadFile(QFileInfo{ "data/ddl/input_file1.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
             REQUIRE(file_stream.data.propertiesCount() == 3);
@@ -755,12 +755,12 @@ TEST_CASE("io::DDLFileStream") {
             CHECK(property->second.contains("SomethingElse"));
 
             // save
-            error_code = file_stream.saveFile({ "data/ddl/output_file1.ddl" });
+            error_code = file_stream.saveFile(QFileInfo{ "data/ddl/output_file1.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
 
             io::DDLFileStream file_stream2;
-            error_code = file_stream2.loadFile({ "data/ddl/output_file1.ddl" });
+            error_code = file_stream2.loadFile(QFileInfo{ "data/ddl/output_file1.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
             CHECK(file_stream.data.properties == file_stream2.data.properties);
@@ -769,7 +769,7 @@ TEST_CASE("io::DDLFileStream") {
         { // test 2
             // load
             io::DDLFileStream file_stream;
-            auto error_code = file_stream.loadFile({ "data/ddl/input_file2.ddl" });
+            auto error_code = file_stream.loadFile(QFileInfo{ "data/ddl/input_file2.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
             REQUIRE(file_stream.data.propertiesCount() == 3);
@@ -778,12 +778,12 @@ TEST_CASE("io::DDLFileStream") {
             REQUIRE(file_stream.data.attributesCount(std::pair<QString, QString>{ "Test", "value3" }) == 2);
 
             // save
-            error_code = file_stream.saveFile({ "data/ddl/output_file2.ddl" });
+            error_code = file_stream.saveFile(QFileInfo{ "data/ddl/output_file2.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
 
             io::DDLFileStream file_stream2;
-            error_code = file_stream2.loadFile({ "data/ddl/output_file2.ddl" });
+            error_code = file_stream2.loadFile(QFileInfo{ "data/ddl/output_file2.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
             CHECK(file_stream.data.properties == file_stream2.data.properties);

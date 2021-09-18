@@ -11,21 +11,26 @@
 
 #define NOMINMAX
 #include <windows.h>
-#include <singleapplication.h>
 
 namespace ddnet::editor {
 
 qint32 App::run(qint32 argc, char* argv[]) {
+    /* TODO singleapplication replacement
     SingleApplication::addLibraryPath("./");
     SingleApplication::setStyle(QStyleFactory::create("Fusion"));
 
     SingleApplication app{ argc, argv, true, SingleApplication::Mode::User | SingleApplication::Mode::SecondaryNotification };
-
+    
     if (app.isSecondary()) {
         AllowSetForegroundWindow(DWORD(app.primaryPid()));
         app.sendMessage(app.arguments().join(", ").toUtf8());
         return 0;
     }
+    */
+    QApplication::addLibraryPath("./");
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
+
+    QApplication app{ argc, argv };
 
     // initialize resources
     if (debug::failed(App::initResources()))
@@ -40,8 +45,10 @@ qint32 App::run(qint32 argc, char* argv[]) {
     app.setFont(QFont{ App::resources.setting(SettingIndex::FontFamily), App::resources.setting(SettingIndex::FontSize).toInt() });
 
     editor::MainWindow window;
-    window.HandleMessage_(app.applicationPid(), app.arguments().join(", ").toUtf8());
     window.show();
+
+    /* TODO singleapplication replacement
+    window.HandleMessage_(app.applicationPid(), app.arguments().join(", ").toUtf8());
 
     QObject::connect(&app, &SingleApplication::receivedMessage, &window, &MainWindow::HandleMessage_);
     QObject::connect(&app, &SingleApplication::instanceStarted, [&window]() {
@@ -49,7 +56,7 @@ qint32 App::run(qint32 argc, char* argv[]) {
         window.raise();
         window.activateWindow();
     });
-    
+    */
     return app.exec();
 }
 
@@ -92,7 +99,7 @@ debug::ErrorCode App::initThemePalette() {
 
 
 QApplication* App::instance() {
-    return static_cast<QApplication*>(SingleApplication::instance());
+    return static_cast<QApplication*>(QApplication::instance());
 }
 
 } // ddnet::editor::

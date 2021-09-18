@@ -39,12 +39,8 @@
     <ClInclude Include="include\ddnet\util\macros.hpp" />
     <ClInclude Include="include\ddnet\util\types.hpp" />
     <ClInclude Include="include\ddnet\util\utility.hpp" />
-    <QtMoc Include="libs\singleapplication\singleapplication_p.h" />
-    <QtMoc Include="libs\singleapplication\singleapplication.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="libs\singleapplication\singleapplication.cpp" />
-    <ClCompile Include="libs\singleapplication\singleapplication_p.cpp" />
     <ClCompile Include="source\ddnet\io\ddldata.cpp" />
     <ClCompile Include="source\ddnet\io\ddlfilestream.cpp" />
     <ClCompile Include="source\ddnet\io\ddlparser.cpp" />
@@ -57,8 +53,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D4CDFBA4-3D72-4510-B174-22F8914EDF40}</ProjectGuid>
-    <Keyword>QtVS_v303</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
@@ -100,21 +96,23 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>core;opengl;gui;widgets</QtModules>
+    <QtInstall>msvc2019_64</QtInstall>
+    <QtModules>core;openglwidgets;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>core;opengl;gui;widgets</QtModules>
+    <QtInstall>msvc2019_64</QtInstall>
+    <QtModules>core;openglwidgets;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
@@ -128,6 +126,7 @@
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PreprocessorDefinitions>DDNETLIB_LIB;BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,6 +141,7 @@
       <Optimization>MaxSpeed</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PreprocessorDefinitions>DDNETLIB_LIB;BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

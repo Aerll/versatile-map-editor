@@ -2,6 +2,9 @@
 
 #include <ddnet/util/utility.hpp>
 
+#include <QByteArray>
+#include <QIODevice>
+
 using namespace ddnet;
 
 std::variant<short, int, float, double> v;

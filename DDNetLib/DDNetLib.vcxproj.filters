@@ -36,12 +36,6 @@
     <Filter Include="Source Files\ddnet\io">
       <UniqueIdentifier>{6c721757-1223-436f-9418-e871f698e47c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="libs">
-      <UniqueIdentifier>{da48a75f-e4b8-4819-a536-880618b19e48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="libs\singleapplication">
-      <UniqueIdentifier>{be448a03-5fde-418f-951f-cd2caf868023}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\ddnet\util">
       <UniqueIdentifier>{36cc3fa2-e372-435b-b1db-d236364a543f}</UniqueIdentifier>
     </Filter>
@@ -136,14 +130,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="libs\singleapplication\singleapplication.h">
-      <Filter>libs\singleapplication</Filter>
-    </QtMoc>
-    <QtMoc Include="libs\singleapplication\singleapplication_p.h">
-      <Filter>libs\singleapplication</Filter>
-    </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="source\ddnet\io\ddldata.cpp">
       <Filter>Source Files\ddnet\io</Filter>
     </ClCompile>
@@ -158,12 +144,6 @@
     </ClCompile>
     <ClCompile Include="source\ddnet\io\mapfilestream.cpp">
       <Filter>Source Files\ddnet\io</Filter>
-    </ClCompile>
-    <ClCompile Include="libs\singleapplication\singleapplication.cpp">
-      <Filter>libs\singleapplication</Filter>
-    </ClCompile>
-    <ClCompile Include="libs\singleapplication\singleapplication_p.cpp">
-      <Filter>libs\singleapplication</Filter>
     </ClCompile>
     <ClCompile Include="source\ddnet\util\graphics.cpp">
       <Filter>Source Files\ddnet\util</Filter>

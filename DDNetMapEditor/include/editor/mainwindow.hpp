@@ -28,7 +28,9 @@ private:
     void connectSignals();
 
 public slots:
+    /* TODO singleapplication replacement
     void HandleMessage_(quint32 instance_id, QByteArray message);
+    */
     void New_();
     void Open_();
     void Save_();

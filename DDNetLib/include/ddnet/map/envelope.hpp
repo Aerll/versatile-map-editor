@@ -3,6 +3,7 @@
 #include <QtGlobal>
 #include <QString>
 #include <QColor>
+#include <QPoint>
 
 #include <vector>
 
