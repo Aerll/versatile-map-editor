@@ -1,153 +1,153 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="Source Files\editor">
-      <UniqueIdentifier>{1830e292-9fad-443d-99b5-6e688b11ee15}</UniqueIdentifier>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Header Files\editor">
+    <Filter Include="include\editor">
       <UniqueIdentifier>{e1eecceb-8c94-4573-9d27-09c64d79b0f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\themes">
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="source\editor">
+      <UniqueIdentifier>{1830e292-9fad-443d-99b5-6e688b11ee15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="resource\themes">
       <UniqueIdentifier>{509a1ac8-b0cb-4cc0-a58c-e219f9590b5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\general">
+    <Filter Include="resource\themes\darkdefault">
+      <UniqueIdentifier>{11a2df50-ee3e-4b24-84e2-dabca97a42f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\general">
       <UniqueIdentifier>{b3270dd1-4529-42e8-a00f-f22086e856e4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\lang">
+    <Filter Include="resource\lang">
       <UniqueIdentifier>{95ceeb3f-57f7-4634-b969-f7a6ceb9d73f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\themes\darkdefault">
-      <UniqueIdentifier>{11a2df50-ee3e-4b24-84e2-dabca97a42f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="config.ddl">
-      <Filter>Resource Files\general</Filter>
+      <Filter>resource\general</Filter>
     </None>
     <None Include="settings.ddl">
-      <Filter>Resource Files\general</Filter>
+      <Filter>resource\general</Filter>
     </None>
     <None Include="data\lang\english.ddl">
-      <Filter>Resource Files\lang</Filter>
+      <Filter>resource\lang</Filter>
     </None>
     <None Include="data\lang\polish.ddl">
-      <Filter>Resource Files\lang</Filter>
+      <Filter>resource\lang</Filter>
     </None>
     <None Include="data\themes\darkdefault\darkdefault-palette.ddl">
-      <Filter>Resource Files\themes\darkdefault</Filter>
+      <Filter>resource\themes\darkdefault</Filter>
     </None>
     <None Include="data\themes\darkdefault\darkdefault-assets.ddl">
-      <Filter>Resource Files\themes\darkdefault</Filter>
+      <Filter>resource\themes\darkdefault</Filter>
     </None>
     <None Include="data\themes\darkdefault\darkdefault-widgets.ddl">
-      <Filter>Resource Files\themes\darkdefault</Filter>
+      <Filter>resource\themes\darkdefault</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="include\editor\mainwindow.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </QtMoc>
     <QtMoc Include="include\editor\openglwidget.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </QtMoc>
     <QtMoc Include="include\editor\tabwidget.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </QtMoc>
     <QtMoc Include="include\editor\tabbar.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </QtMoc>
     <QtMoc Include="include\editor\closebutton.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </QtMoc>
     <QtMoc Include="include\editor\tablabel.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </QtMoc>
     <QtMoc Include="include\editor\toolbar.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </QtMoc>
     <QtMoc Include="include\editor\menu.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </QtMoc>
     <QtMoc Include="include\editor\dockpanel.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </QtMoc>
     <QtMoc Include="include\editor\dockwindow.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </QtMoc>
     <QtMoc Include="include\editor\sidebar.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\editor\openglwidget.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\main.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\mainwindow.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\tabwidget.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\app.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\tabbar.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\closebutton.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\tablabel.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\resourcemanager.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\toolbar.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\menu.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\dockpanel.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\dockwindow.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\editor\sidebar.cpp">
-      <Filter>Source Files\editor</Filter>
+      <Filter>source\editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\editor\app.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </ClInclude>
     <ClInclude Include="include\editor\resourcemanager.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </ClInclude>
     <ClInclude Include="include\editor\constants.hpp">
-      <Filter>Header Files\editor</Filter>
+      <Filter>include\editor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

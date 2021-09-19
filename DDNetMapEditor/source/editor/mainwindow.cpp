@@ -263,7 +263,7 @@ void MainWindow::connectSignals() {
 }
 
 
-/* TODO singleapplication replacement
+
 void MainWindow::HandleMessage_(quint32 instance_id, QByteArray message) {
     QString strMessage = message.data();
     QStringList args = strMessage.split(", ", Qt::SkipEmptyParts);
@@ -277,7 +277,7 @@ void MainWindow::HandleMessage_(quint32 instance_id, QByteArray message) {
     }
     // TODO openFile
 }
-*/
+
 
 
 void MainWindow::New_() {

@@ -39,8 +39,12 @@
     <ClInclude Include="include\ddnet\util\macros.hpp" />
     <ClInclude Include="include\ddnet\util\types.hpp" />
     <ClInclude Include="include\ddnet\util\utility.hpp" />
+    <QtMoc Include="libs\singleapplication\singleapplication_p.h" />
+    <QtMoc Include="libs\singleapplication\singleapplication.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="libs\singleapplication\singleapplication.cpp" />
+    <ClCompile Include="libs\singleapplication\singleapplication_p.cpp" />
     <ClCompile Include="source\ddnet\io\ddldata.cpp" />
     <ClCompile Include="source\ddnet\io\ddlfilestream.cpp" />
     <ClCompile Include="source\ddnet\io\ddlparser.cpp" />
@@ -107,12 +111,12 @@
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>$(DefaultQtVersion)</QtInstall>
-    <QtModules>core;openglwidgets;gui;widgets</QtModules>
+    <QtModules>core;openglwidgets;gui;widgets;network;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>$(DefaultQtVersion)</QtInstall>
-    <QtModules>core;openglwidgets;gui;widgets</QtModules>
+    <QtModules>core;openglwidgets;gui;widgets;network;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
