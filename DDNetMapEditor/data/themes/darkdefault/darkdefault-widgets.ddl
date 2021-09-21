@@ -152,11 +152,11 @@ DDNet = :ToolBar::separator
 
 DDNet = :ToolBar QToolButton
 {
-	max-width  = :24
-	max-height = :24
+	max-width  = :18
+	max-height = :18
 	border     = :none
 	margin     = :0 2 0 2
-	padding    = :0
+	padding    = :3
 }
 
 DDNet = :ToolBar QToolButton:hover
