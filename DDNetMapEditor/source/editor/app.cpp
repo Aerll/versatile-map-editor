@@ -10,8 +10,6 @@
 #include <QDir>
 
 #include <windows.h>
-
-#define QAPPLICATION_CLASS QApplication
 #include <singleapplication.h>
 
 namespace ddnet::editor {
