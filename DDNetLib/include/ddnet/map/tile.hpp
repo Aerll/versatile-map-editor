@@ -10,7 +10,7 @@ enum class Rotation : quint8 {
     N = 0,
     V = 1 << 0,
     H = 1 << 1,
-    R = 1 << 2,
+    R = 1 << 3,
 
     VH = V | H,
     VR = V | R,

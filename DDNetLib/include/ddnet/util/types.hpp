@@ -19,6 +19,8 @@ struct Size {
 };
 
 struct Color {
+    inline bool operator==(const Color&) const = default;
+
     qint32 r;
     qint32 g;
     qint32 b;
