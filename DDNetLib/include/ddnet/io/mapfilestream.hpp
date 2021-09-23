@@ -545,7 +545,10 @@ MAPItemData
 *             tiles -> layer tiles.
 *                 Fields:
 *                 index -> tile index.
-*                 flags -> TODO.
+*                 flags -> 1 - VFlip, 
+                           2 - HFlip, 
+                           4 - Opaque, 
+                           8 - Rotate.
 *                 skip -> TODO.
 *                 reserved -> reserved.
 *             tiles_info -> one of the following:
@@ -563,7 +566,10 @@ MAPItemData
 *                     Fields:
 *                     number -> switch number.
 *                     index -> tile index.
-*                     flags -> TODO.
+*                     flags -> 1 - VFlip, 
+*                              2 - HFlip, 
+*                              4 - Opaque,
+*                              8 - Rotate.
 *                     delay -> switch delay.
 *                 TuneTileInfo -> tune layer tiles.
 *                     Fields:

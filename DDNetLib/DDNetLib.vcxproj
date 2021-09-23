@@ -17,9 +17,22 @@
     <ClInclude Include="include\ddnet\io\ddlfilestream.hpp" />
     <ClInclude Include="include\ddnet\io\ddlparser.hpp" />
     <ClInclude Include="include\ddnet\io\ddltokenizer.hpp" />
+    <ClInclude Include="include\ddnet\io\ddmdata.hpp" />
+    <ClInclude Include="include\ddnet\io\ddmfilestream.hpp" />
     <ClInclude Include="include\ddnet\io\mapdata.hpp" />
     <ClInclude Include="include\ddnet\io\mapfilestream.hpp" />
+    <ClInclude Include="include\ddnet\map\node.hpp" />
+    <ClInclude Include="include\ddnet\map\envelope.hpp" />
+    <ClInclude Include="include\ddnet\map\group.hpp" />
+    <ClInclude Include="include\ddnet\map\layer.hpp" />
+    <ClInclude Include="include\ddnet\map\map.hpp" />
+    <ClInclude Include="include\ddnet\map\quad.hpp" />
+    <ClInclude Include="include\ddnet\map\asset.hpp" />
+    <ClInclude Include="include\ddnet\map\sound_source.hpp" />
+    <ClInclude Include="include\ddnet\map\tile.hpp" />
+    <ClInclude Include="include\ddnet\map\tileset.hpp" />
     <ClInclude Include="include\ddnet\util\graphics.hpp" />
+    <ClInclude Include="include\ddnet\util\tile.hpp" />
     <ClInclude Include="include\ddnet\util\token.hpp" />
     <ClInclude Include="include\ddnet\util\concepts.hpp" />
     <ClInclude Include="include\ddnet\util\constants.hpp" />
@@ -36,13 +49,16 @@
     <ClCompile Include="source\ddnet\io\ddlfilestream.cpp" />
     <ClCompile Include="source\ddnet\io\ddlparser.cpp" />
     <ClCompile Include="source\ddnet\io\ddltokenizer.cpp" />
+    <ClCompile Include="source\ddnet\io\ddmdata.cpp" />
+    <ClCompile Include="source\ddnet\io\ddmfilestream.cpp" />
     <ClCompile Include="source\ddnet\io\mapfilestream.cpp" />
     <ClCompile Include="source\ddnet\util\graphics.cpp" />
+    <ClCompile Include="source\ddnet\util\tile.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D4CDFBA4-3D72-4510-B174-22F8914EDF40}</ProjectGuid>
-    <Keyword>QtVS_v303</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
@@ -84,21 +100,23 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>core;opengl;gui;widgets</QtModules>
+    <QtInstall>$(DefaultQtVersion)</QtInstall>
+    <QtModules>core;openglwidgets;gui;widgets;network;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>core;opengl;gui;widgets</QtModules>
+    <QtInstall>$(DefaultQtVersion)</QtInstall>
+    <QtModules>core;openglwidgets;gui;widgets;network;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
@@ -111,7 +129,8 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PreprocessorDefinitions>DDNETLIB_LIB;BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DDNETLIB_LIB;BUILD_STATIC;QAPPLICATION_CLASS=QApplication;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -125,7 +144,8 @@
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>MaxSpeed</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PreprocessorDefinitions>DDNETLIB_LIB;BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DDNETLIB_LIB;BUILD_STATIC;QAPPLICATION_CLASS=QApplication;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

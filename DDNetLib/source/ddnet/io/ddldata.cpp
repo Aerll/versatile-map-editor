@@ -2,7 +2,6 @@
 
 #include <ddnet/util/constants.hpp>
 
-#include <algorithm>
 #include <iterator>
 
 namespace ddnet::io {
@@ -10,7 +9,7 @@ namespace ddnet::io {
 qint32 DDLData::attributesCount(const DDLProperty& property) const {
     auto iter = properties.find(property);
 
-    if (iter == std::cend(properties))
+    if (iter == properties.cend())
         return constants::_notfound;
     return iter->second.size();
 }

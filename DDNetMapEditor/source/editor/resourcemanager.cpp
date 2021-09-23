@@ -9,6 +9,7 @@
 #include <QDirIterator>
 #include <QDir>
 
+#include <algorithm>
 #include <tuple>
 
 namespace ddnet::editor {
@@ -30,7 +31,7 @@ debug::ErrorCode ResourceManager::initResources() {
     
     // read config
     io::DDLFileStream config_ddl;
-    if (debug::failed(config_ddl.loadFile({ "config.ddl" }))) [[unlikely]]
+    if (debug::failed(config_ddl.loadFile(QFileInfo{ "config.ddl" }))) [[unlikely]]
         return debug::ErrorCode::Resource_Config_FailedToRead;
 
     io::DDLProperty config_main_property = { .name = "Config", .value = "Main" };
@@ -54,7 +55,7 @@ debug::ErrorCode ResourceManager::initResources() {
 
     // read settings
     io::DDLFileStream settings_ddl;
-    if (debug::failed(settings_ddl.loadFile({ settings_file }))) [[unlikely]]
+    if (debug::failed(settings_ddl.loadFile(QFileInfo{ settings_file }))) [[unlikely]]
         return debug::ErrorCode::Resource_Settings_FailedToRead;
 
     io::DDLProperty settings_main_property = { .name = "Settings", .value = "Main" };
@@ -95,10 +96,10 @@ debug::ErrorCode ResourceManager::initResources() {
 
 QString ResourceManager::relativePath(ResourceType resource_type, const QString& file_name) {
     auto& file_paths = resource_files[resource_type];
-    auto file_path = std::find_if(std::begin(file_paths), std::end(file_paths), [&file_name](const QString& file_path) {
+    auto file_path = std::ranges::find_if(file_paths, [&file_name](const auto& file_path) {
         return file_path.lastIndexOf(file_name) != -1;
     });
-    if (file_path == std::end(file_paths))
+    if (file_path == file_paths.end())
         return {};
     return *file_path;
 }
@@ -162,7 +163,7 @@ QByteArray ResourceManager::theme(debug::ErrorCode& error_code) {
     QString theme_file_name = setting(SettingIndex::Theme) + "-widgets.ddl";
 
     io::DDLFileStream theme_ddl;
-    if (debug::failed(theme_ddl.loadFile(relativePath(ResourceType::Theme, theme_file_name)))) [[unlikely]] {
+    if (debug::failed(theme_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Theme, theme_file_name) }))) [[unlikely]] {
         error_code = debug::ErrorCode::Resource_Settings_ThemeFailedToRead;
         return {};
     }
@@ -183,7 +184,7 @@ QPalette ResourceManager::themePalette(debug::ErrorCode& error_code) {
     QString theme_palette_file_name = setting(SettingIndex::Theme) + "-palette.ddl";
 
     io::DDLFileStream palette_ddl;
-    if (debug::failed(palette_ddl.loadFile(relativePath(ResourceType::Theme, theme_palette_file_name)))) [[unlikely]] {
+    if (debug::failed(palette_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Theme, theme_palette_file_name) }))) [[unlikely]] {
         error_code = debug::ErrorCode::Resource_Settings_ThemePaletteFailedToRead;
         return {};
     }
@@ -233,7 +234,7 @@ void ResourceManager::listResourceFiles(ResourceType resource_type, const QDir& 
     
     std::vector<QString> temp_buffer;
     while (it.hasNext()) {
-        QFileInfo file_info = it.next();
+        QFileInfo file_info = QFileInfo{ it.next() };
         if (extensionSupported(resource_type, file_info.suffix()))
             temp_buffer.push_back(file_info.filePath());
     }
@@ -282,7 +283,7 @@ debug::ErrorCode ResourceManager::initAssets() {
     QString theme_assets_file_name = setting(SettingIndex::Theme) + "-assets.ddl";
 
     io::DDLFileStream assets_ddl;
-    if (debug::failed(assets_ddl.loadFile(relativePath(ResourceType::Theme, theme_assets_file_name)))) [[unlikely]]
+    if (debug::failed(assets_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Theme, theme_assets_file_name) }))) [[unlikely]]
         return debug::ErrorCode::Resource_Settings_ThemeAssetsFailedToRead;
 
     io::DDLProperty assets_config_property = { .name = "Assets", .value = "Config" };
@@ -303,7 +304,7 @@ debug::ErrorCode ResourceManager::initTranslationStrings() {
     QString language_file_name = setting(SettingIndex::Language) + ".ddl";
 
     io::DDLFileStream language_ddl;
-    if (debug::failed(language_ddl.loadFile(relativePath(ResourceType::Lang, language_file_name)))) [[unlikely]]
+    if (debug::failed(language_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Lang, language_file_name) }))) [[unlikely]]
         return debug::ErrorCode::Resource_Lang_FailedToReadTranslations;
 
     qint32 count = 0;

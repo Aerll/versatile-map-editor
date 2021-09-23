@@ -25,7 +25,7 @@ CloseButton::CloseButton(QWidget* parent)
 
 
 
-void CloseButton::enterEvent(QEvent* event) {
+void CloseButton::enterEvent(QEnterEvent* event) {
     state |= ButtonState::Hover;
     QPushButton::enterEvent(event);
 }

@@ -27,7 +27,7 @@
 #include <QtNetwork/QLocalSocket>
 
 #ifndef QAPPLICATION_CLASS
-  #define QAPPLICATION_CLASS QApplication
+  #define QAPPLICATION_CLASS QCoreApplication
 #endif
 
 #include QT_STRINGIFY(QAPPLICATION_CLASS)
@@ -85,44 +85,44 @@ public:
      * Usually 4*timeout would be the worst case (fail) scenario.
      * @see See the corresponding QAPPLICATION_CLASS constructor for reference
      */
-    explicit SingleApplication( int &argc, char *argv[], bool allowSecondary = false, Options options = Mode::User, int timeout = 1000 );
+    explicit SingleApplication( int &argc, char *argv[], bool allowSecondary = false, Options options = Mode::User, int timeout = 1000, const QString &userData = {} );
     ~SingleApplication() override;
 
     /**
      * @brief Returns if the instance is the primary instance
      * @returns {bool}
      */
-    bool isPrimary();
+    bool isPrimary() const;
 
     /**
      * @brief Returns if the instance is a secondary instance
      * @returns {bool}
      */
-    bool isSecondary();
+    bool isSecondary() const;
 
     /**
      * @brief Returns a unique identifier for the current instance
      * @returns {qint32}
      */
-    quint32 instanceId();
+    quint32 instanceId() const;
 
     /**
      * @brief Returns the process ID (PID) of the primary instance
      * @returns {qint64}
      */
-    qint64 primaryPid();
+    qint64 primaryPid() const;
 
     /**
      * @brief Returns the username of the user running the primary instance
      * @returns {QString}
      */
-    QString primaryUser();
+    QString primaryUser() const;
 
     /**
      * @brief Returns the username of the current user
      * @returns {QString}
      */
-    QString currentUser();
+    QString currentUser() const;
 
     /**
      * @brief Sends a message to the primary instance. Returns true on success.
@@ -133,6 +133,12 @@ public:
      */
     bool sendMessage( const QByteArray &message, int timeout = 100 );
 
+    /**
+     * @brief Get the set user data.
+     * @returns {QStringList}
+     */
+    QStringList userData() const;
+
 Q_SIGNALS:
     void instanceStarted();
     void receivedMessage( quint32 instanceId, QByteArray message );
@@ -140,6 +146,7 @@ Q_SIGNALS:
 private:
     SingleApplicationPrivate *d_ptr;
     Q_DECLARE_PRIVATE(SingleApplication)
+    void abortSafely();
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(SingleApplication::Options)

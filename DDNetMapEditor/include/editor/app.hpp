@@ -2,6 +2,8 @@
 
 #include <editor/resourcemanager.hpp>
 
+class QApplication;
+
 namespace ddnet::editor {
 
 class App {

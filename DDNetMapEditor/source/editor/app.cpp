@@ -1,7 +1,6 @@
 #include <editor/app.hpp>
 
 #include <editor/mainwindow.hpp>
-#include <ddnet/io/mapfilestream.hpp>
 
 #include <QApplication>
 #include <QStyleFactory>
@@ -10,7 +9,6 @@
 #include <QFile>
 #include <QDir>
 
-#define NOMINMAX
 #include <windows.h>
 #include <singleapplication.h>
 
@@ -21,7 +19,7 @@ qint32 App::run(qint32 argc, char* argv[]) {
     SingleApplication::setStyle(QStyleFactory::create("Fusion"));
 
     SingleApplication app{ argc, argv, true, SingleApplication::Mode::User | SingleApplication::Mode::SecondaryNotification };
-
+    
     if (app.isSecondary()) {
         AllowSetForegroundWindow(DWORD(app.primaryPid()));
         app.sendMessage(app.arguments().join(", ").toUtf8());
@@ -50,7 +48,6 @@ qint32 App::run(qint32 argc, char* argv[]) {
         window.raise();
         window.activateWindow();
     });
-    
     return app.exec();
 }
 

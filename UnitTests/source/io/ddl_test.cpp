@@ -17,10 +17,10 @@ using namespace ddnet;
 namespace test_util {
 
 bool hasError(const io::DDLParser& parser, debug::ErrorCode code) {
-    auto it = std::find_if(std::begin(parser.errors), std::end(parser.errors), [code](const debug::Error& error) {
+    auto it = std::ranges::find_if(parser.errors, [code](const auto& error) {
         return error.code == code;
     });
-    return it != std::end(parser.errors);
+    return it != parser.errors.end();
 }
 
 } // test_util::
@@ -68,7 +68,7 @@ TEST_CASE("io::DDLData") {
         CHECK(data.property({ "Prop1", "Value1" })->first.value == "Value1");
         CHECK(data.property({ "Prop2", "Value2" })->first.value == "Value2");
         CHECK(data.property({ "Prop3", "Value3" })->first.value == "Value3");
-        CHECK(data.property({ "invalid", "invalid" }) == std::cend(data));
+        CHECK(data.property({ "invalid", "invalid" }) == data.cend());
     }
 }
 
@@ -736,7 +736,7 @@ TEST_CASE("io::DDLFileStream") {
         { // test 1
             // load
             io::DDLFileStream file_stream;
-            auto error_code = file_stream.loadFile({ "data/ddl/input_file1.ddl" });
+            auto error_code = file_stream.loadFile(QFileInfo{ "data/ddl/input_file1.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
             REQUIRE(file_stream.data.propertiesCount() == 3);
@@ -755,12 +755,12 @@ TEST_CASE("io::DDLFileStream") {
             CHECK(property->second.contains("SomethingElse"));
 
             // save
-            error_code = file_stream.saveFile({ "data/ddl/output_file1.ddl" });
+            error_code = file_stream.saveFile(QFileInfo{ "data/ddl/output_file1.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
 
             io::DDLFileStream file_stream2;
-            error_code = file_stream2.loadFile({ "data/ddl/output_file1.ddl" });
+            error_code = file_stream2.loadFile(QFileInfo{ "data/ddl/output_file1.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
             CHECK(file_stream.data.properties == file_stream2.data.properties);
@@ -769,7 +769,7 @@ TEST_CASE("io::DDLFileStream") {
         { // test 2
             // load
             io::DDLFileStream file_stream;
-            auto error_code = file_stream.loadFile({ "data/ddl/input_file2.ddl" });
+            auto error_code = file_stream.loadFile(QFileInfo{ "data/ddl/input_file2.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
             REQUIRE(file_stream.data.propertiesCount() == 3);
@@ -778,12 +778,12 @@ TEST_CASE("io::DDLFileStream") {
             REQUIRE(file_stream.data.attributesCount(std::pair<QString, QString>{ "Test", "value3" }) == 2);
 
             // save
-            error_code = file_stream.saveFile({ "data/ddl/output_file2.ddl" });
+            error_code = file_stream.saveFile(QFileInfo{ "data/ddl/output_file2.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
 
             io::DDLFileStream file_stream2;
-            error_code = file_stream2.loadFile({ "data/ddl/output_file2.ddl" });
+            error_code = file_stream2.loadFile(QFileInfo{ "data/ddl/output_file2.ddl" });
 
             REQUIRE(error_code == debug::ErrorCode::NoError);
             CHECK(file_stream.data.properties == file_stream2.data.properties);

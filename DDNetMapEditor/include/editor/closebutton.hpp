@@ -14,13 +14,13 @@ public:
     ~CloseButton() = default;
 
 private:
-    void enterEvent(QEvent* event) final;
-    void leaveEvent(QEvent* event) final;
+    virtual void enterEvent(QEnterEvent* event) final;
+    virtual void leaveEvent(QEvent* event) final;
 
-    void mousePressEvent(QMouseEvent* event) final;
-    void mouseReleaseEvent(QMouseEvent* event) final;
+    virtual void mousePressEvent(QMouseEvent* event) final;
+    virtual void mouseReleaseEvent(QMouseEvent* event) final;
 
-    void paintEvent(QPaintEvent* event) final;
+    virtual void paintEvent(QPaintEvent* event) final;
 
 public:
     ButtonState state = ButtonState::Normal;

@@ -9,6 +9,7 @@
 #include <cstddef>
 #include <utility>
 #include <variant>
+#include <vector>
 
 namespace ddnet::concepts::detail {
 
@@ -61,12 +62,12 @@ inline constexpr _UnderlyingType toUnderlying(_EnumType value) noexcept {
     return static_cast<_UnderlyingType>(value);
 }
 
-inline constexpr qint32 floatToFixed(float value) noexcept { 
-    return static_cast<int>(value * static_cast<float>(1 << constants::_fractional_bits)); 
+inline constexpr qint32 floatToFixed(qreal value) noexcept { 
+    return static_cast<qint32>(value * static_cast<qreal>(1 << constants::_fractional_bits));
 }
 
-inline constexpr float fixedToFloat(qint32 value) noexcept { 
-    return value * (1.f / (1 << constants::_fractional_bits));
+inline constexpr qreal fixedToFloat(qint32 value) noexcept {
+    return value * (1.0 / (1 << constants::_fractional_bits));
 }
 
 } // ddnet::util::
