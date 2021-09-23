@@ -356,6 +356,8 @@ struct MAPItemData {
     std::vector<std::variant<MAPItemLayerTile, MAPItemLayerQuad, MAPItemLayerSound>> layers;
 };
 
+class DDMData;
+
 class MAPData {
 private:
     template <typename _Type>
@@ -381,6 +383,8 @@ public:
     inline qint32 tileLayersCount() const { return layersCountImpl<LayerTile>(); }
     inline qint32 quadLayersCount() const { return layersCountImpl<LayerQuad>(); }
     inline qint32 soundLayersCount() const { return layersCountImpl<LayerSound>(); }
+
+    DDMData toDDM() const;
 
 public:
     MAPHeader header;

@@ -18,7 +18,7 @@ debug::ErrorCode DDLFileStream::loadFile(const QFileInfo& file_info) {
 
     QTextStream ddl_text_stream{ &file };
     if (ddl_text_stream.device()->size() == 0) [[unlikely]]
-        return debug::ErrorCode::File_DDL_NoData;
+        return debug::ErrorCode::File_NoData;
 
     DDLTokenizer tokenizer;
     tokenizer.tokenize(ddl_text_stream);

@@ -42,7 +42,7 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
 
     QDataStream map_data_stream{ &file };
     if (map_data_stream.device()->size() == 0) [[unlikely]]
-        return debug::ErrorCode::File_MAP_NoData;
+        return debug::ErrorCode::File_NoData;
 
 
 

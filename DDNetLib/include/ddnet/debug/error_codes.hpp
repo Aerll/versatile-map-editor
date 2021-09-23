@@ -8,14 +8,13 @@ enum class [[nodiscard]] ErrorCode {
     // file
     File_FailedToRead,
     File_FailedToWrite,
+    File_NoData,
 
     // zlib
     ZLIB_CompressionFailed,
     ZLIB_DecompressionFailed,
     
     // map file
-    File_MAP_NoData,
-
     File_MAP_InvalidData,
     File_MAP_InvalidHeader,
     File_MAP_InvalidSignature,
@@ -38,7 +37,6 @@ enum class [[nodiscard]] ErrorCode {
     File_MAP_UnsupportedItemLayerSoundVersion,
 
     // ddl file
-    File_DDL_NoData,
     File_DDL_FailedToTokenize,
     File_DDL_FailedToParse,
 
@@ -51,6 +49,9 @@ enum class [[nodiscard]] ErrorCode {
     Parser_DDL_MissingCloseBracket,
 
     Parser_DDL_UnexpectedToken,
+
+    // ddm file
+
 
     // resource manager values
     Resource_Value_InvalidSize,

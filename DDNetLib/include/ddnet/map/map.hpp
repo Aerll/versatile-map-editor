@@ -11,8 +11,15 @@
 namespace ddnet::map {
 
 class Map {
+public:
+    QString author;
+    QString credits;
+    QString license;
+    qint32 version;
+
     std::vector<Group> groups;
 
+    QuadLayer skybox_layer;
     GameLayer game_layer;
     FrontLayer front_layer;
     TeleLayer tele_layer;

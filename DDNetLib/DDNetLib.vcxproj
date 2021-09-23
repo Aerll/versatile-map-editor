@@ -51,6 +51,7 @@
     <ClCompile Include="source\ddnet\io\ddltokenizer.cpp" />
     <ClCompile Include="source\ddnet\io\ddmdata.cpp" />
     <ClCompile Include="source\ddnet\io\ddmfilestream.cpp" />
+    <ClCompile Include="source\ddnet\io\mapdata.cpp" />
     <ClCompile Include="source\ddnet\io\mapfilestream.cpp" />
     <ClCompile Include="source\ddnet\util\graphics.cpp" />
     <ClCompile Include="source\ddnet\util\tile.cpp" />
