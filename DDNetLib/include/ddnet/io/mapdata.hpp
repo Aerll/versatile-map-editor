@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ddnet/util/constants.hpp>
+#include <ddnet/util/enums.hpp>
 #include <ddnet/util/types.hpp>
 #include <ddnet/util/utility.hpp>
 
@@ -80,7 +81,7 @@ struct MAPFileInfo {
 };
 
 struct MAPItemType {
-    map::ItemType type;
+    enums::ItemType type;
     qint32 start;
     qint32 count;
 };
@@ -125,13 +126,13 @@ struct MAPItemEnvelope : MAPDataFileItem {
     qint32 channels;
     qint32 start_point;
     qint32 points_count;
-    std::array<qint32, map::MAX_ITEM_ENVELOPE_NAME_LENGTH> name;
+    std::array<qint32, constants::_map_max_item_envelope_name_length> name;
     qint32 is_synchronized;
 };
 
 struct MAPItemEnvelopePoint {
     qint32 time;
-    map::CurveType curve_type;
+    enums::CurveType curve_type;
     std::array<qint32, 4> values;
 };
 
@@ -148,12 +149,12 @@ struct MAPItemGroup : MAPDataFileItem {
     qint32 clip_y;
     qint32 clip_w;
     qint32 clip_h;
-    std::array<qint32, map::MAX_ITEM_GROUP_NAME_LENGTH> name;
+    std::array<qint32, constants::_map_max_group_name_length> name;
 };
 
 struct MAPItemLayerInfo : MAPDataFileItem {
     qint32 version;
-    map::LayerType type;
+    enums::LayerType type;
     qint32 is_detail;
 };
 
@@ -162,7 +163,7 @@ struct MAPItemLayerTile {
     qint32 version;
     qint32 width;
     qint32 height;
-    map::SpecialLayerType special_type;
+    enums::SpecialLayerType special_type;
 
     util::Color color;
     qint32 color_envelope_index;
@@ -170,7 +171,7 @@ struct MAPItemLayerTile {
 
     qint32 image_index;
     qint32 data_index;
-    std::array<qint32, map::MAX_ITEM_LAYER_NAME_LENGTH> name;
+    std::array<qint32, constants::_map_max_item_layer_name_length> name;
 
     qint32 tele_index;
     qint32 speedup_index;
@@ -185,7 +186,7 @@ struct MAPItemLayerQuad {
     qint32 quads_count;
     qint32 data_index;
     qint32 image_index;
-    std::array<qint32, map::MAX_ITEM_LAYER_NAME_LENGTH> name;
+    std::array<qint32, constants::_map_max_item_layer_name_length> name;
 };
 
 struct MAPItemLayerSound {
@@ -194,7 +195,7 @@ struct MAPItemLayerSound {
     qint32 sources_count;
     qint32 data_index;
     qint32 sound_index;
-    std::array<qint32, map::MAX_ITEM_LAYER_NAME_LENGTH> name;
+    std::array<qint32, constants::_map_max_item_layer_name_length> name;
 };
 
 struct MAPDetails {
@@ -218,7 +219,7 @@ struct Envelope {
 
 struct EnvelopePoint {
     qint32 time;
-    map::CurveType curve_type;
+    enums::CurveType curve_type;
     std::array<qint32, 4> values;
 };
 
@@ -245,7 +246,7 @@ struct Layer {
 struct LayerTile : Layer {
     qint32 width;
     qint32 height;
-    map::SpecialLayerType special_type;
+    enums::SpecialLayerType special_type;
 
     util::Color color;
     qint32 color_envelope_index;
@@ -307,7 +308,7 @@ struct Quad {
 };
 
 struct SoundShape {
-    map::SoundSourceShapeType type;
+    enums::SoundSourceShapeType type;
     std::variant<util::RectangleSize, util::CircleRadius> size;
 };
 

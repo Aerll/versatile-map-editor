@@ -1,7 +1,7 @@
 #pragma once
 
-#include <ddnet/io/mapdata.hpp>
 #include <ddnet/debug/error_codes.hpp>
+#include <ddnet/io/mapdata.hpp>
 
 class QFileInfo;
 

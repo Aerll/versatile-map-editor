@@ -2,6 +2,8 @@
 
 #include <editor/mainwindow.hpp>
 
+#include <ddnet/util/utility.hpp>
+
 #include <QApplication>
 #include <QStyleFactory>
 #include <QFontDatabase>
@@ -27,13 +29,13 @@ qint32 App::run(qint32 argc, char* argv[]) {
     }
 
     // initialize resources
-    if (debug::failed(App::initResources()))
+    if (util::failed(App::initResources()))
         return -1; // TODO prompt
-    if (debug::failed(App::initFonts()))
+    if (util::failed(App::initFonts()))
         return -1; // TODO prompt
-    if (debug::failed(App::initTheme()))
+    if (util::failed(App::initTheme()))
         return -1; // TODO prompt
-    if (debug::failed(App::initThemePalette()))
+    if (util::failed(App::initThemePalette()))
         return -1; // TODO prompt
 
     app.setFont(QFont{ App::resources.setting(SettingIndex::FontFamily), App::resources.setting(SettingIndex::FontSize).toInt() });
@@ -62,7 +64,7 @@ debug::ErrorCode App::initResources() {
 debug::ErrorCode App::initFonts() {
     debug::ErrorCode error_code;
     auto font_files = App::resources.fonts(error_code);
-    if (debug::failed(error_code))
+    if (util::failed(error_code))
         return error_code;
 
     for (const auto& font_file : font_files)

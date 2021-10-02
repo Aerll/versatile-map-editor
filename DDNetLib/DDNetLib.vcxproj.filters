@@ -89,9 +89,6 @@
     <ClInclude Include="include\ddnet\util\token.hpp">
       <Filter>include\ddnet\util</Filter>
     </ClInclude>
-    <ClInclude Include="include\ddnet\debug\error.hpp">
-      <Filter>include\ddnet\debug</Filter>
-    </ClInclude>
     <ClInclude Include="include\ddnet\util\graphics.hpp">
       <Filter>include\ddnet\util</Filter>
     </ClInclude>
@@ -133,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="include\ddnet\io\ddmfilestream.hpp">
       <Filter>include\ddnet\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\util\enums.hpp">
+      <Filter>include\ddnet\util</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\debug\error.hpp">
+      <Filter>include\ddnet\debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

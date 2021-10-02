@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ddnet/util/macros.hpp>
+#include <ddnet/util/utility.hpp>
 
 #include <QtGlobal>
 
@@ -8,16 +9,16 @@ namespace ddnet {
 
 enum class Rotation : quint8 {
     N = 0,
-    V = 1 << 0,
-    H = 1 << 1,
-    R = 1 << 3,
+    V = util::flag(0),
+    H = util::flag(1),
+    R = util::flag(3),
 
     VH = V | H,
     VR = V | R,
     HR = H | R,
     VHR = V | H | R,
 };
-ENUM_DEFINE_ALL_(Rotation);
+ENUM_DEFINE_BITWISE_OPS_(Rotation);
 
 } // ddnet::
 

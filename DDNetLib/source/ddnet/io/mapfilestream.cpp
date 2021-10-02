@@ -1,7 +1,8 @@
 #include <ddnet/io/mapfilestream.hpp>
 
-#include <ddnet/util/macros.hpp>
 #include <ddnet/util/concepts.hpp>
+#include <ddnet/util/enums.hpp>
+#include <ddnet/util/macros.hpp>
 #include <ddnet/util/utility.hpp>
 
 #include <QByteArrayList>
@@ -28,8 +29,8 @@ namespace ddnet::io {
 
 debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
 
-#define UNCOMPRESS_(compressed_data_stream_, data_index_, destination_)                                 \
-    if (debug::failed(uncompressData(compressed_data_stream_, data_index_, destination_))) [[unlikely]] \
+#define UNCOMPRESS_(compressed_data_stream_, data_index_, destination_)                                \
+    if (util::failed(uncompressData(compressed_data_stream_, data_index_, destination_))) [[unlikely]] \
         return debug::ErrorCode::ZLIB_DecompressionFailed
 
 
@@ -50,9 +51,9 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
     map_data_stream.device()->reset();
     if (util::readRawData(map_data_stream, &data.header, sizeof(MAPHeader)) != sizeof(data.header)) [[unlikely]]
         return debug::ErrorCode::File_MAP_InvalidHeader;
-    if (data.header.id != map::_id) [[unlikely]] // has to be "DATA"
+    if (data.header.id != constants::_map_id) [[unlikely]] // has to be "DATA"
         return debug::ErrorCode::File_MAP_InvalidSignature;
-    if (data.header.version != map::_version) [[unlikely]] // support only the most recent version
+    if (data.header.version != constants::_map_version) [[unlikely]] // support only the most recent version
         return debug::ErrorCode::File_MAP_UnsupportedVersion;
 
 
@@ -71,8 +72,8 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
         return debug::ErrorCode::NoError;
     };
 
-#define UNLIKELY_RETURN_ON_ERROR_()             \
-    if (debug::failed(error_code)) [[unlikely]] \
+#define UNLIKELY_RETURN_ON_ERROR_()            \
+    if (util::failed(error_code)) [[unlikely]] \
         return error_code
 
     debug::ErrorCode error_code;
@@ -138,18 +139,18 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
         const MAPItemType& item_type = data.file_info.item_types[item_type_index];
         
         switch (item_type.type) {
-            case map::ItemType::Version: { // read the version
+            case enums::ItemType::Version: { // read the version
                 RESERVE_(item_data.versions);
                 FOR_EACH_ITEM_() {
                     READ_(item_data.versions, MAPItemVersion);
                 
-                    if (item_data.versions.back().version != map::_item_version) [[unlikely]]
+                    if (item_data.versions.back().version != constants::_map_item_version) [[unlikely]]
                         return debug::ErrorCode::File_MAP_UnsupportedItemVersion;
                 }
                 break;
             }
 
-            case map::ItemType::Info: { // read map details
+            case enums::ItemType::Info: { // read map details
                 RESERVE_(item_data.infos);
                 FOR_EACH_ITEM_() {
                     READ_(item_data.infos, MAPItemInfo);
@@ -157,7 +158,7 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
                 break;
             }
 
-            case map::ItemType::Image: { // read image assets
+            case enums::ItemType::Image: { // read image assets
                 RESERVE_(item_data.images);
                 FOR_EACH_ITEM_() {
                     READ_(item_data.images, MAPItemImage);
@@ -165,46 +166,46 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
                 break;
             }
 
-            case map::ItemType::Envelope: { // read envelopes
+            case enums::ItemType::Envelope: { // read envelopes
                 RESERVE_(item_data.envelopes);
                 FOR_EACH_ITEM_() {
                     READ_(item_data.envelopes, MAPItemEnvelope);
 
-                    if (item_data.envelopes.back().version < map::_item_envelope_version) [[unlikely]]
+                    if (item_data.envelopes.back().version < constants::_map_item_envelope_version) [[unlikely]]
                         return debug::ErrorCode::File_MAP_UnsupportedItemEnvelopeVersion;
                 }
                 break;
             }
 
-            case map::ItemType::Group: { // read groups
+            case enums::ItemType::Group: { // read groups
                 RESERVE_(item_data.groups);
                 FOR_EACH_ITEM_() {
                     READ_(item_data.groups, MAPItemGroup);
 
-                    if (item_data.groups.back().version < map::_item_group_version) [[unlikely]]
+                    if (item_data.groups.back().version < constants::_map_item_group_version) [[unlikely]]
                         return debug::ErrorCode::File_MAP_UnsupportedItemGroupVersion;
                 }
                 break;
             }
 
-            case map::ItemType::Layer: { // read layers
+            case enums::ItemType::Layer: { // read layers
                 RESERVE_(item_data.layer_infos);
                 RESERVE_(item_data.layers);
                 FOR_EACH_ITEM_() {
                     READ_(item_data.layer_infos, MAPItemLayerInfo);
 
                     switch (item_data.layer_infos.back().type) {
-                        case map::LayerType::Tile: {
+                        case enums::LayerType::Tile: {
                             READ_(item_data.layers, MAPItemLayerTile);
                             break;
                         }
 
-                        case map::LayerType::Quad: {
+                        case enums::LayerType::Quad: {
                             READ_(item_data.layers, MAPItemLayerQuad);
                             break;
                         }
 
-                        case map::LayerType::Sound: {
+                        case enums::LayerType::Sound: {
                             READ_(item_data.layers, MAPItemLayerSound);
                             break;
                         }
@@ -216,14 +217,14 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
                 break;
             }
 
-            case map::ItemType::EnvelopePoints: { // read envelope points
+            case enums::ItemType::EnvelopePoints: { // read envelope points
                 FOR_EACH_ITEM_() {
                     READ_SEQUENCE_(item_data.envelope_points, MAPItemEnvelopePoint);
                 }
                 break;
             }
 
-            case map::ItemType::Sound: { // read sound assets
+            case enums::ItemType::Sound: { // read sound assets
                 RESERVE_(item_data.sounds);
                 FOR_EACH_ITEM_() {
                     READ_(item_data.sounds, MAPItemSound);
@@ -312,11 +313,11 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
     for (qint32 i = 0; i < item_data.groups.size(); ++i) { // read group
         auto& item_group = item_data.groups[i];
 
-        if (item_group.version != map::_item_group_version) [[unlikely]]
+        if (item_group.version != constants::_map_item_group_version) [[unlikely]]
             return debug::ErrorCode::File_MAP_UnsupportedItemGroupVersion;
 
         Group group;
-        _IntsToBytes(item_group.name, map::MAX_ITEM_GROUP_NAME_LENGTH, group.name);
+        _IntsToBytes(item_group.name, constants::_map_max_item_group_name_length, group.name);
 
         group.offset_x = item_group.offset_x;
         group.offset_y = item_group.offset_y;
@@ -336,14 +337,14 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
             auto& item_layer = item_data.layers[j];
 
             switch (item_layer_info.type) {
-                case map::LayerType::Tile: { // read tile layer
+                case enums::LayerType::Tile: { // read tile layer
                     auto& item_layer_tile = std::get<MAPItemLayerTile>(item_layer);
 
-                    if (item_layer_tile.version != map::_item_layer_tile_version) [[unlikely]]
+                    if (item_layer_tile.version != constants::_map_item_layer_tile_version) [[unlikely]]
                         return debug::ErrorCode::File_MAP_UnsupportedItemLayerTileVersion;
                     
                     LayerTile layer_tile;
-                    _IntsToBytes(item_layer_tile.name, map::MAX_ITEM_LAYER_NAME_LENGTH, layer_tile.name);
+                    _IntsToBytes(item_layer_tile.name, constants::_map_max_item_layer_name_length, layer_tile.name);
 
                     layer_tile.asset_index = item_layer_tile.image_index;
                     layer_tile.is_detail = item_layer_info.is_detail;
@@ -358,7 +359,7 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
 
                     layer_tile.tiles.resize(layer_tile.width * layer_tile.height);
                     switch (layer_tile.special_type) {
-                        case map::SpecialLayerType::Tele: { // read tele layer
+                        case enums::SpecialLayerType::Tele: { // read tele layer
                             READ_TILES_(item_layer_tile.data_index);
                             READ_TILES_INFO_(item_layer_tile.tele_index);
                             for (qint32 tile_index = 0; tile_index < layer_tile.width * layer_tile.height; ++tile_index) {
@@ -370,7 +371,7 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
                             break;
                         }
 
-                        case map::SpecialLayerType::Speedup: { // read speedup layer
+                        case enums::SpecialLayerType::Speedup: { // read speedup layer
                             READ_TILES_(item_layer_tile.data_index);
                             READ_TILES_INFO_(item_layer_tile.speedup_index);
                             for (qint32 tile_index = 0; tile_index < layer_tile.width * layer_tile.height; ++tile_index) {
@@ -382,12 +383,12 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
                             break;
                         }
 
-                        case map::SpecialLayerType::Front: { // read front layer
+                        case enums::SpecialLayerType::Front: { // read front layer
                             READ_TILES_(item_layer_tile.front_index);
                             break;
                         }
 
-                        case map::SpecialLayerType::Switch: { // read switch layer
+                        case enums::SpecialLayerType::Switch: { // read switch layer
                             READ_TILES_(item_layer_tile.data_index);
                             READ_TILES_INFO_(item_layer_tile.switch_index);
                             for (qint32 tile_index = 0; tile_index < layer_tile.width * layer_tile.height; ++tile_index) {
@@ -399,7 +400,7 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
                             break; 
                         }
 
-                        case map::SpecialLayerType::Tune: { // read tune layer
+                        case enums::SpecialLayerType::Tune: { // read tune layer
                             READ_TILES_(item_layer_tile.data_index);
                             READ_TILES_INFO_(item_layer_tile.tune_index);
                             for (qint32 tile_index = 0; tile_index < layer_tile.width * layer_tile.height; ++tile_index) {
@@ -411,7 +412,7 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
                             break;
                         }
 
-                        case map::SpecialLayerType::Game: // read game layer
+                        case enums::SpecialLayerType::Game: // read game layer
                         default: { // read design tile layer
                             READ_TILES_(item_layer_tile.data_index);
                         }
@@ -421,14 +422,14 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
                     break;
                 }
 
-                case map::LayerType::Quad: { // read quad layer, these are little endian
+                case enums::LayerType::Quad: { // read quad layer, these are little endian
                     auto& item_layer_quad = std::get<MAPItemLayerQuad>(item_layer);
 
-                    if (item_layer_quad.version != map::_item_layer_quad_version) [[unlikely]]
+                    if (item_layer_quad.version != constants::_map_item_layer_quad_version) [[unlikely]]
                         return debug::ErrorCode::File_MAP_UnsupportedItemLayerQuadVersion;
 
                     LayerQuad layer_quad;
-                    _IntsToBytes(item_layer_quad.name, map::MAX_ITEM_LAYER_NAME_LENGTH, layer_quad.name);
+                    _IntsToBytes(item_layer_quad.name, constants::_map_max_item_layer_name_length, layer_quad.name);
 
                     layer_quad.asset_index = item_layer_quad.image_index;
                     layer_quad.is_detail = item_layer_info.is_detail;
@@ -445,14 +446,14 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
                     break;
                 }
 
-                case map::LayerType::Sound: { // read sound layer, these are little endian
+                case enums::LayerType::Sound: { // read sound layer, these are little endian
                     auto& item_layer_sound = std::get<MAPItemLayerSound>(item_layer);
 
-                    if (item_layer_sound.version != map::_item_layer_sound_version) [[unlikely]]
+                    if (item_layer_sound.version != constants::_map_item_layer_sound_version) [[unlikely]]
                         return debug::ErrorCode::File_MAP_UnsupportedItemLayerSoundVersion;
 
                     LayerSound layer_sound;
-                    _IntsToBytes(item_layer_sound.name, map::MAX_ITEM_LAYER_NAME_LENGTH, layer_sound.name);
+                    _IntsToBytes(item_layer_sound.name, constants::_map_max_item_layer_name_length, layer_sound.name);
 
                     layer_sound.asset_index = item_layer_sound.sound_index;
                     layer_sound.is_detail = item_layer_info.is_detail;
@@ -469,7 +470,7 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
                         
                         sounds_data_stream >> sound_source.shape.type;
                         switch (sound_source.shape.type) {
-                            case map::SoundSourceShapeType::Circle: {
+                            case enums::SoundSourceShapeType::Circle: {
                                 util::CircleRadius circle_radius;
                                 sounds_data_stream >> circle_radius;
                                 sounds_data_stream.skipRawData(4);
@@ -477,7 +478,7 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
                                 break;
                             }
 
-                            case map::SoundSourceShapeType::Rectangle: {
+                            case enums::SoundSourceShapeType::Rectangle: {
                                 util::RectangleSize rectangle_size;
                                 sounds_data_stream >> rectangle_size.width;
                                 sounds_data_stream >> rectangle_size.height;
@@ -503,7 +504,7 @@ debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
 
         Envelope envelope;
         if (item_envelope.name[0] != -1) // compatibility with old maps
-            _IntsToBytes(item_envelope.name, map::MAX_ITEM_ENVELOPE_NAME_LENGTH, envelope.name);
+            _IntsToBytes(item_envelope.name, constants::_map_max_item_envelope_name_length, envelope.name);
 
         envelope.channels = item_envelope.channels;
         envelope.is_synchronized = item_envelope.is_synchronized;
@@ -529,9 +530,9 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
 
 #define DATAS_ datas
 #define TEMP_BUFFER_ temp_buffer
-#define COMPRESS_(source_)                                               \
-    if (debug::failed(compressData(source_, TEMP_BUFFER_))) [[unlikely]] \
-        return debug::ErrorCode::ZLIB_CompressionFailed;                 \
+#define COMPRESS_(source_)                                              \
+    if (util::failed(compressData(source_, TEMP_BUFFER_))) [[unlikely]] \
+        return debug::ErrorCode::ZLIB_CompressionFailed;                \
     DATAS_.push_back(std::move(TEMP_BUFFER_))
 #define ADD_UNCOMPRESSED_SIZE_(name_, size_)   \
     qint32 name_ = size_;                      \
@@ -560,7 +561,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
     items.reserve(512);
     datas.reserve(512);
 
-    std::vector<std::pair<map::ItemType, qint32>> item_type_counts;
+    std::vector<std::pair<enums::ItemType, qint32>> item_type_counts;
     item_type_counts.reserve(8);
 
     auto _ToQByteArray = [] <typename _Type> (const _Type& value) {
@@ -574,26 +575,26 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
             items.emplace_back(_ToQByteArray(value));
     };
 
-    auto _AddItemType = [&](map::ItemType type, qint32 count) {
-        item_type_counts.emplace_back(std::pair<map::ItemType, qint32>{ type, count });
+    auto _AddItemType = [&](enums::ItemType type, qint32 count) {
+        item_type_counts.emplace_back(std::pair<enums::ItemType, qint32>{ type, count });
     };
 
     // save the version
     {
         MAPItemVersion item_version;
-        item_version.type_and_id = (map::ItemType::Version << 16);
+        item_version.type_and_id = (enums::ItemType::Version << 16);
         item_version.size = sizeof(MAPItemVersion) - sizeof(MAPDataFileItem);
-        item_version.version = map::_item_version;
+        item_version.version = constants::_map_item_version;
         _AddItem(item_version);
-        _AddItemType(map::ItemType::Version, 1);
+        _AddItemType(enums::ItemType::Version, 1);
     }
 
     // save the details
     {
         MAPItemInfo item_info;
-        item_info.type_and_id = (map::ItemType::Info << 16);
+        item_info.type_and_id = (enums::ItemType::Info << 16);
         item_info.size = sizeof(MAPItemInfo) - sizeof(MAPDataFileItem);
-        item_info.version = map::_item_version;
+        item_info.version = constants::_map_item_version;
         item_info.author_index = -1;
         item_info.map_version_index = -1;
         item_info.credits_index = -1;
@@ -633,7 +634,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
             item_info.settings_index = DATAS_.size() - 1;
         }
         _AddItem(item_info);
-        _AddItemType(map::ItemType::Info, 1);
+        _AddItemType(enums::ItemType::Info, 1);
     }
     
     // save image assets
@@ -641,9 +642,9 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
         const auto& image_asset = data.assets.images[i];
 
         MAPItemImage item_image;
-        item_image.type_and_id = (map::ItemType::Image << 16) | i;
+        item_image.type_and_id = (enums::ItemType::Image << 16) | i;
         item_image.size = sizeof(MAPItemImage) - sizeof(MAPDataFileItem);
-        item_image.version = map::_item_version;
+        item_image.version = constants::_map_item_version;
         item_image.width = image_asset.width;
         item_image.height = image_asset.height;
         item_image.is_external = image_asset.is_external;
@@ -661,16 +662,16 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
         }
         _AddItem(item_image);
     }
-    _AddItemType(map::ItemType::Image, data.assets.images.size());
+    _AddItemType(enums::ItemType::Image, data.assets.images.size());
 
     // save sound assets
     for (qint32 i = 0; i < data.assets.sounds.size(); ++i) {
         const auto& sound_asset = data.assets.sounds[i];
 
         MAPItemSound item_sound;
-        item_sound.type_and_id = (map::ItemType::Sound << 16) | i;
+        item_sound.type_and_id = (enums::ItemType::Sound << 16) | i;
         item_sound.size = sizeof(MAPItemSound) - sizeof(MAPDataFileItem);
-        item_sound.version = map::_item_version;
+        item_sound.version = constants::_map_item_version;
         item_sound.is_external = sound_asset.is_external;
 
         ADD_UNCOMPRESSED_SIZE_(name_uncompressed_size, sound_asset.name.size());
@@ -689,7 +690,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
         }
         _AddItem(item_sound);
     }
-    _AddItemType(map::ItemType::Sound, data.assets.sounds.size());
+    _AddItemType(enums::ItemType::Sound, data.assets.sounds.size());
 
 
 
@@ -724,9 +725,9 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
             MAPItemGroup item_group;
             _BytesToInts(group.name, item_group.name);
 
-            item_group.type_and_id = (map::ItemType::Group << 16) | i;
+            item_group.type_and_id = (enums::ItemType::Group << 16) | i;
             item_group.size = sizeof(MAPItemGroup) - sizeof(MAPDataFileItem);
-            item_group.version = map::_item_group_version;
+            item_group.version = constants::_map_item_group_version;
 
             item_group.offset_x = group.offset_x;
             item_group.offset_y = group.offset_y;
@@ -745,7 +746,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
             layer_count += group.layers.size();
             _AddItem(item_group);
         }
-        _AddItemType(map::ItemType::Group, data.groups.size());
+        _AddItemType(enums::ItemType::Group, data.groups.size());
     }
 
     // save layers
@@ -758,7 +759,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
                 const auto& layer_variant = group.layers[j];
 
                 MAPItemLayerInfo item_layer_info;
-                item_layer_info.type_and_id = (map::ItemType::Layer << 16) | layer_count;
+                item_layer_info.type_and_id = (enums::ItemType::Layer << 16) | layer_count;
                 item_layer_info.version = 0;
 
                 switch (layer_variant.index()) {
@@ -770,9 +771,9 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
 
                         item_layer_tile.info = std::move(item_layer_info);
                         item_layer_tile.info.size = sizeof(MAPItemLayerTile) - sizeof(MAPDataFileItem);
-                        item_layer_tile.info.type = map::LayerType::Tile;
+                        item_layer_tile.info.type = enums::LayerType::Tile;
                         item_layer_tile.info.is_detail = layer_tile.is_detail;
-                        item_layer_tile.version = map::_item_layer_tile_version;
+                        item_layer_tile.version = constants::_map_item_layer_tile_version;
                         item_layer_tile.width = layer_tile.width;
                         item_layer_tile.height = layer_tile.height;
                         item_layer_tile.special_type = layer_tile.special_type;
@@ -794,7 +795,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
                         item_layer_tile.tune_index = -1;
 
                         switch (layer_tile.special_type) {
-                            case map::SpecialLayerType::Tele: {
+                            case enums::SpecialLayerType::Tele: {
                                 SAVE_TILE_INFO_BEGIN_(tile_info_buffer, tile_info, TeleTileInfo);
                                 tile_info_buffer.push_back(tile_info.number);
                                 tile_info_buffer.push_back(tile_info.index);
@@ -802,7 +803,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
                                 break;
                             }
                                                             
-                            case map::SpecialLayerType::Speedup: {
+                            case enums::SpecialLayerType::Speedup: {
                                 SAVE_TILE_INFO_BEGIN_(tile_info_buffer, tile_info, SpeedupTileInfo);
                                 tile_info_buffer.push_back(tile_info.force);
                                 tile_info_buffer.push_back(tile_info.max_speed);
@@ -814,12 +815,12 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
                                 break;
                             }
 
-                            case map::SpecialLayerType::Front: {
+                            case enums::SpecialLayerType::Front: {
                                 item_layer_tile.front_index = item_layer_tile.data_index;
                                 break;
                             }
 
-                            case map::SpecialLayerType::Switch: {
+                            case enums::SpecialLayerType::Switch: {
                                 SAVE_TILE_INFO_BEGIN_(tile_info_buffer, tile_info, SwitchTileInfo);
                                 tile_info_buffer.push_back(tile_info.number);
                                 tile_info_buffer.push_back(tile_info.index);
@@ -829,7 +830,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
                                 break;
                             }
 
-                            case map::SpecialLayerType::Tune: {
+                            case enums::SpecialLayerType::Tune: {
                                 SAVE_TILE_INFO_BEGIN_(tile_info_buffer, tile_info, TuneTileInfo);
                                 tile_info_buffer.push_back(tile_info.number);
                                 tile_info_buffer.push_back(tile_info.index);
@@ -849,9 +850,9 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
 
                         item_layer_quad.info = std::move(item_layer_info);
                         item_layer_quad.info.size = sizeof(MAPItemLayerQuad) - sizeof(MAPDataFileItem);
-                        item_layer_quad.info.type = map::LayerType::Quad;
+                        item_layer_quad.info.type = enums::LayerType::Quad;
                         item_layer_quad.info.is_detail = layer_quad.is_detail;
-                        item_layer_quad.version = map::_item_layer_quad_version;
+                        item_layer_quad.version = constants::_map_item_layer_quad_version;
                         item_layer_quad.quads_count = layer_quad.quads.size();
                         item_layer_quad.image_index = layer_quad.asset_index;
                         item_layer_quad.data_index = -1;
@@ -880,9 +881,9 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
 
                         item_layer_sound.info = std::move(item_layer_info);
                         item_layer_sound.info.size = sizeof(MAPItemLayerSound) - sizeof(MAPDataFileItem);
-                        item_layer_sound.info.type = map::LayerType::Sound;
+                        item_layer_sound.info.type = enums::LayerType::Sound;
                         item_layer_sound.info.is_detail = layer_sound.is_detail;
-                        item_layer_sound.version = map::_item_layer_sound_version;
+                        item_layer_sound.version = constants::_map_item_layer_sound_version;
                         item_layer_sound.sources_count = layer_sound.sound_sources.size();
                         item_layer_sound.sound_index = layer_sound.asset_index;
                         item_layer_sound.data_index = -1;
@@ -898,13 +899,13 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
                                 util::writeRawData(sources_data_stream, &sound_source, sizeof(SoundSource) - sizeof(SoundShape));
                                 sources_data_stream << sound_source.shape.type;
                                 switch (sound_source.shape.type) {
-                                    case map::SoundSourceShapeType::Circle: {
+                                    case enums::SoundSourceShapeType::Circle: {
                                         auto radius = std::get<util::CircleRadius>(sound_source.shape.size);
                                         sources_data_stream << radius << qint32(0);
                                         break;
                                     }
 
-                                    case map::SoundSourceShapeType::Rectangle: {
+                                    case enums::SoundSourceShapeType::Rectangle: {
                                         auto size = std::get<util::RectangleSize>(sound_source.shape.size);
                                         sources_data_stream << size.width << size.height;
                                         break;
@@ -922,7 +923,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
                 }
             }
         }
-        _AddItemType(map::ItemType::Layer, layer_count);
+        _AddItemType(enums::ItemType::Layer, layer_count);
     }
 
     // save envelopes
@@ -934,9 +935,9 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
             MAPItemEnvelope item_envelope;
             _BytesToInts(envelope.name, item_envelope.name);
 
-            item_envelope.type_and_id = (map::ItemType::Envelope << 16) | i;
+            item_envelope.type_and_id = (enums::ItemType::Envelope << 16) | i;
             item_envelope.size = sizeof(MAPItemEnvelope) - sizeof(MAPDataFileItem);
-            item_envelope.version = map::_item_envelope_version;
+            item_envelope.version = constants::_map_item_envelope_version;
             item_envelope.channels = envelope.channels;
             item_envelope.start_point = point_count;
             item_envelope.points_count = envelope.points.size();
@@ -945,11 +946,11 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
             point_count += envelope.points.size();
             _AddItem(item_envelope);
         }
-        _AddItemType(map::ItemType::Envelope, data.envelopes.size());
+        _AddItemType(enums::ItemType::Envelope, data.envelopes.size());
 
     // save envelope points
         MAPDataFileItem data_file_item;
-        data_file_item.type_and_id = (map::ItemType::EnvelopePoints << 16);
+        data_file_item.type_and_id = (enums::ItemType::EnvelopePoints << 16);
         data_file_item.size = sizeof(MAPItemEnvelopePoint) * point_count;
 
         QByteArray temp_buffer;
@@ -961,7 +962,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
             temp_buffer.push_back(QByteArray::fromRawData(reinterpret_cast<const char*>(envelope.points.data()), util::byteSize(envelope.points)));
         }
         _AddItem(temp_buffer);
-        _AddItemType(map::ItemType::EnvelopePoints, 1);
+        _AddItemType(enums::ItemType::EnvelopePoints, 1);
     }
 
 
@@ -1000,8 +1001,8 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
     qint32 data_total_size = util::totalSize(DATAS_);
     qint32 item_data_total_size = util::totalSize(items);
     qint32 file_size = sizeof(MAPHeader) + item_data_total_size + util::byteSize(data.file_info.item_offsets) + util::byteSize(data.file_info.item_types) + data_total_size + util::byteSize(data.file_info.data_sizes) * 2;
-    data.header.id = map::_id; // DATA
-    data.header.version = map::_version;
+    data.header.id = constants::_map_id; // DATA
+    data.header.version = constants::_map_version;
     data.header.size = file_size - 16;
     data.header.swaplen = file_size - data_total_size - 16;
     data.header.item_types_count = data.file_info.item_types.size();

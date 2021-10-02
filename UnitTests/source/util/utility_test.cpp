@@ -18,6 +18,9 @@ enum class Enum_qint64 : qint64 { Value };
 static_assert(std::is_same_v<decltype(util::toUnderlying(Enum_qint16::Value)), qint16>);
 static_assert(std::is_same_v<decltype(util::toUnderlying(Enum_qint64::Value)), qint64>);
 
+static_assert(util::flag(0) == 1 << 0);
+static_assert(util::flag(5) == 1 << 5);
+
 TEST_CASE("util::byteSize") {
     SECTION("Size of the std::vector in bytes") {
         std::vector<qint16> v1;

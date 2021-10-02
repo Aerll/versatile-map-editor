@@ -1,23 +1,18 @@
 #pragma once
 
+#include <ddnet/util/macros.hpp>
 #include <ddnet/util/utility.hpp>
 
 namespace ddnet::editor {
 
 enum class ButtonState {
     None    = 0,
-    Normal  = 1 << 0,
-    Hover   = 1 << 1,
-    Pressed = 1 << 2,
-    Clicked = 1 << 3,
+    Normal  = util::flag(0),
+    Hover   = util::flag(1),
+    Pressed = util::flag(2),
+    Clicked = util::flag(3),
 };
-
-inline constexpr ButtonState operator|(ButtonState lhs, ButtonState rhs) noexcept { return static_cast<ButtonState>(util::toUnderlying(lhs) | util::toUnderlying(rhs)); }
-inline constexpr ButtonState& operator|=(ButtonState& lhs, ButtonState rhs) noexcept { lhs = lhs | rhs; return lhs; }
-inline constexpr ButtonState operator&(ButtonState lhs, ButtonState rhs) noexcept { return static_cast<ButtonState>(util::toUnderlying(lhs) & util::toUnderlying(rhs)); }
-inline constexpr ButtonState& operator&=(ButtonState& lhs, ButtonState rhs) noexcept { lhs = lhs & rhs; return lhs; }
-inline constexpr ButtonState operator^(ButtonState lhs, ButtonState rhs) noexcept { return static_cast<ButtonState>(util::toUnderlying(lhs) ^ util::toUnderlying(rhs)); }
-inline constexpr ButtonState& operator^=(ButtonState& lhs, ButtonState rhs) noexcept { lhs = lhs ^ rhs; return lhs; }
+ENUM_DEFINE_BITWISE_OPS_(ButtonState);
 
 enum class ResourceType {
     AssetUi,

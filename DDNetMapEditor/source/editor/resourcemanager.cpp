@@ -31,7 +31,7 @@ debug::ErrorCode ResourceManager::initResources() {
     
     // read config
     io::DDLFileStream config_ddl;
-    if (debug::failed(config_ddl.loadFile(QFileInfo{ "config.ddl" }))) [[unlikely]]
+    if (util::failed(config_ddl.loadFile(QFileInfo{ "config.ddl" }))) [[unlikely]]
         return debug::ErrorCode::Resource_Config_FailedToRead;
 
     io::DDLProperty config_main_property = { .name = "Config", .value = "Main" };
@@ -55,7 +55,7 @@ debug::ErrorCode ResourceManager::initResources() {
 
     // read settings
     io::DDLFileStream settings_ddl;
-    if (debug::failed(settings_ddl.loadFile(QFileInfo{ settings_file }))) [[unlikely]]
+    if (util::failed(settings_ddl.loadFile(QFileInfo{ settings_file }))) [[unlikely]]
         return debug::ErrorCode::Resource_Settings_FailedToRead;
 
     io::DDLProperty settings_main_property = { .name = "Settings", .value = "Main" };
@@ -82,11 +82,11 @@ debug::ErrorCode ResourceManager::initResources() {
 
     // initialize translation strings
     error_code = initTranslationStrings();
-    if (debug::failed(error_code))
+    if (util::failed(error_code))
         return error_code;
 
     error_code = initAssets();
-    if (debug::failed(error_code))
+    if (util::failed(error_code))
         return error_code;
 
     return debug::ErrorCode::NoError;
@@ -163,7 +163,7 @@ QByteArray ResourceManager::theme(debug::ErrorCode& error_code) {
     QString theme_file_name = setting(SettingIndex::Theme) + "-widgets.ddl";
 
     io::DDLFileStream theme_ddl;
-    if (debug::failed(theme_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Theme, theme_file_name) }))) [[unlikely]] {
+    if (util::failed(theme_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Theme, theme_file_name) }))) [[unlikely]] {
         error_code = debug::ErrorCode::Resource_Settings_ThemeFailedToRead;
         return {};
     }
@@ -184,7 +184,7 @@ QPalette ResourceManager::themePalette(debug::ErrorCode& error_code) {
     QString theme_palette_file_name = setting(SettingIndex::Theme) + "-palette.ddl";
 
     io::DDLFileStream palette_ddl;
-    if (debug::failed(palette_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Theme, theme_palette_file_name) }))) [[unlikely]] {
+    if (util::failed(palette_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Theme, theme_palette_file_name) }))) [[unlikely]] {
         error_code = debug::ErrorCode::Resource_Settings_ThemePaletteFailedToRead;
         return {};
     }
@@ -283,7 +283,7 @@ debug::ErrorCode ResourceManager::initAssets() {
     QString theme_assets_file_name = setting(SettingIndex::Theme) + "-assets.ddl";
 
     io::DDLFileStream assets_ddl;
-    if (debug::failed(assets_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Theme, theme_assets_file_name) }))) [[unlikely]]
+    if (util::failed(assets_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Theme, theme_assets_file_name) }))) [[unlikely]]
         return debug::ErrorCode::Resource_Settings_ThemeAssetsFailedToRead;
 
     io::DDLProperty assets_config_property = { .name = "Assets", .value = "Config" };
@@ -304,7 +304,7 @@ debug::ErrorCode ResourceManager::initTranslationStrings() {
     QString language_file_name = setting(SettingIndex::Language) + ".ddl";
 
     io::DDLFileStream language_ddl;
-    if (debug::failed(language_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Lang, language_file_name) }))) [[unlikely]]
+    if (util::failed(language_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Lang, language_file_name) }))) [[unlikely]]
         return debug::ErrorCode::Resource_Lang_FailedToReadTranslations;
 
     qint32 count = 0;
@@ -374,34 +374,34 @@ debug::ErrorCode ResourceManager::createAssets(io::DDLData& data, const QString&
     { // ui assets normal
         io::DDLProperty ui_normal = { .name = "Ui", .value = "Normal" };
         auto [atlas, size, spacing] = _ReadInfo(ui_normal, ResourceType::AssetUi);
-        if (debug::failed(error_code))
+        if (util::failed(error_code))
             return error_code;
 
-        _CreateAsset(ui_normal, AssetIndex::Ui16_Normal_ArrowMenu,   "ArrowMenu",   atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(ui_normal, AssetIndex::Ui16_Normal_ButtonClose, "ButtonClose", atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(ui_normal, AssetIndex::Ui16_Normal_CheckMenu,   "CheckMenu",   atlas, size, spacing); if (debug::failed(error_code)) return error_code;
+        _CreateAsset(ui_normal, AssetIndex::Ui16_Normal_ArrowMenu,   "ArrowMenu",   atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(ui_normal, AssetIndex::Ui16_Normal_ButtonClose, "ButtonClose", atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(ui_normal, AssetIndex::Ui16_Normal_CheckMenu,   "CheckMenu",   atlas, size, spacing); if (util::failed(error_code)) return error_code;
     }
 
     { // ui assets hover
         io::DDLProperty ui_hover = { .name = "Ui", .value = "Hover" };
         auto [atlas, size, spacing] = _ReadInfo(ui_hover, ResourceType::AssetUi);
-        if (debug::failed(error_code))
+        if (util::failed(error_code))
             return error_code;
 
-        _CreateAsset(ui_hover, AssetIndex::Ui16_Hover_ArrowMenu,   "ArrowMenu",   atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(ui_hover, AssetIndex::Ui16_Hover_ButtonClose, "ButtonClose", atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(ui_hover, AssetIndex::Ui16_Hover_CheckMenu,   "CheckMenu",   atlas, size, spacing); if (debug::failed(error_code)) return error_code;
+        _CreateAsset(ui_hover, AssetIndex::Ui16_Hover_ArrowMenu,   "ArrowMenu",   atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(ui_hover, AssetIndex::Ui16_Hover_ButtonClose, "ButtonClose", atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(ui_hover, AssetIndex::Ui16_Hover_CheckMenu,   "CheckMenu",   atlas, size, spacing); if (util::failed(error_code)) return error_code;
     }
 
     { // ui assets pressed
         io::DDLProperty ui_pressed = { .name = "Ui", .value = "Pressed" };
         auto [atlas, size, spacing] = _ReadInfo(ui_pressed, ResourceType::AssetUi);
-        if (debug::failed(error_code))
+        if (util::failed(error_code))
             return error_code;
 
-        _CreateAsset(ui_pressed, AssetIndex::Ui16_Pressed_ArrowMenu,   "ArrowMenu",   atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(ui_pressed, AssetIndex::Ui16_Pressed_ButtonClose, "ButtonClose", atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(ui_pressed, AssetIndex::Ui16_Pressed_CheckMenu,   "CheckMenu",   atlas, size, spacing); if (debug::failed(error_code)) return error_code;
+        _CreateAsset(ui_pressed, AssetIndex::Ui16_Pressed_ArrowMenu,   "ArrowMenu",   atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(ui_pressed, AssetIndex::Ui16_Pressed_ButtonClose, "ButtonClose", atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(ui_pressed, AssetIndex::Ui16_Pressed_CheckMenu,   "CheckMenu",   atlas, size, spacing); if (util::failed(error_code)) return error_code;
     }
 
     { // ui textures
@@ -413,45 +413,45 @@ debug::ErrorCode ResourceManager::createAssets(io::DDLData& data, const QString&
     { // icon assets normal 16x16
         io::DDLProperty icons_normal_16 = { .name = "Icons", .value = "Normal_16" };
         auto [atlas, size, spacing] = _ReadInfo(icons_normal_16, ResourceType::AssetIcon);
-        if (debug::failed(error_code))
+        if (util::failed(error_code))
             return error_code;
         
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_NewFile,     "NewFile",     atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_OpenFile,    "OpenFile",    atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_SaveFile,    "SaveFile",    atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Import,      "Import",      atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Export,      "Export",      atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_LayerTile,   "LayerTile",   atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_LayerQuad,   "LayerQuad",   atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_LayerSound,  "LayerSound",  atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_MapresImage, "MapresImage", atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_MapresSound, "MapresSound", atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Grid,        "Grid",        atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Undo,        "Undo",        atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Redo,        "Redo",        atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Delete,      "Delete",      atlas, size, spacing); if (debug::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_NewFile,     "NewFile",     atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_OpenFile,    "OpenFile",    atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_SaveFile,    "SaveFile",    atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Import,      "Import",      atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Export,      "Export",      atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_LayerTile,   "LayerTile",   atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_LayerQuad,   "LayerQuad",   atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_LayerSound,  "LayerSound",  atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_MapresImage, "MapresImage", atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_MapresSound, "MapresSound", atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Grid,        "Grid",        atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Undo,        "Undo",        atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Redo,        "Redo",        atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Delete,      "Delete",      atlas, size, spacing); if (util::failed(error_code)) return error_code;
     }
 
     { // icon assets normal 24x24
         io::DDLProperty icons_normal_24 = { .name = "Icons", .value = "Normal_24" };
         auto [atlas, size, spacing] = _ReadInfo(icons_normal_24, ResourceType::AssetIcon);
-        if (debug::failed(error_code))
+        if (util::failed(error_code))
             return error_code;
         
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_NewFile,     "NewFile",     atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_OpenFile,    "OpenFile",    atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_SaveFile,    "SaveFile",    atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Import,      "Import",      atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Export,      "Export",      atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_LayerTile,   "LayerTile",   atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_LayerQuad,   "LayerQuad",   atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_LayerSound,  "LayerSound",  atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_MapresImage, "MapresImage", atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_MapresSound, "MapresSound", atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Grid,        "Grid",        atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Undo,        "Undo",        atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Redo,        "Redo",        atlas, size, spacing); if (debug::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Delete,      "Delete",      atlas, size, spacing); if (debug::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_NewFile,     "NewFile",     atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_OpenFile,    "OpenFile",    atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_SaveFile,    "SaveFile",    atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Import,      "Import",      atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Export,      "Export",      atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_LayerTile,   "LayerTile",   atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_LayerQuad,   "LayerQuad",   atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_LayerSound,  "LayerSound",  atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_MapresImage, "MapresImage", atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_MapresSound, "MapresSound", atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Grid,        "Grid",        atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Undo,        "Undo",        atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Redo,        "Redo",        atlas, size, spacing); if (util::failed(error_code)) return error_code;
+        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Delete,      "Delete",      atlas, size, spacing); if (util::failed(error_code)) return error_code;
     }
 
     return error_code;

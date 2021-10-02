@@ -1,5 +1,8 @@
 #pragma once
 
+#include <ddnet/util/constants.hpp>
+#include <ddnet/util/enums.hpp>
+
 #include <QtGlobal>
 #include <QString>
 #include <QColor>
@@ -9,19 +12,9 @@
 
 namespace ddnet::map {
 
-enum class CurveType {
-    Step = 0,
-    Linear,
-    Slow,
-    Fast,
-    Smooth,
-};
-
-
-
 struct EnvelopePoint {
     qreal time_point;
-    CurveType curve_type = CurveType::Linear;
+    enums::CurveType curve_type = enums::CurveType::Linear;
 };
 
 struct ColorEnvelopePoint : EnvelopePoint {

@@ -21,27 +21,27 @@ DDMData MAPData::toDDM() const {
             switch (current_layer.index()) {
                 case 0: { // tile layer
                     const auto& map_tile_layer = std::get<io::LayerTile>(current_layer);
-                    if (map_tile_layer.special_type == map::SpecialLayerType::Game) {
+                    if (map_tile_layer.special_type == enums::SpecialLayerType::Game) {
                         map::GameLayer game_layer;
                         // TODO
                     }
-                    else if (map_tile_layer.special_type == map::SpecialLayerType::Front) {
+                    else if (map_tile_layer.special_type == enums::SpecialLayerType::Front) {
                         map::FrontLayer front_layer;
                         // TODO
                     }
-                    else if (map_tile_layer.special_type == map::SpecialLayerType::Tele) {
+                    else if (map_tile_layer.special_type == enums::SpecialLayerType::Tele) {
                         map::TeleLayer tele_layer;
                         // TODO
                     }
-                    else if (map_tile_layer.special_type == map::SpecialLayerType::Tune) {
+                    else if (map_tile_layer.special_type == enums::SpecialLayerType::Tune) {
                         map::TuneLayer tune_layer;
                         // TODO
                     }
-                    else if (map_tile_layer.special_type == map::SpecialLayerType::Switch) {
+                    else if (map_tile_layer.special_type == enums::SpecialLayerType::Switch) {
                         map::SwitchLayer switch_layer;
                         // TODO
                     }
-                    else if (map_tile_layer.special_type == map::SpecialLayerType::Speedup) {
+                    else if (map_tile_layer.special_type == enums::SpecialLayerType::Speedup) {
                         map::SpeedupLayer speedup_layer;
                         // TODO
                     }
@@ -73,6 +73,7 @@ DDMData MAPData::toDDM() const {
     }
 
     // TODO
+    return {};
 }
 
 } // ddnet::io::

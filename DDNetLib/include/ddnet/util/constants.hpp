@@ -7,80 +7,25 @@ namespace ddnet::constants {
 constexpr qint32 _notfound = -1;
 constexpr qint32 _fractional_bits = 10;
 
+constexpr qint32 _map_id = 0x41544144u; // DATA
+constexpr qint32 _map_version = 4;
+constexpr qint32 _map_item_version = 1;
+constexpr qint32 _map_item_envelope_version = 2;
+constexpr qint32 _map_item_group_version = 3;
+constexpr qint32 _map_item_layer_tile_version = 3;
+constexpr qint32 _map_item_layer_quad_version = 2;
+constexpr qint32 _map_item_layer_sound_version = 2;
+
+constexpr qint32 _map_max_author_length = 32;
+constexpr qint32 _map_max_map_version_length = 16;
+constexpr qint32 _map_max_credits_length = 128;
+constexpr qint32 _map_max_license_length = 32;
+constexpr qint32 _map_max_command_length = 256;
+constexpr qint32 _map_max_item_envelope_name_length = 8;
+constexpr qint32 _map_max_item_group_name_length = 3;
+constexpr qint32 _map_max_item_layer_name_length = 3;
+constexpr qint32 _map_max_envelope_name_length = _map_max_item_envelope_name_length * sizeof(qint32);
+constexpr qint32 _map_max_group_name_length = _map_max_item_group_name_length * sizeof(qint32);
+constexpr qint32 _map_max_layer_name_length = _map_max_item_layer_name_length * sizeof(qint32);
+
 } // ddnet::constants::
-
-namespace ddnet::map {
-
-constexpr qint32 _id = 0x41544144u; // DATA
-constexpr qint32 _version = 4;
-constexpr qint32 _item_version = 1;
-constexpr qint32 _item_envelope_version = 2;
-constexpr qint32 _item_group_version = 3;
-constexpr qint32 _item_layer_tile_version = 3;
-constexpr qint32 _item_layer_quad_version = 2;
-constexpr qint32 _item_layer_sound_version = 2;
-
-enum {
-    MAX_AUTHOR_LENGTH             = 32,
-    MAX_MAP_VERSION_LENGTH        = 16,
-    MAX_CREDITS_LENGTH            = 128,
-    MAX_LICENSE_LENGTH            = 32,
-
-    MAX_COMMAND_LENGTH            = 256,
-
-    MAX_ITEM_ENVELOPE_NAME_LENGTH = 8,
-    MAX_ITEM_GROUP_NAME_LENGTH    = 3,
-    MAX_ITEM_LAYER_NAME_LENGTH    = 3,
-    MAX_ENVELOPE_NAME_LENGTH      = MAX_ITEM_ENVELOPE_NAME_LENGTH * sizeof(qint32),
-    MAX_GROUP_NAME_LENGTH         = MAX_ITEM_GROUP_NAME_LENGTH * sizeof(qint32),
-    MAX_LAYER_NAME_LENGTH         = MAX_ITEM_LAYER_NAME_LENGTH * sizeof(qint32),
-};
-
-enum class ItemType {
-    Version = 0,
-    Info,
-    Image,
-    Envelope,
-    Group,
-    Layer,
-    EnvelopePoints,
-    Sound,
-};
-
-enum class LayerType {
-    Invalid = 0,
-    Tile    = 2,
-    Quad    = 3,
-    Sound   = 10,
-};
-
-enum class SpecialLayerType {
-    None    = 0,
-    Game    = 1 << 0,
-    Tele    = 1 << 1,
-    Speedup = 1 << 2,
-    Front   = 1 << 3,
-    Switch  = 1 << 4,
-    Tune    = 1 << 5,
-};
-
-enum class CurveType {
-    Step = 0,
-    Linear,
-    Slow,
-    Fast,
-    Smooth,
-};
-
-enum class SoundSourceShapeType {
-    Rectangle = 0,
-    Circle
-};
-
-
-
-inline constexpr qint32 operator<<(ItemType item_type, qint32 value) noexcept {
-    return static_cast<qint32>(item_type) << value;
-}
-
-} // ddnet::map::

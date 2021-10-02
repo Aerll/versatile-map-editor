@@ -1,20 +1,21 @@
 #pragma once
 
 #include <ddnet/util/macros.hpp>
+#include <ddnet/util/utility.hpp>
 
 #include <QString>
 
 namespace ddnet::util {
 
 enum class TokenType {
-    Invalid    = 1 << 0,
-    Identifier = 1 << 1,
-    Literal    = 1 << 2,
-    Keyword    = 1 << 3,
-    Operator   = 1 << 4,
-    Open       = 1 << 5,
-    Close      = 1 << 6,
-    Terminal   = 1 << 7,
+    Invalid    = util::flag(0),
+    Identifier = util::flag(1),
+    Literal    = util::flag(2),
+    Keyword    = util::flag(3),
+    Operator   = util::flag(4),
+    Open       = util::flag(5),
+    Close      = util::flag(6),
+    Terminal   = util::flag(7),
 };
 ENUM_DEFINE_AND_(TokenType);
 ENUM_DEFINE_OR_(TokenType);

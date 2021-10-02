@@ -1,8 +1,10 @@
 #pragma once
 
+#include <QtGlobal>
+
 namespace ddnet::debug {
 
-enum class [[nodiscard]] ErrorCode {
+enum class [[nodiscard]] ErrorCode : qint32 {
     NoError = 0,
 
     // file
@@ -96,9 +98,5 @@ enum class [[nodiscard]] ErrorCode {
     Resource_Font_FailedToReadFont,
     Resource_Lang_FailedToReadTranslations,
 };
-
-[[nodiscard]] inline constexpr bool failed(ErrorCode error_code) noexcept {
-    return error_code != ErrorCode::NoError;
-}
 
 } // ddnet::debug::
