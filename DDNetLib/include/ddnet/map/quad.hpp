@@ -6,13 +6,15 @@
 
 #include <array>
 
-namespace ddnet::map {
+namespace ddnet {
 
 struct QuadVertex {
     QPointF position;
     QPoint tex_coord;
     QColor color;
 };
+
+
 
 struct Quad {
     std::array<QuadVertex, 4> vertices;
@@ -25,4 +27,4 @@ struct Quad {
     qint32 color_envelope_offset;
 };
 
-} // ddnet::map::
+}

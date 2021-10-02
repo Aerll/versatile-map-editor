@@ -38,4 +38,4 @@ public:
     QAction* action_delete;
 };
 
-} // ddnet::editor::
+}

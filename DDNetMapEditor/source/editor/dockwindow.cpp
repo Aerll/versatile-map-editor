@@ -77,4 +77,4 @@ void DockWindow::mouseMoveEvent(QMouseEvent* event) {
     }
 }
 
-} // ddnet::editor::
+}

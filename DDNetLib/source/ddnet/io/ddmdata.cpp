@@ -9,4 +9,4 @@ MAPData DDMData::toMAP() const {
     return {};
 }
 
-} // ddnet::io::
+}

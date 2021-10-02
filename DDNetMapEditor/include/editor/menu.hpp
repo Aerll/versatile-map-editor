@@ -18,4 +18,4 @@ private:
     qint32 border_size = 0;
 };
 
-} // ddnet::editor::
+}

@@ -15,4 +15,4 @@ protected:
     QWidget* widget;
 };
 
-} // ddnet::editor::
+}

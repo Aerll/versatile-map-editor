@@ -1,11 +1,12 @@
 #include <ddnet/io/ddlparser.hpp>
 
 #include <ddnet/io/ddltokenizer.hpp>
+#include <ddnet/util/enums.hpp>
 
 namespace ddnet::io {
 
 void DDLParser::parseIdentifier(const std::pair<util::Token, qint32>& token) {
-    if (token.first.type != util::TokenType::Identifier) [[unlikely]]
+    if (token.first.type != enums::TokenType::Identifier) [[unlikely]]
         errors.push_back(debug::Error{ 
             .message = "Missing identifier at line: " + QString::number(token.second),
             .code = debug::ErrorCode::Parser_DDL_MissingIdentifier
@@ -15,7 +16,7 @@ void DDLParser::parseIdentifier(const std::pair<util::Token, qint32>& token) {
 
 
 void DDLParser::parseAssignment(const std::pair<util::Token, qint32>& token) {
-    if (token.first != util::Token{ .string = "=", .type = util::TokenType::Operator }) [[unlikely]]
+    if (token.first != util::Token{ .string = "=", .type = enums::TokenType::Operator }) [[unlikely]]
         errors.push_back(debug::Error{ 
             .message = "Missing '=' at line: " + QString::number(token.second),
             .code = debug::ErrorCode::Parser_DDL_MissingAssignment
@@ -25,7 +26,7 @@ void DDLParser::parseAssignment(const std::pair<util::Token, qint32>& token) {
 
 
 void DDLParser::parseLiteralOperator(const std::pair<util::Token, qint32>& token) {
-    if (token.first != util::Token{ .string = ":", .type = util::TokenType::Operator }) [[unlikely]]
+    if (token.first != util::Token{ .string = ":", .type = enums::TokenType::Operator }) [[unlikely]]
         errors.push_back(debug::Error{ 
             .message = "Missing ':' at line: " + QString::number(token.second),
             .code = debug::ErrorCode::Parser_DDL_MissingLiteralOperator
@@ -69,43 +70,43 @@ void DDLParser::parse(const tokenlist_type& tokens) {
     for (size_t i = 0; i < tokens.size(); ++i) {
         if (i == 0) { // first token
             parseIdentifier(tokens[i]);
-            if (tokens[i].first.type != util::TokenType::Identifier)
+            if (tokens[i].first.type != enums::TokenType::Identifier)
                 errorUnexpectedToken(tokens[i]);
         }
 
-        if (tokens[i].first == util::Token{ .string = "{", .type = util::TokenType::Operator | util::TokenType::Open })
+        if (tokens[i].first == util::Token{ .string = "{", .type = enums::TokenType::Operator | enums::TokenType::Open })
             parse_attributes = true;
-        else if (tokens[i].first == util::Token{ .string = "}", .type = util::TokenType::Operator | util::TokenType::Close })
+        else if (tokens[i].first == util::Token{ .string = "}", .type = enums::TokenType::Operator | enums::TokenType::Close })
             parse_attributes = false;
         
         if (i == tokens.size() - 1) { // last token
-            if (tokens[i].first != util::Token{ .string = "}", .type = util::TokenType::Operator | util::TokenType::Close }) {
+            if (tokens[i].first != util::Token{ .string = "}", .type = enums::TokenType::Operator | enums::TokenType::Close }) {
                 errorMissingCloseBracket(tokens[i]);
                 continue;
             }
         }
         else { // rest
-            if (tokens[i + 1].first == util::Token{ .string = "=", .type = util::TokenType::Operator }
+            if (tokens[i + 1].first == util::Token{ .string = "=", .type = enums::TokenType::Operator }
                 ) { // 'id ='
                 parseIdentifier(tokens[i]);
                 continue;
             }
             else if (
-                tokens[i + 1].first == util::Token{ .string = ":", .type = util::TokenType::Operator }
+                tokens[i + 1].first == util::Token{ .string = ":", .type = enums::TokenType::Operator }
                 ) { // '= :'
                 parseAssignment(tokens[i]);
                 continue;
             }
             else if (
-                tokens[i].first == util::Token{ .string = "=", .type = util::TokenType::Operator }
+                tokens[i].first == util::Token{ .string = "=", .type = enums::TokenType::Operator }
                 ) { // '= :'
                 parseLiteralOperator(tokens[i + 1]);
                 continue;
             }
             else if (
-                tokens[i + 1].first == util::Token{ .string = "{", .type = util::TokenType::Operator | util::TokenType::Open }
+                tokens[i + 1].first == util::Token{ .string = "{", .type = enums::TokenType::Operator | enums::TokenType::Open }
                 ) { // ': {' & 'literal {'
-                if (tokens[i].first.type != util::TokenType::Literal) {
+                if (tokens[i].first.type != enums::TokenType::Literal) {
                     errorUnexpectedToken(tokens[i + 1]);
                     continue;
                 }
@@ -115,8 +116,8 @@ void DDLParser::parse(const tokenlist_type& tokens) {
                 }
             }
             else if (
-                tokens[i].first.type == util::TokenType::Literal &&
-                tokens[i + 1].first != util::Token{ .string = "{", .type = util::TokenType::Operator | util::TokenType::Open } &&
+                tokens[i].first.type == enums::TokenType::Literal &&
+                tokens[i + 1].first != util::Token{ .string = "{", .type = enums::TokenType::Operator | enums::TokenType::Open } &&
                 !parse_attributes
                 ) { // ': [inv]' & 'literal [inv]'
                 errorMissingOpenBracket(tokens[i]);
@@ -124,10 +125,10 @@ void DDLParser::parse(const tokenlist_type& tokens) {
                 continue;
             }
             else if (
-                tokens[i + 1].first == util::Token{ .string = "}", .type = util::TokenType::Operator | util::TokenType::Close }
+                tokens[i + 1].first == util::Token{ .string = "}", .type = enums::TokenType::Operator | enums::TokenType::Close }
                 ) { // ': }' & 'literal }' & '{ }'
-                if (tokens[i].first.type != util::TokenType::Literal && 
-                    tokens[i].first != util::Token{ .string = "{", .type = util::TokenType::Operator | util::TokenType::Open }
+                if (tokens[i].first.type != enums::TokenType::Literal &&
+                    tokens[i].first != util::Token{ .string = "{", .type = enums::TokenType::Operator | enums::TokenType::Open }
                     ) {
                     errorUnexpectedToken(tokens[i + 1]);
                     continue;
@@ -137,4 +138,4 @@ void DDLParser::parse(const tokenlist_type& tokens) {
     }
 }
 
-} // ddnet::io::
+}

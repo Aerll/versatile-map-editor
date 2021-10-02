@@ -70,4 +70,4 @@ void CloseButton::paintEvent(QPaintEvent* event) {
         painter.drawImage(rect(), App::resources.asset(AssetIndex::Ui16_Pressed_ButtonClose));
 }
 
-} // ddnet::editor::
+}

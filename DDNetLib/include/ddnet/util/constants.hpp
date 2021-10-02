@@ -28,4 +28,4 @@ constexpr qint32 _map_max_envelope_name_length = _map_max_item_envelope_name_len
 constexpr qint32 _map_max_group_name_length = _map_max_item_group_name_length * sizeof(qint32);
 constexpr qint32 _map_max_layer_name_length = _map_max_item_layer_name_length * sizeof(qint32);
 
-} // ddnet::constants::
+}

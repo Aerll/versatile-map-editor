@@ -6,7 +6,7 @@
 
 #include <array>
 
-namespace ddnet::map {
+namespace ddnet {
 
 class Node {
     inline Node(quint16 id)
@@ -24,4 +24,4 @@ protected:
     quint16 id;
 };
 
-} // ddnet::map::
+}

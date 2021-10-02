@@ -27,4 +27,4 @@ public:
     errorlist_type errors;
 };
 
-} // ddnet::io::
+}

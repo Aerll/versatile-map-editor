@@ -12,7 +12,7 @@ DDMData MAPData::toDDM() const {
     ddm.map.version = details.map_version.toInt();
 
     for (const auto& map_group : groups) {
-        map::Group group = {
+        Group group = {
             .name = map_group.name,
             .is_visible = true
         };
@@ -20,33 +20,33 @@ DDMData MAPData::toDDM() const {
         for (const auto& current_layer : map_group.layers) {
             switch (current_layer.index()) {
                 case 0: { // tile layer
-                    const auto& map_tile_layer = std::get<io::LayerTile>(current_layer);
+                    const auto& map_tile_layer = std::get<io::MAPLayerTile>(current_layer);
                     if (map_tile_layer.special_type == enums::SpecialLayerType::Game) {
-                        map::GameLayer game_layer;
+                        GameLayer game_layer;
                         // TODO
                     }
                     else if (map_tile_layer.special_type == enums::SpecialLayerType::Front) {
-                        map::FrontLayer front_layer;
+                        FrontLayer front_layer;
                         // TODO
                     }
                     else if (map_tile_layer.special_type == enums::SpecialLayerType::Tele) {
-                        map::TeleLayer tele_layer;
+                        TeleLayer tele_layer;
                         // TODO
                     }
                     else if (map_tile_layer.special_type == enums::SpecialLayerType::Tune) {
-                        map::TuneLayer tune_layer;
+                        TuneLayer tune_layer;
                         // TODO
                     }
                     else if (map_tile_layer.special_type == enums::SpecialLayerType::Switch) {
-                        map::SwitchLayer switch_layer;
+                        SwitchLayer switch_layer;
                         // TODO
                     }
                     else if (map_tile_layer.special_type == enums::SpecialLayerType::Speedup) {
-                        map::SpeedupLayer speedup_layer;
+                        SpeedupLayer speedup_layer;
                         // TODO
                     }
                     else {
-                        map::TileLayer tile_layer;
+                        TileLayer tile_layer;
                         // TODO
                     }
 
@@ -54,16 +54,16 @@ DDMData MAPData::toDDM() const {
                 }
 
                 case 1: { // quad layer
-                    const auto& map_quad_layer = std::get<io::LayerQuad>(current_layer);
-                    map::QuadLayer quad_layer;
+                    const auto& map_quad_layer = std::get<io::MAPLayerQuad>(current_layer);
+                    QuadLayer quad_layer;
 
                     // TODO
                     break;
                 }
 
                 case 2: { // sound layer
-                    const auto& map_sound_layer = std::get<io::LayerSound>(current_layer);
-                    map::SoundLayer sound_layer;
+                    const auto& map_sound_layer = std::get<io::MAPLayerSound>(current_layer);
+                    SoundLayer sound_layer;
 
                     // TODO
                     break;
@@ -76,4 +76,4 @@ DDMData MAPData::toDDM() const {
     return {};
 }
 
-} // ddnet::io::
+}

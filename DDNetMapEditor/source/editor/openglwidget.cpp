@@ -20,4 +20,4 @@ void OpenGLWidget::paintEvent(QPaintEvent* event) {
     painter.fillRect(event->rect(), App::resources.asset(AssetIndex::Ui_Texture_Checker));
 }
 
-} // ddnet::editor::
+}

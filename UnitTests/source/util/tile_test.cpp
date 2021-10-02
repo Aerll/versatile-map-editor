@@ -13,153 +13,153 @@ TEST_CASE("util::toTilesetCoords") {
 }
 
 TEST_CASE("util::rotateTile") {
-    SECTION("Rotate clockwise") {
-        map::Tile tile;
+    SECTION("enums::Rotate clockwise") {
+        Tile tile;
 
         // non-mirrored
-        tile.rotation = Rotation::N;
+        tile.rotation = enums::Rotation::N;
 
-        util::rotateTile(tile, Rotate::Clockwise);
-        CHECK(tile.rotation == Rotation::R);
+        util::rotateTile(tile, enums::Rotate::Clockwise);
+        CHECK(tile.rotation == enums::Rotation::R);
 
-        util::rotateTile(tile, Rotate::Clockwise);
-        CHECK(tile.rotation == Rotation::VH);
+        util::rotateTile(tile, enums::Rotate::Clockwise);
+        CHECK(tile.rotation == enums::Rotation::VH);
 
-        util::rotateTile(tile, Rotate::Clockwise);
-        CHECK(tile.rotation == Rotation::VHR);
+        util::rotateTile(tile, enums::Rotate::Clockwise);
+        CHECK(tile.rotation == enums::Rotation::VHR);
 
-        util::rotateTile(tile, Rotate::Clockwise);
-        CHECK(tile.rotation == Rotation::N);
+        util::rotateTile(tile, enums::Rotate::Clockwise);
+        CHECK(tile.rotation == enums::Rotation::N);
 
         // mirrored
-        tile.rotation = Rotation::V;
+        tile.rotation = enums::Rotation::V;
 
-        util::rotateTile(tile, Rotate::Clockwise);
-        CHECK(tile.rotation == Rotation::VR);
+        util::rotateTile(tile, enums::Rotate::Clockwise);
+        CHECK(tile.rotation == enums::Rotation::VR);
 
-        util::rotateTile(tile, Rotate::Clockwise);
-        CHECK(tile.rotation == Rotation::H);
+        util::rotateTile(tile, enums::Rotate::Clockwise);
+        CHECK(tile.rotation == enums::Rotation::H);
 
-        util::rotateTile(tile, Rotate::Clockwise);
-        CHECK(tile.rotation == Rotation::HR);
+        util::rotateTile(tile, enums::Rotate::Clockwise);
+        CHECK(tile.rotation == enums::Rotation::HR);
 
-        util::rotateTile(tile, Rotate::Clockwise);
-        CHECK(tile.rotation == Rotation::V);
+        util::rotateTile(tile, enums::Rotate::Clockwise);
+        CHECK(tile.rotation == enums::Rotation::V);
     }
 
-    SECTION("Rotate counter-clockwise") {
-        map::Tile tile;
+    SECTION("enums::Rotate counter-clockwise") {
+        Tile tile;
 
         // non-mirrored
-        tile.rotation = Rotation::N;
+        tile.rotation = enums::Rotation::N;
 
-        util::rotateTile(tile, Rotate::CounterClockwise);
-        CHECK(tile.rotation == Rotation::VHR);
+        util::rotateTile(tile, enums::Rotate::CounterClockwise);
+        CHECK(tile.rotation == enums::Rotation::VHR);
 
-        util::rotateTile(tile, Rotate::CounterClockwise);
-        CHECK(tile.rotation == Rotation::VH);
+        util::rotateTile(tile, enums::Rotate::CounterClockwise);
+        CHECK(tile.rotation == enums::Rotation::VH);
 
-        util::rotateTile(tile, Rotate::CounterClockwise);
-        CHECK(tile.rotation == Rotation::R);
+        util::rotateTile(tile, enums::Rotate::CounterClockwise);
+        CHECK(tile.rotation == enums::Rotation::R);
 
-        util::rotateTile(tile, Rotate::CounterClockwise);
-        CHECK(tile.rotation == Rotation::N);
+        util::rotateTile(tile, enums::Rotate::CounterClockwise);
+        CHECK(tile.rotation == enums::Rotation::N);
 
         // mirrored
-        tile.rotation = Rotation::V;
+        tile.rotation = enums::Rotation::V;
 
-        util::rotateTile(tile, Rotate::CounterClockwise);
-        CHECK(tile.rotation == Rotation::HR);
+        util::rotateTile(tile, enums::Rotate::CounterClockwise);
+        CHECK(tile.rotation == enums::Rotation::HR);
 
-        util::rotateTile(tile, Rotate::CounterClockwise);
-        CHECK(tile.rotation == Rotation::H);
+        util::rotateTile(tile, enums::Rotate::CounterClockwise);
+        CHECK(tile.rotation == enums::Rotation::H);
 
-        util::rotateTile(tile, Rotate::CounterClockwise);
-        CHECK(tile.rotation == Rotation::VR);
+        util::rotateTile(tile, enums::Rotate::CounterClockwise);
+        CHECK(tile.rotation == enums::Rotation::VR);
 
-        util::rotateTile(tile, Rotate::CounterClockwise);
-        CHECK(tile.rotation == Rotation::V);
+        util::rotateTile(tile, enums::Rotate::CounterClockwise);
+        CHECK(tile.rotation == enums::Rotation::V);
     }
 }
 
 TEST_CASE("util::mirrorTile") {
     SECTION("In relation to vertical axis") {
-        map::Tile tile;
+        Tile tile;
 
         // N <-> V
-        tile.rotation = Rotation::N;
+        tile.rotation = enums::Rotation::N;
 
-        util::mirrorTile(tile, Mirror::VerticalAxis);
-        CHECK(tile.rotation == Rotation::V);
+        util::mirrorTile(tile, enums::Mirror::VerticalAxis);
+        CHECK(tile.rotation == enums::Rotation::V);
 
-        util::mirrorTile(tile, Mirror::VerticalAxis);
-        CHECK(tile.rotation == Rotation::N);
+        util::mirrorTile(tile, enums::Mirror::VerticalAxis);
+        CHECK(tile.rotation == enums::Rotation::N);
 
         // R <-> HR
-        tile.rotation = Rotation::R;
+        tile.rotation = enums::Rotation::R;
 
-        util::mirrorTile(tile, Mirror::VerticalAxis);
-        CHECK(tile.rotation == Rotation::HR);
+        util::mirrorTile(tile, enums::Mirror::VerticalAxis);
+        CHECK(tile.rotation == enums::Rotation::HR);
 
-        util::mirrorTile(tile, Mirror::VerticalAxis);
-        CHECK(tile.rotation == Rotation::R);
+        util::mirrorTile(tile, enums::Mirror::VerticalAxis);
+        CHECK(tile.rotation == enums::Rotation::R);
 
         // VH <-> H
-        tile.rotation = Rotation::VH;
+        tile.rotation = enums::Rotation::VH;
 
-        util::mirrorTile(tile, Mirror::VerticalAxis);
-        CHECK(tile.rotation == Rotation::H);
+        util::mirrorTile(tile, enums::Mirror::VerticalAxis);
+        CHECK(tile.rotation == enums::Rotation::H);
 
-        util::mirrorTile(tile, Mirror::VerticalAxis);
-        CHECK(tile.rotation == Rotation::VH);
+        util::mirrorTile(tile, enums::Mirror::VerticalAxis);
+        CHECK(tile.rotation == enums::Rotation::VH);
 
         // VHR <-> VR
-        tile.rotation = Rotation::VHR;
+        tile.rotation = enums::Rotation::VHR;
 
-        util::mirrorTile(tile, Mirror::VerticalAxis);
-        CHECK(tile.rotation == Rotation::VR);
+        util::mirrorTile(tile, enums::Mirror::VerticalAxis);
+        CHECK(tile.rotation == enums::Rotation::VR);
 
-        util::mirrorTile(tile, Mirror::VerticalAxis);
-        CHECK(tile.rotation == Rotation::VHR);
+        util::mirrorTile(tile, enums::Mirror::VerticalAxis);
+        CHECK(tile.rotation == enums::Rotation::VHR);
     }
 
     SECTION("In relation to horizontal axis") {
-        map::Tile tile;
+        Tile tile;
 
         // N <-> H
-        tile.rotation = Rotation::N;
+        tile.rotation = enums::Rotation::N;
 
-        util::mirrorTile(tile, Mirror::HorizontalAxis);
-        CHECK(tile.rotation == Rotation::H);
+        util::mirrorTile(tile, enums::Mirror::HorizontalAxis);
+        CHECK(tile.rotation == enums::Rotation::H);
 
-        util::mirrorTile(tile, Mirror::HorizontalAxis);
-        CHECK(tile.rotation == Rotation::N);
+        util::mirrorTile(tile, enums::Mirror::HorizontalAxis);
+        CHECK(tile.rotation == enums::Rotation::N);
 
         // R <-> VR
-        tile.rotation = Rotation::R;
+        tile.rotation = enums::Rotation::R;
 
-        util::mirrorTile(tile, Mirror::HorizontalAxis);
-        CHECK(tile.rotation == Rotation::VR);
+        util::mirrorTile(tile, enums::Mirror::HorizontalAxis);
+        CHECK(tile.rotation == enums::Rotation::VR);
 
-        util::mirrorTile(tile, Mirror::HorizontalAxis);
-        CHECK(tile.rotation == Rotation::R);
+        util::mirrorTile(tile, enums::Mirror::HorizontalAxis);
+        CHECK(tile.rotation == enums::Rotation::R);
 
         // VH <-> V
-        tile.rotation = Rotation::VH;
+        tile.rotation = enums::Rotation::VH;
 
-        util::mirrorTile(tile, Mirror::HorizontalAxis);
-        CHECK(tile.rotation == Rotation::V);
+        util::mirrorTile(tile, enums::Mirror::HorizontalAxis);
+        CHECK(tile.rotation == enums::Rotation::V);
 
-        util::mirrorTile(tile, Mirror::HorizontalAxis);
-        CHECK(tile.rotation == Rotation::VH);
+        util::mirrorTile(tile, enums::Mirror::HorizontalAxis);
+        CHECK(tile.rotation == enums::Rotation::VH);
 
         // VHR <-> HR
-        tile.rotation = Rotation::VHR;
+        tile.rotation = enums::Rotation::VHR;
 
-        util::mirrorTile(tile, Mirror::HorizontalAxis);
-        CHECK(tile.rotation == Rotation::HR);
+        util::mirrorTile(tile, enums::Mirror::HorizontalAxis);
+        CHECK(tile.rotation == enums::Rotation::HR);
 
-        util::mirrorTile(tile, Mirror::HorizontalAxis);
-        CHECK(tile.rotation == Rotation::VHR);
+        util::mirrorTile(tile, enums::Mirror::HorizontalAxis);
+        CHECK(tile.rotation == enums::Rotation::VHR);
     }
 }

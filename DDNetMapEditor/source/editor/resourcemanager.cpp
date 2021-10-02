@@ -513,4 +513,4 @@ debug::ErrorCode ResourceManager::createTranslationStrings(io::DDLData& data) {
     return error_code;
 }
 
-} // ddnet::editor::
+}

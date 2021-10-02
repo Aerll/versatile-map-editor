@@ -11,12 +11,16 @@ struct Point {
     qint32 y;
 };
 
+
+
 struct Size {
     inline bool operator==(const Size&) const = default;
 
     qint32 width;
     qint32 height;
 };
+
+
 
 struct Color {
     inline bool operator==(const Color&) const = default;
@@ -29,8 +33,7 @@ struct Color {
 
 
 
-// aliases
 using RectangleSize = Size;
 using CircleRadius = qint32;
 
-} // ddnet::util::
+}

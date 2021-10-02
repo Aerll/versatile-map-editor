@@ -71,4 +71,4 @@ void Menu::paintEvent(QPaintEvent* event) {
     }
 }
 
-} // ddnet::editor::
+}

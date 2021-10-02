@@ -103,7 +103,7 @@ TEST_CASE("io::DDLTokenizer") {
         CHECK(text_stream.atEnd());
         REQUIRE(ddl_tokenizer.tokens.size() == 1);
 
-        CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "/", util::TokenType::Invalid });
+        CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "/", enums::TokenType::Invalid });
 
         CHECK(ddl_tokenizer.tokens[0].second == 2);
     }
@@ -142,7 +142,7 @@ TEST_CASE("io::DDLTokenizer") {
         CHECK(text_stream.atEnd());
         REQUIRE(ddl_tokenizer.tokens.size() == 1);
 
-        CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "/*", util::TokenType::Invalid | util::TokenType::Open });
+        CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "/*", enums::TokenType::Invalid | enums::TokenType::Open });
 
         CHECK(ddl_tokenizer.tokens[0].second == 3);
     }
@@ -159,9 +159,9 @@ TEST_CASE("io::DDLTokenizer") {
         CHECK(text_stream.atEnd());
         REQUIRE(ddl_tokenizer.tokens.size() == 3);
 
-        CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "=", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[1].first == util::Token{ ":", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[2].first == util::Token{ {}, util::TokenType::Literal });
+        CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "=", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[1].first == util::Token{ ":", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[2].first == util::Token{ {}, enums::TokenType::Literal });
 
         CHECK(ddl_tokenizer.tokens[0].second == 1);
         CHECK(ddl_tokenizer.tokens[1].second == 1);
@@ -182,8 +182,8 @@ TEST_CASE("io::DDLTokenizer") {
         CHECK(text_stream.atEnd());
         REQUIRE(ddl_tokenizer.tokens.size() == 2);
 
-        CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "{", util::TokenType::Operator | util::TokenType::Open });
-        CHECK(ddl_tokenizer.tokens[1].first == util::Token{ "}", util::TokenType::Operator | util::TokenType::Close });
+        CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "{", enums::TokenType::Operator | enums::TokenType::Open });
+        CHECK(ddl_tokenizer.tokens[1].first == util::Token{ "}", enums::TokenType::Operator | enums::TokenType::Close });
 
         CHECK(ddl_tokenizer.tokens[0].second == 1);
         CHECK(ddl_tokenizer.tokens[1].second == 3);
@@ -202,11 +202,11 @@ TEST_CASE("io::DDLTokenizer") {
         CHECK(text_stream.atEnd());
         REQUIRE(ddl_tokenizer.tokens.size() == 5);
 
-        CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "Identifier_1", util::TokenType::Identifier });
-        CHECK(ddl_tokenizer.tokens[1].first == util::Token{ "Identifier_2", util::TokenType::Identifier });
-        CHECK(ddl_tokenizer.tokens[2].first == util::Token{ "Ident", util::TokenType::Identifier });
-        CHECK(ddl_tokenizer.tokens[3].first == util::Token{ "=", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[4].first == util::Token{ "ifier", util::TokenType::Identifier });
+        CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "Identifier_1", enums::TokenType::Identifier });
+        CHECK(ddl_tokenizer.tokens[1].first == util::Token{ "Identifier_2", enums::TokenType::Identifier });
+        CHECK(ddl_tokenizer.tokens[2].first == util::Token{ "Ident", enums::TokenType::Identifier });
+        CHECK(ddl_tokenizer.tokens[3].first == util::Token{ "=", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[4].first == util::Token{ "ifier", enums::TokenType::Identifier });
 
         CHECK(ddl_tokenizer.tokens[0].second == 1);
         CHECK(ddl_tokenizer.tokens[1].second == 1);
@@ -228,8 +228,8 @@ TEST_CASE("io::DDLTokenizer") {
             CHECK(text_stream.atEnd());
             REQUIRE(ddl_tokenizer.tokens.size() == 2);
 
-            CHECK(ddl_tokenizer.tokens[0].first == util::Token{ ":", util::TokenType::Operator });
-            CHECK(ddl_tokenizer.tokens[1].first == util::Token{ "", util::TokenType::Literal });
+            CHECK(ddl_tokenizer.tokens[0].first == util::Token{ ":", enums::TokenType::Operator });
+            CHECK(ddl_tokenizer.tokens[1].first == util::Token{ "", enums::TokenType::Literal });
 
             CHECK(ddl_tokenizer.tokens[0].second == 1);
             CHECK(ddl_tokenizer.tokens[1].second == 1);
@@ -249,8 +249,8 @@ TEST_CASE("io::DDLTokenizer") {
             CHECK(text_stream.atEnd());
             REQUIRE(ddl_tokenizer.tokens.size() == 2);
 
-            CHECK(ddl_tokenizer.tokens[0].first == util::Token{ ":", util::TokenType::Operator });
-            CHECK(ddl_tokenizer.tokens[1].first == util::Token{ "literal1\nliteral2\n!@#$%^&*()///**/", util::TokenType::Literal });
+            CHECK(ddl_tokenizer.tokens[0].first == util::Token{ ":", enums::TokenType::Operator });
+            CHECK(ddl_tokenizer.tokens[1].first == util::Token{ "literal1\nliteral2\n!@#$%^&*()///**/", enums::TokenType::Literal });
 
             CHECK(ddl_tokenizer.tokens[0].second == 1);
             CHECK(ddl_tokenizer.tokens[1].second == 1);
@@ -268,8 +268,8 @@ TEST_CASE("io::DDLTokenizer") {
             CHECK(text_stream.atEnd());
             REQUIRE(ddl_tokenizer.tokens.size() == 2);
 
-            CHECK(ddl_tokenizer.tokens[0].first == util::Token{ ":", util::TokenType::Operator });
-            CHECK(ddl_tokenizer.tokens[1].first == util::Token{ ":", util::TokenType::Literal });
+            CHECK(ddl_tokenizer.tokens[0].first == util::Token{ ":", enums::TokenType::Operator });
+            CHECK(ddl_tokenizer.tokens[1].first == util::Token{ ":", enums::TokenType::Literal });
 
             CHECK(ddl_tokenizer.tokens[0].second == 1);
             CHECK(ddl_tokenizer.tokens[1].second == 1);
@@ -291,12 +291,12 @@ TEST_CASE("io::DDLTokenizer") {
             CHECK(text_stream.atEnd());
             REQUIRE(ddl_tokenizer.tokens.size() == 6);
 
-            CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "Invalid1", util::TokenType::Identifier });
-            CHECK(ddl_tokenizer.tokens[1].first == util::Token{ "@", util::TokenType::Invalid });
-            CHECK(ddl_tokenizer.tokens[2].first == util::Token{ "Invalid2", util::TokenType::Identifier });
-            CHECK(ddl_tokenizer.tokens[3].first == util::Token{ "#", util::TokenType::Invalid });
-            CHECK(ddl_tokenizer.tokens[4].first == util::Token{ "Invalid3", util::TokenType::Identifier });
-            CHECK(ddl_tokenizer.tokens[5].first == util::Token{ "!@#", util::TokenType::Invalid });
+            CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "Invalid1", enums::TokenType::Identifier });
+            CHECK(ddl_tokenizer.tokens[1].first == util::Token{ "@", enums::TokenType::Invalid });
+            CHECK(ddl_tokenizer.tokens[2].first == util::Token{ "Invalid2", enums::TokenType::Identifier });
+            CHECK(ddl_tokenizer.tokens[3].first == util::Token{ "#", enums::TokenType::Invalid });
+            CHECK(ddl_tokenizer.tokens[4].first == util::Token{ "Invalid3", enums::TokenType::Identifier });
+            CHECK(ddl_tokenizer.tokens[5].first == util::Token{ "!@#", enums::TokenType::Invalid });
 
             CHECK(ddl_tokenizer.tokens[0].second == 1);
             CHECK(ddl_tokenizer.tokens[1].second == 1);
@@ -318,7 +318,7 @@ TEST_CASE("io::DDLTokenizer") {
             CHECK(text_stream.atEnd());
             REQUIRE(ddl_tokenizer.tokens.size() == 1);
 
-            CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "@", util::TokenType::Invalid });
+            CHECK(ddl_tokenizer.tokens[0].first == util::Token{ "@", enums::TokenType::Invalid });
 
             CHECK(ddl_tokenizer.tokens[0].second == 1);
         }
@@ -353,40 +353,40 @@ TEST_CASE("io::DDLTokenizer") {
         CHECK(text_stream.atEnd());
         REQUIRE(ddl_tokenizer.tokens.size() == 34);
 
-        CHECK(ddl_tokenizer.tokens[0].first  == util::Token{ "Test1", util::TokenType::Identifier });
-        CHECK(ddl_tokenizer.tokens[1].first  == util::Token{ "=", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[2].first  == util::Token{ ":", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[3].first  == util::Token{ "test", util::TokenType::Literal });
-        CHECK(ddl_tokenizer.tokens[4].first  == util::Token{ "{", util::TokenType::Operator | util::TokenType::Open });
-        CHECK(ddl_tokenizer.tokens[5].first  == util::Token{ "Something", util::TokenType::Identifier });
-        CHECK(ddl_tokenizer.tokens[6].first  == util::Token{ "=", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[7].first  == util::Token{ ":", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[8].first  == util::Token{ "hello", util::TokenType::Literal });
-        CHECK(ddl_tokenizer.tokens[9].first  == util::Token{ "SomethingElse", util::TokenType::Identifier });
-        CHECK(ddl_tokenizer.tokens[10].first == util::Token{ "=", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[11].first == util::Token{ ":", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[12].first == util::Token{ "world", util::TokenType::Literal });
-        CHECK(ddl_tokenizer.tokens[13].first == util::Token{ "}", util::TokenType::Operator | util::TokenType::Close });
-        CHECK(ddl_tokenizer.tokens[14].first == util::Token{ "UsingTest1", util::TokenType::Identifier });
-        CHECK(ddl_tokenizer.tokens[15].first == util::Token{ "=", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[16].first == util::Token{ ":", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[17].first == util::Token{ "val", util::TokenType::Literal });
-        CHECK(ddl_tokenizer.tokens[18].first == util::Token{ "{", util::TokenType::Operator | util::TokenType::Open });
-        CHECK(ddl_tokenizer.tokens[19].first == util::Token{ "Test1", util::TokenType::Identifier });
-        CHECK(ddl_tokenizer.tokens[20].first == util::Token{ "=", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[21].first == util::Token{ ":", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[22].first == util::Token{ "test", util::TokenType::Literal });
-        CHECK(ddl_tokenizer.tokens[23].first == util::Token{ "Something", util::TokenType::Identifier });
-        CHECK(ddl_tokenizer.tokens[24].first == util::Token{ "=", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[25].first == util::Token{ ":", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[26].first == util::Token{ "hello\nworld", util::TokenType::Literal });
-        CHECK(ddl_tokenizer.tokens[27].first == util::Token{ "}", util::TokenType::Operator | util::TokenType::Close });
-        CHECK(ddl_tokenizer.tokens[28].first == util::Token{ "Empty", util::TokenType::Identifier });
-        CHECK(ddl_tokenizer.tokens[29].first == util::Token{ "=", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[30].first == util::Token{ ":", util::TokenType::Operator });
-        CHECK(ddl_tokenizer.tokens[31].first == util::Token{ {}, util::TokenType::Literal });
-        CHECK(ddl_tokenizer.tokens[32].first == util::Token{ "{", util::TokenType::Operator | util::TokenType::Open });
-        CHECK(ddl_tokenizer.tokens[33].first == util::Token{ "}", util::TokenType::Operator | util::TokenType::Close });
+        CHECK(ddl_tokenizer.tokens[0].first  == util::Token{ "Test1", enums::TokenType::Identifier });
+        CHECK(ddl_tokenizer.tokens[1].first  == util::Token{ "=", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[2].first  == util::Token{ ":", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[3].first  == util::Token{ "test", enums::TokenType::Literal });
+        CHECK(ddl_tokenizer.tokens[4].first  == util::Token{ "{", enums::TokenType::Operator | enums::TokenType::Open });
+        CHECK(ddl_tokenizer.tokens[5].first  == util::Token{ "Something", enums::TokenType::Identifier });
+        CHECK(ddl_tokenizer.tokens[6].first  == util::Token{ "=", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[7].first  == util::Token{ ":", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[8].first  == util::Token{ "hello", enums::TokenType::Literal });
+        CHECK(ddl_tokenizer.tokens[9].first  == util::Token{ "SomethingElse", enums::TokenType::Identifier });
+        CHECK(ddl_tokenizer.tokens[10].first == util::Token{ "=", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[11].first == util::Token{ ":", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[12].first == util::Token{ "world", enums::TokenType::Literal });
+        CHECK(ddl_tokenizer.tokens[13].first == util::Token{ "}", enums::TokenType::Operator | enums::TokenType::Close });
+        CHECK(ddl_tokenizer.tokens[14].first == util::Token{ "UsingTest1", enums::TokenType::Identifier });
+        CHECK(ddl_tokenizer.tokens[15].first == util::Token{ "=", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[16].first == util::Token{ ":", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[17].first == util::Token{ "val", enums::TokenType::Literal });
+        CHECK(ddl_tokenizer.tokens[18].first == util::Token{ "{", enums::TokenType::Operator | enums::TokenType::Open });
+        CHECK(ddl_tokenizer.tokens[19].first == util::Token{ "Test1", enums::TokenType::Identifier });
+        CHECK(ddl_tokenizer.tokens[20].first == util::Token{ "=", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[21].first == util::Token{ ":", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[22].first == util::Token{ "test", enums::TokenType::Literal });
+        CHECK(ddl_tokenizer.tokens[23].first == util::Token{ "Something", enums::TokenType::Identifier });
+        CHECK(ddl_tokenizer.tokens[24].first == util::Token{ "=", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[25].first == util::Token{ ":", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[26].first == util::Token{ "hello\nworld", enums::TokenType::Literal });
+        CHECK(ddl_tokenizer.tokens[27].first == util::Token{ "}", enums::TokenType::Operator | enums::TokenType::Close });
+        CHECK(ddl_tokenizer.tokens[28].first == util::Token{ "Empty", enums::TokenType::Identifier });
+        CHECK(ddl_tokenizer.tokens[29].first == util::Token{ "=", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[30].first == util::Token{ ":", enums::TokenType::Operator });
+        CHECK(ddl_tokenizer.tokens[31].first == util::Token{ {}, enums::TokenType::Literal });
+        CHECK(ddl_tokenizer.tokens[32].first == util::Token{ "{", enums::TokenType::Operator | enums::TokenType::Open });
+        CHECK(ddl_tokenizer.tokens[33].first == util::Token{ "}", enums::TokenType::Operator | enums::TokenType::Close });
 
         CHECK(ddl_tokenizer.tokens[0].second  == 1);
         CHECK(ddl_tokenizer.tokens[1].second  == 1);

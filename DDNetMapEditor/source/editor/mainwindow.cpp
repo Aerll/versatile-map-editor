@@ -406,4 +406,4 @@ void MainWindow::About_() {
 
 }
 
-} // ddnet::editor::
+}

@@ -60,4 +60,4 @@ public:
     io::DDLData widget_styles;
 };
 
-} // ddnet::editor::
+}

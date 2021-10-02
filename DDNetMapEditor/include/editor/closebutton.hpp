@@ -26,4 +26,4 @@ public:
     ButtonState state = ButtonState::Normal;
 };
 
-} // ddnet::editor::
+}

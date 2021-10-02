@@ -24,4 +24,4 @@ private:
     QColor underline_color;
 };
 
-} // ddnet::editor::
+}

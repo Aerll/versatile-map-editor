@@ -24,4 +24,4 @@ private:
     bool eventFilter(QObject* object, QEvent* event) final;
 };
 
-} // ddnet::editor::
+}

@@ -11,4 +11,4 @@ DockPanel::DockPanel(QWidget* parent)
     setMinimumWidth(200);
 }
 
-} // ddnet::editor::
+}

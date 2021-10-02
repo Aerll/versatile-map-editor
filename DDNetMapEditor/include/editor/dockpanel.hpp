@@ -15,4 +15,4 @@ public:
 
 };
 
-} // ddnet::editor::
+}

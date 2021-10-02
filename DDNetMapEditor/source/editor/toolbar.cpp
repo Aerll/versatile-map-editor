@@ -123,4 +123,4 @@ bool ToolBar::hasVisibleBarAfter(qint32 bar_index) const {
     return false;
 }
 
-} // ddnet::editor::
+}

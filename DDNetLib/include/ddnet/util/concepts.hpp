@@ -17,4 +17,4 @@ template <typename _Type>
 template <typename _Type>
     concept Integral = std::integral<_Type>;
 
-} // ddnet::concepts::
+}

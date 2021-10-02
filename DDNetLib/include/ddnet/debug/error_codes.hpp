@@ -99,4 +99,4 @@ enum class [[nodiscard]] ErrorCode : qint32 {
     Resource_Lang_FailedToReadTranslations,
 };
 
-} // ddnet::debug::
+}

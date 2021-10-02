@@ -1,9 +1,9 @@
 #pragma once
 
-namespace ddnet::map {
+namespace ddnet {
 
 class Tileset {
     // TODO
 };
 
-} // ddnet::map::
+}

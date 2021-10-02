@@ -43,4 +43,4 @@ QImage crop(const QImage& image, const QSize& size, const QPoint& spacing, const
     return image.copy(rect);
 }
 
-} // ddnet::util::
+}

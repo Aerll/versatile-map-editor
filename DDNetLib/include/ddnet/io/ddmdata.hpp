@@ -1,7 +1,6 @@
 #pragma once
 
 #include <ddnet/map/map.hpp>
-#include <ddnet/util/macros.hpp>
 
 namespace ddnet::io {
 
@@ -12,7 +11,7 @@ public:
     MAPData toMAP() const;
 
 public:
-    map::Map map;
+    Map map;
 };
 
-} // ddnet::io::
+}

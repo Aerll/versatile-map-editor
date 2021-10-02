@@ -88,4 +88,4 @@ private:
     editor::TabWidget* tab_widget;
 };
 
-} // ddnet::editor::
+}

@@ -12,4 +12,4 @@ public:
     ~TabLabel() = default;
 };
 
-} // ddnet::editor::
+}

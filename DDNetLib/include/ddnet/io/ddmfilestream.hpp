@@ -16,4 +16,4 @@ public:
     DDMData data;
 };
 
-} // ddnet::io::
+}

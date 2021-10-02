@@ -56,4 +56,4 @@ QByteArray DDLData::toQss() const {
     return qss_buffer.toUtf8();
 }
 
-} // ddnet::io::
+}

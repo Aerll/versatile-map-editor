@@ -1,5 +1,7 @@
 #include <ddnet/io/ddltokenizer.hpp>
 
+#include <ddnet/util/enums.hpp>
+
 #include <QTextStream>
 
 #include <cassert>
@@ -10,8 +12,8 @@ void DDLTokenizer::finalize() {
     // concatenate string literals
     for (size_t i = 0; i < tokens.size(); ++i) {
         if (i + 3 < tokens.size()) {
-            if (tokens[i + 1].first.type == util::TokenType::Literal &&
-                tokens[i + 3].first.type == util::TokenType::Literal
+            if (tokens[i + 1].first.type == enums::TokenType::Literal &&
+                tokens[i + 3].first.type == enums::TokenType::Literal
                 ) {
                 tokens[i + 1].first.string += tokens[i + 3].first.string;
                 tokens.erase(tokens.begin() + (i + 2), tokens.begin() + (i + 4));
@@ -29,7 +31,7 @@ void DDLTokenizer::finalize() {
 
 void DDLTokenizer::validate() {
     for (const auto& token : tokens)
-        if (static_cast<bool>(token.first.type & util::TokenType::Invalid))
+        if (static_cast<bool>(token.first.type & enums::TokenType::Invalid))
             errors.emplace_back(debug::Error{ 
                 .message = "Invalid token '" + token.first.string + "' at line: " + QString::number(token.second) + ".\n", 
                 .code = debug::ErrorCode::Tokenizer_DDL_InvalidToken 
@@ -81,20 +83,20 @@ void DDLTokenizer::tokenize(QTextStream& text_stream) {
                         ++line;
 
                     if (text_stream.atEnd())
-                        tokens.push_back({ util::Token{ .string = "/*", .type = util::TokenType::Invalid | util::TokenType::Open }, line_token });
+                        tokens.push_back({ util::Token{ .string = "/*", .type = enums::TokenType::Invalid | enums::TokenType::Open }, line_token });
                 }
             }
             else {
-                tokens.push_back({ util::Token{ .string = "/", .type = util::TokenType::Invalid }, line });
+                tokens.push_back({ util::Token{ .string = "/", .type = enums::TokenType::Invalid }, line });
                 text_stream.seek(text_stream.pos() - 1);
             }
         }
         else if (c == '=') { // operators
-            tokens.push_back({ util::Token{ .string = c, .type = util::TokenType::Operator }, line });
+            tokens.push_back({ util::Token{ .string = c, .type = enums::TokenType::Operator }, line });
         }
         else if (c == ':') { // literals
-            tokens.push_back({ util::Token{ .string = c, .type = util::TokenType::Operator }, line });
-            tokens.push_back({ util::Token{ .string = {}, .type = util::TokenType::Literal }, line });
+            tokens.push_back({ util::Token{ .string = c, .type = enums::TokenType::Operator }, line });
+            tokens.push_back({ util::Token{ .string = {}, .type = enums::TokenType::Literal }, line });
             while (!text_stream.atEnd()) {
                 text_stream >> c;
                 tokens.back().first.string += c;
@@ -105,13 +107,13 @@ void DDLTokenizer::tokenize(QTextStream& text_stream) {
             }
         }
         else if (c == '{') { // open brackets
-            tokens.push_back({ util::Token{ .string = c, .type = util::TokenType::Operator | util::TokenType::Open }, line });
+            tokens.push_back({ util::Token{ .string = c, .type = enums::TokenType::Operator | enums::TokenType::Open }, line });
         }
         else if (c == '}') { // close brackets
-            tokens.push_back({ util::Token{ .string = c, .type = util::TokenType::Operator | util::TokenType::Close }, line });
+            tokens.push_back({ util::Token{ .string = c, .type = enums::TokenType::Operator | enums::TokenType::Close }, line });
         }
         else if (c.isLetterOrNumber() || c == '_' || c == '-') { // identifiers
-            tokens.push_back({ util::Token{ .string = c, .type = util::TokenType::Identifier }, line });
+            tokens.push_back({ util::Token{ .string = c, .type = enums::TokenType::Identifier }, line });
             while (!text_stream.atEnd()) {
                 text_stream >> c;
                 if (!c.isLetterOrNumber() && c != '_' && c != '-') {
@@ -122,14 +124,14 @@ void DDLTokenizer::tokenize(QTextStream& text_stream) {
             }
         }
         else {
-            if (!tokens.empty() && static_cast<bool>(tokens.back().first.type & util::TokenType::Invalid))
+            if (!tokens.empty() && static_cast<bool>(tokens.back().first.type & enums::TokenType::Invalid))
                 tokens.back().first.string += c;
             else
-                tokens.push_back({ util::Token{ .string = c, .type = util::TokenType::Invalid }, line });
+                tokens.push_back({ util::Token{ .string = c, .type = enums::TokenType::Invalid }, line });
         }
     }
     finalize();
     validate();
 }
 
-} // ddnet::io::
+}

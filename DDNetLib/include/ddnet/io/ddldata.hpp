@@ -21,6 +21,8 @@ public:
     QString value;
 };
 
+
+
 class DDLData {
 public:
     std::map<DDLProperty, std::map<QString, QString>> properties;
@@ -48,4 +50,4 @@ public:
     inline const_iterator cend() const noexcept { return properties.cend(); }
 };
 
-} // ddnet::io::
+}

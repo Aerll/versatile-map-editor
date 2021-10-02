@@ -168,4 +168,4 @@ enum class SettingIndex : std::size_t {
     TotalCount,
 };
 
-} // ddnet::editor::
+}

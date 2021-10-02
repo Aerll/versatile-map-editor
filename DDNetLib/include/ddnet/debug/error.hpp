@@ -11,4 +11,4 @@ struct Error {
     ErrorCode code;
 };
 
-} // ddnet::debug::
+}

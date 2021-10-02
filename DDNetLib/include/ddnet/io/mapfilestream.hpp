@@ -18,9 +18,12 @@ private:
     debug::ErrorCode uncompressData(QDataStream& compressed_data_stream, qint32 data_index, QByteArray& destination) const;
     debug::ErrorCode compressData(const QByteArray& source, QByteArray& destination) const;
 
+
 public:
     MAPData data;
 };
+
+}
 
 /*
                     MAP FILE STRUCTURE
@@ -786,5 +789,3 @@ MapData
                     bool has_clipping;
 
 */
-
-} // ddnet::io::

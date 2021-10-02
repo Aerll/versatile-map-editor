@@ -2,6 +2,7 @@
 
 #include <ddnet/io/ddltokenizer.hpp>
 #include <ddnet/io/ddlparser.hpp>
+#include <ddnet/util/enums.hpp>
 
 #include <QTextStream>
 #include <QFile>
@@ -38,12 +39,12 @@ debug::ErrorCode DDLFileStream::loadFile(const QFileInfo& file_info) {
     bool read_attributes = false;
     DDLProperty property;
     for (size_t i = 0; i < tokenizer.tokens.size(); ++i) {
-        if (tokenizer.tokens[i].first == util::Token{ .string = "{", .type = util::TokenType::Operator | util::TokenType::Open })
+        if (tokenizer.tokens[i].first == util::Token{ .string = "{", .type = enums::TokenType::Operator | enums::TokenType::Open })
             read_attributes = true;
-        else if (tokenizer.tokens[i].first == util::Token{ .string = "}", .type = util::TokenType::Operator | util::TokenType::Close })
+        else if (tokenizer.tokens[i].first == util::Token{ .string = "}", .type = enums::TokenType::Operator | enums::TokenType::Close })
             read_attributes = false;
 
-        if (tokenizer.tokens[i].first.type == util::TokenType::Identifier) {
+        if (tokenizer.tokens[i].first.type == enums::TokenType::Identifier) {
             if (!read_attributes) {
                 property.name  = tokenizer.tokens[i].first.string;
                 property.value = tokenizer.tokens[i + 3].first.string;
@@ -97,4 +98,4 @@ debug::ErrorCode DDLFileStream::saveFile(const QFileInfo& file_info) {
     return debug::ErrorCode::NoError;
 }
 
-} // ddnet::io::
+}

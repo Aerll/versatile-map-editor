@@ -31,4 +31,4 @@ protected:
     bool dragging = false;
 };
 
-} // ddnet::editor::
+}

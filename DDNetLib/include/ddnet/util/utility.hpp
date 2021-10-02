@@ -22,11 +22,6 @@ consteval _Type flag(_Type bit) noexcept {
 
 
 template <typename _ContainerType>
-requires (
-    requires (_ContainerType type) {
-        typename _ContainerType::value_type;
-        { type.size() } -> concepts::ConvertibleTo<qint32>;
-    })
 [[nodiscard]] inline qint32 byteSize(const _ContainerType& container) noexcept {
     return container.size() * sizeof(_ContainerType::value_type);
 }
@@ -98,4 +93,4 @@ inline qint32 writeRawData(QDataStream& data_stream, _Type* source, qint32 sourc
     return error_code != debug::ErrorCode::NoError;
 }
 
-} // ddnet::util::
+}

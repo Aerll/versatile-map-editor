@@ -4,7 +4,7 @@
 #include <QPoint>
 #include <QSize>
 
-namespace ddnet::map {
+namespace ddnet {
 
 struct SoundSource {
     QPointF position;
@@ -22,12 +22,16 @@ struct SoundSource {
     bool has_panning;
 };
 
+
+
 struct SoundSourceCircle : SoundSource {
     qint32 radius;
 };
+
+
 
 struct SoundSourceRectangle : SoundSource {
     QSize size;
 };
 
-} // ddnet::map::
+}

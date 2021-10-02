@@ -21,4 +21,4 @@ Sidebar::Sidebar(QWidget* parent)
     setLayout(layout);
 }
 
-} // ddnet::editor::
+}

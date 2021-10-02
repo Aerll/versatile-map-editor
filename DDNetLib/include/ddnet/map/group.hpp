@@ -7,7 +7,7 @@
 #include <memory>
 #include <vector>
 
-namespace ddnet::map {
+namespace ddnet {
 
 class Group {
 public:
@@ -17,4 +17,4 @@ public:
     bool is_visible = false;
 };
 
-} // ddnet::map::
+}

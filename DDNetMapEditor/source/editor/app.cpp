@@ -95,4 +95,4 @@ QApplication* App::instance() {
     return static_cast<QApplication*>(SingleApplication::instance());
 }
 
-} // ddnet::editor::
+}

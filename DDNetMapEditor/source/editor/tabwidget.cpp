@@ -74,4 +74,4 @@ void TabWidget::paintEvent(QPaintEvent* event) {
     painter.drawRect(event->rect().x(), event->rect().y() + tabBar()->height(), event->rect().width(), underline_height);
 }
 
-} // ddnet::editor::
+}

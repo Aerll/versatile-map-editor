@@ -22,4 +22,4 @@ public:
     inline static ResourceManager resources = {};
 };
 
-} // ddnet::editor::
+}

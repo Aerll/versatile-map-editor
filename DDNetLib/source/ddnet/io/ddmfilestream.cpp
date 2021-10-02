@@ -20,6 +20,8 @@ debug::ErrorCode DDMFileStream::loadFile(const QFileInfo& file_info) {
     return debug::ErrorCode::NoError;
 }
 
+
+
 debug::ErrorCode DDMFileStream::saveFile(const QFileInfo& file_info) {
     QFile file{ file_info.absoluteFilePath() };
 
@@ -31,4 +33,4 @@ debug::ErrorCode DDMFileStream::saveFile(const QFileInfo& file_info) {
     return debug::ErrorCode::NoError;
 }
 
-} // ddnet::io::
+}

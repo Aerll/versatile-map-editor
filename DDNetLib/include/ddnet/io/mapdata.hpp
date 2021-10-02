@@ -34,23 +34,23 @@ struct MAPItemLayerSound;
 struct MAPDetails;
 struct MAPAssets;
 
-struct Envelope;
-struct EnvelopePoint;
-struct Group;
-struct Layer;
-struct LayerTile;
-struct LayerQuad;
-struct LayerSound;
-struct Tile;
-struct TeleTileInfo;
-struct SpeedupTileInfo;
-struct SwitchTileInfo;
-struct TuneTileInfo;
-struct Quad;
-struct SoundShape;
-struct SoundSource;
-struct ImageAsset;
-struct SoundAsset;
+struct MAPEnvelope;
+struct MAPEnvelopePoint;
+struct MAPGroup;
+struct MAPLayer;
+struct MAPLayerTile;
+struct MAPLayerQuad;
+struct MAPLayerSound;
+struct MAPTile;
+struct MAPTeleTileInfo;
+struct MAPSpeedupTileInfo;
+struct MAPSwitchTileInfo;
+struct MAPTuneTileInfo;
+struct MAPQuad;
+struct MAPSoundShape;
+struct MAPSoundSource;
+struct MAPImageAsset;
+struct MAPSoundAsset;
 
 struct MAPItemData;
 class MAPData;
@@ -69,6 +69,8 @@ struct MAPHeader {
     qint32 data_size;
 };
 
+
+
 struct MAPFileInfo {
     std::vector<MAPItemType> item_types;
     std::vector<qint32> item_offsets;
@@ -80,20 +82,28 @@ struct MAPFileInfo {
     qint32 data_offsets_end;
 };
 
+
+
 struct MAPItemType {
     enums::ItemType type;
     qint32 start;
     qint32 count;
 };
 
+
+
 struct MAPDataFileItem {
     qint32 type_and_id;
     qint32 size;
 };
 
+
+
 struct MAPItemVersion : MAPDataFileItem {
     qint32 version;
 };
+
+
 
 struct MAPItemInfo : MAPDataFileItem {
     qint32 version;
@@ -104,6 +114,8 @@ struct MAPItemInfo : MAPDataFileItem {
     qint32 settings_index;
 };
 
+
+
 struct MAPItemImage : MAPDataFileItem {
     qint32 version;
     qint32 width;
@@ -113,6 +125,8 @@ struct MAPItemImage : MAPDataFileItem {
     qint32 image_data_index;
 };
 
+
+
 struct MAPItemSound : MAPDataFileItem {
     qint32 version;
     qint32 is_external;
@@ -120,6 +134,8 @@ struct MAPItemSound : MAPDataFileItem {
     qint32 sound_data_index;
     qint32 sound_data_size;
 };
+
+
 
 struct MAPItemEnvelope : MAPDataFileItem {
     qint32 version;
@@ -130,11 +146,15 @@ struct MAPItemEnvelope : MAPDataFileItem {
     qint32 is_synchronized;
 };
 
+
+
 struct MAPItemEnvelopePoint {
     qint32 time;
     enums::CurveType curve_type;
     std::array<qint32, 4> values;
 };
+
+
 
 struct MAPItemGroup : MAPDataFileItem {
     qint32 version;
@@ -152,11 +172,15 @@ struct MAPItemGroup : MAPDataFileItem {
     std::array<qint32, constants::_map_max_group_name_length> name;
 };
 
+
+
 struct MAPItemLayerInfo : MAPDataFileItem {
     qint32 version;
     enums::LayerType type;
     qint32 is_detail;
 };
+
+
 
 struct MAPItemLayerTile {
     MAPItemLayerInfo info;
@@ -180,6 +204,8 @@ struct MAPItemLayerTile {
     qint32 tune_index;
 };
 
+
+
 struct MAPItemLayerQuad {
     MAPItemLayerInfo info;
     qint32 version;
@@ -188,6 +214,8 @@ struct MAPItemLayerQuad {
     qint32 image_index;
     std::array<qint32, constants::_map_max_item_layer_name_length> name;
 };
+
+
 
 struct MAPItemLayerSound {
     MAPItemLayerInfo info;
@@ -198,6 +226,8 @@ struct MAPItemLayerSound {
     std::array<qint32, constants::_map_max_item_layer_name_length> name;
 };
 
+
+
 struct MAPDetails {
     QByteArray author;
     QByteArray map_version;
@@ -205,27 +235,35 @@ struct MAPDetails {
     QByteArray license;
 };
 
+
+
 struct MAPAssets {
-    std::vector<ImageAsset> images;
-    std::vector<SoundAsset> sounds;
+    std::vector<MAPImageAsset> images;
+    std::vector<MAPSoundAsset> sounds;
 };
 
-struct Envelope {
-    std::vector<EnvelopePoint> points;
+
+
+struct MAPEnvelope {
+    std::vector<MAPEnvelopePoint> points;
     QByteArray name;
     qint32 channels;
     bool is_synchronized;
 };
 
-struct EnvelopePoint {
+
+
+struct MAPEnvelopePoint {
     qint32 time;
     enums::CurveType curve_type;
     std::array<qint32, 4> values;
 };
 
-struct Group {
+
+
+struct MAPGroup {
     QByteArray name;
-    std::vector<std::variant<LayerTile, LayerQuad, LayerSound>> layers;
+    std::vector<std::variant<MAPLayerTile, MAPLayerQuad, MAPLayerSound>> layers;
     qint32 offset_x;
     qint32 offset_y;
     qint32 parallax_x;
@@ -237,13 +275,17 @@ struct Group {
     bool has_clipping;
 };
 
-struct Layer {
+
+
+struct MAPLayer {
     QByteArray name;
     qint32 asset_index;
     bool is_detail;
 };
 
-struct LayerTile : Layer {
+
+
+struct MAPLayerTile : MAPLayer {
     qint32 width;
     qint32 height;
     enums::SpecialLayerType special_type;
@@ -252,50 +294,66 @@ struct LayerTile : Layer {
     qint32 color_envelope_index;
     qint32 color_envelope_offset;
 
-    std::vector<Tile> tiles;
-    std::vector<std::variant<TeleTileInfo, SpeedupTileInfo, SwitchTileInfo, TuneTileInfo>> tiles_info;
+    std::vector<MAPTile> tiles;
+    std::vector<std::variant<MAPTeleTileInfo, MAPSpeedupTileInfo, MAPSwitchTileInfo, MAPTuneTileInfo>> tiles_info;
 };
 
-struct LayerQuad : Layer {
-    std::vector<Quad> quads;
+
+
+struct MAPLayerQuad : MAPLayer {
+    std::vector<MAPQuad> quads;
 };
 
-struct LayerSound : Layer {
-    std::vector<SoundSource> sound_sources;
+
+
+struct MAPLayerSound : MAPLayer {
+    std::vector<MAPSoundSource> sound_sources;
 };
 
-struct Tile {
+
+
+struct MAPTile {
     quint8 index;
     quint8 flags;
     quint8 skip;
     quint8 reserved;
 };
 
-struct TeleTileInfo {
+
+
+struct MAPTeleTileInfo {
     quint8 number;
     quint8 index;
 };
 
-struct SpeedupTileInfo {
+
+
+struct MAPSpeedupTileInfo {
     quint8 force;
     quint8 max_speed;
     quint8 index;
     qint16 angle;
 };
 
-struct SwitchTileInfo {
+
+
+struct MAPSwitchTileInfo {
     quint8 number;
     quint8 index;
     quint8 flags;
     quint8 delay;
 };
 
-struct TuneTileInfo {
+
+
+struct MAPTuneTileInfo {
     quint8 number;
     quint8 index;
 };
 
-struct Quad {
+
+
+struct MAPQuad {
     std::array<util::Point, 5> points;
     std::array<util::Color, 4> colors;
     std::array<util::Point, 4> tex_coords;
@@ -307,12 +365,16 @@ struct Quad {
     qint32 color_envelope_offset;
 };
 
-struct SoundShape {
+
+
+struct MAPSoundShape {
     enums::SoundSourceShapeType type;
     std::variant<util::RectangleSize, util::CircleRadius> size;
 };
 
-struct SoundSource {
+
+
+struct MAPSoundSource {
     util::Point position;
     qint32 is_looped;
     qint32 has_panning;
@@ -325,10 +387,12 @@ struct SoundSource {
     qint32 sound_envelope_index;
     qint32 sound_envelope_offset;
 
-    SoundShape shape;
+    MAPSoundShape shape;
 };
 
-struct ImageAsset {
+
+
+struct MAPImageAsset {
     QByteArray name;
     QByteArray data;
     qint32 width;
@@ -336,7 +400,9 @@ struct ImageAsset {
     bool is_external;
 };
 
-struct SoundAsset {
+
+
+struct MAPSoundAsset {
     QByteArray name;
     QByteArray data;
     bool is_external;
@@ -356,6 +422,8 @@ struct MAPItemData {
     std::vector<MAPItemLayerInfo> layer_infos;
     std::vector<std::variant<MAPItemLayerTile, MAPItemLayerQuad, MAPItemLayerSound>> layers;
 };
+
+
 
 class DDMData;
 
@@ -381,9 +449,9 @@ public:
     inline const auto& imageAssets() const noexcept { return assets.images; }
     inline const auto& soundAssets() const noexcept { return assets.sounds; }
 
-    inline qint32 tileLayersCount() const { return layersCountImpl<LayerTile>(); }
-    inline qint32 quadLayersCount() const { return layersCountImpl<LayerQuad>(); }
-    inline qint32 soundLayersCount() const { return layersCountImpl<LayerSound>(); }
+    inline qint32 tileLayersCount() const { return layersCountImpl<MAPLayerTile>(); }
+    inline qint32 quadLayersCount() const { return layersCountImpl<MAPLayerQuad>(); }
+    inline qint32 soundLayersCount() const { return layersCountImpl<MAPLayerSound>(); }
 
     DDMData toDDM() const;
 
@@ -393,8 +461,8 @@ public:
     MAPDetails details;
     MAPAssets assets;
     std::vector<QByteArray> settings;
-    std::vector<Envelope> envelopes;
-    std::vector<Group> groups;
+    std::vector<MAPEnvelope> envelopes;
+    std::vector<MAPGroup> groups;
 };
 
-} // ddnet::io::
+}

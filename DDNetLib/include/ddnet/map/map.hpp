@@ -8,7 +8,7 @@
 
 #include <vector>
 
-namespace ddnet::map {
+namespace ddnet {
 
 class Map {
 public:
@@ -34,4 +34,4 @@ public:
     std::vector<QString> server_settings;
 };
 
-} // ddnet::map::
+}

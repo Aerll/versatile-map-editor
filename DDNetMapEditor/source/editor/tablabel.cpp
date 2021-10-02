@@ -24,4 +24,4 @@ TabLabel::TabLabel(const QString& string, QWidget* parent)
     setMargin(5);
 }
 
-} // ddnet::editor::
+}

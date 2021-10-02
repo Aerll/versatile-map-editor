@@ -14,4 +14,4 @@ QImage recolor(const QImage& image, const QColor& color);
 
 QImage crop(const QImage& image, const QSize& size, const QPoint& spacing, const QPoint& coord);
 
-} // ddnet::util::
+}

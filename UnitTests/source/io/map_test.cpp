@@ -21,21 +21,21 @@ TEST_CASE("io::MAPData") {
 
         data.groups.push_back({}); // first group with 2 tile, 3 quad, 1 sound
         data.groups.back().layers.reserve(6);
-        data.groups.back().layers.push_back(io::LayerQuad{});
-        data.groups.back().layers.push_back(io::LayerTile{});
-        data.groups.back().layers.push_back(io::LayerQuad{});
-        data.groups.back().layers.push_back(io::LayerSound{});
-        data.groups.back().layers.push_back(io::LayerQuad{});
-        data.groups.back().layers.push_back(io::LayerTile{});
+        data.groups.back().layers.push_back(io::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::MAPLayerTile{});
+        data.groups.back().layers.push_back(io::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::MAPLayerSound{});
+        data.groups.back().layers.push_back(io::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::MAPLayerTile{});
 
         data.groups.push_back({}); // second group with 3 tile, 1 quad, 2 sound
         data.groups.back().layers.reserve(6);
-        data.groups.back().layers.push_back(io::LayerTile{});
-        data.groups.back().layers.push_back(io::LayerQuad{});
-        data.groups.back().layers.push_back(io::LayerSound{});
-        data.groups.back().layers.push_back(io::LayerTile{});
-        data.groups.back().layers.push_back(io::LayerSound{});
-        data.groups.back().layers.push_back(io::LayerTile{});
+        data.groups.back().layers.push_back(io::MAPLayerTile{});
+        data.groups.back().layers.push_back(io::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::MAPLayerSound{});
+        data.groups.back().layers.push_back(io::MAPLayerTile{});
+        data.groups.back().layers.push_back(io::MAPLayerSound{});
+        data.groups.back().layers.push_back(io::MAPLayerTile{});
 
         CHECK(data.tileLayersCount() == 5);
         CHECK(data.quadLayersCount() == 4);
@@ -218,7 +218,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[0];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Game" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -238,7 +238,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[1];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Front" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -258,7 +258,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[2];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Tele" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -278,7 +278,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[3];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Switch" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -298,7 +298,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[4];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Speedup" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -318,7 +318,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[5];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Tune" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -350,7 +350,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[1].layers[0];
                         REQUIRE(layer_variant.index() == 2);
 
-                        const auto& layer = std::get<io::LayerSound>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerSound>(layer_variant);
                         REQUIRE(layer.sound_sources.size() == 2);
 
                         CHECK(layer.name == QString{ "SoundLayer" });
@@ -400,7 +400,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[1].layers[1];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "TileLayer" });
                         CHECK(layer.asset_index == 0);
                         CHECK(layer.is_detail);
@@ -414,35 +414,35 @@ TEST_CASE("io::MAPFileStream") {
                         REQUIRE(layer.tiles.size() == 2500);
 
                         CHECK(layer.tiles[0].index == 1);
-                        CHECK(layer.tiles[0].flags == util::toUnderlying(Rotation::N));
+                        CHECK(layer.tiles[0].flags == util::toUnderlying(enums::Rotation::N));
 
                         CHECK(layer.tiles[1].index == 1);
-                        CHECK(layer.tiles[1].flags == util::toUnderlying(Rotation::VHR));
+                        CHECK(layer.tiles[1].flags == util::toUnderlying(enums::Rotation::VHR));
 
                         CHECK(layer.tiles[2].index == 1);
-                        CHECK(layer.tiles[2].flags == util::toUnderlying(Rotation::VH));
+                        CHECK(layer.tiles[2].flags == util::toUnderlying(enums::Rotation::VH));
 
                         CHECK(layer.tiles[3].index == 1);
-                        CHECK(layer.tiles[3].flags == util::toUnderlying(Rotation::R));
+                        CHECK(layer.tiles[3].flags == util::toUnderlying(enums::Rotation::R));
 
                         CHECK(layer.tiles[4].index == 1);
-                        CHECK(layer.tiles[4].flags == util::toUnderlying(Rotation::V));
+                        CHECK(layer.tiles[4].flags == util::toUnderlying(enums::Rotation::V));
 
                         CHECK(layer.tiles[5].index == 1);
-                        CHECK(layer.tiles[5].flags == util::toUnderlying(Rotation::HR));
+                        CHECK(layer.tiles[5].flags == util::toUnderlying(enums::Rotation::HR));
 
                         CHECK(layer.tiles[6].index == 1);
-                        CHECK(layer.tiles[6].flags == util::toUnderlying(Rotation::H));
+                        CHECK(layer.tiles[6].flags == util::toUnderlying(enums::Rotation::H));
 
                         CHECK(layer.tiles[7].index == 1);
-                        CHECK(layer.tiles[7].flags == util::toUnderlying(Rotation::VR));
+                        CHECK(layer.tiles[7].flags == util::toUnderlying(enums::Rotation::VR));
                     }
 
                     { // quad layer
                         const auto& layer_variant = groups[1].layers[2];
                         REQUIRE(layer_variant.index() == 1);
 
-                        const auto& layer = std::get<io::LayerQuad>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerQuad>(layer_variant);
                         REQUIRE(layer.quads.size() == 1);
 
                         CHECK(layer.name == QString{ "QuadLayer" });

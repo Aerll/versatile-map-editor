@@ -12,11 +12,9 @@
 #include <memory>
 #include <vector>
 
-namespace ddnet::map {
+namespace ddnet {
 
 class Asset;
-
-
 
 class BaseLayer {
 public:
@@ -26,6 +24,8 @@ public:
 protected:
     Asset* asset = nullptr;
 };
+
+
 
 class BaseTileLayer : public BaseLayer {
     using node_iterator = std::vector<std::shared_ptr<Node>>::iterator;
@@ -48,12 +48,16 @@ protected:
     QSize size = { 0, 0 };
 };
 
+
+
 class TileLayer : public BaseTileLayer {
 public:
     QColor color{ Qt::white };
     quint16 color_envelope_id = 0;
     quint32 color_envelope_offset = 0;
 };
+
+
 
 class GameLayer : public BaseTileLayer {};
 class FrontLayer : public BaseTileLayer {};
@@ -77,4 +81,4 @@ public:
     std::vector<SoundSourceRectangle> rectangle_sound_sources;
 };
 
-} // ddnet::map::
+}

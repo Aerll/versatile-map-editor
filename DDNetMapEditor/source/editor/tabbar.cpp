@@ -77,4 +77,4 @@ bool TabBar::eventFilter(QObject* object, QEvent* event) {
 	return false;
 }
 
-} // ddnet::editor::
+}

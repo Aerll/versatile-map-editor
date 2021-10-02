@@ -16,4 +16,4 @@ protected:
     void paintEvent(QPaintEvent* event) final;
 };
 
-} // ddnet::editor::
+}
