@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="include\ddnet\debug\error.hpp" />
     <ClInclude Include="include\ddnet\debug\error_codes.hpp" />
+    <ClInclude Include="include\ddnet\debug\error_message.hpp" />
     <ClInclude Include="include\ddnet\io\ddldata.hpp" />
     <ClInclude Include="include\ddnet\io\ddlfilestream.hpp" />
     <ClInclude Include="include\ddnet\io\ddlparser.hpp" />

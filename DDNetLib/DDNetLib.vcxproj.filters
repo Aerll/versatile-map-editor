@@ -1,11 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
-      <Extensions>qrc;*</Extensions>
-      <ParseFiles>false</ParseFiles>
-    </Filter>
     <Filter Include="libs">
       <UniqueIdentifier>{dce8e0bf-2236-4132-b8a1-5d6f862fcc35}</UniqueIdentifier>
     </Filter>
@@ -47,6 +42,9 @@
     </Filter>
     <Filter Include="libs\singleapplication">
       <UniqueIdentifier>{878d2044-d876-42bd-8872-d510b37bf48b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\ddnet\debug">
+      <UniqueIdentifier>{868ca766-45e2-4b6f-b177-ce9090a5f40e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +133,9 @@
       <Filter>include\ddnet\util</Filter>
     </ClInclude>
     <ClInclude Include="include\ddnet\debug\error.hpp">
+      <Filter>include\ddnet\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ddnet\debug\error_message.hpp">
       <Filter>include\ddnet\debug</Filter>
     </ClInclude>
   </ItemGroup>

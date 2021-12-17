@@ -12,3 +12,21 @@ struct Error {
 };
 
 }
+
+
+
+namespace ddnet::internal {
+
+inline debug::Error error = {};
+
+}
+
+
+
+namespace ddnet::debug {
+
+[[nodiscard]] inline const Error& getLastError() noexcept {
+    return internal::error;
+}
+
+}

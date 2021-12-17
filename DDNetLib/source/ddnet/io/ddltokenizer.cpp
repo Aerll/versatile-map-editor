@@ -1,5 +1,7 @@
 #include <ddnet/io/ddltokenizer.hpp>
 
+#include <ddnet/debug/error_message.hpp>
+#include <ddnet/debug/error.hpp>
 #include <ddnet/util/enums.hpp>
 
 #include <QTextStream>
@@ -22,9 +24,10 @@ void DDLTokenizer::finalize() {
         }
     }
 
-    for (auto& token : tokens)
+    for (auto& token : tokens) {
         if (!token.first.string.isEmpty() && token.first.string.back() == '\n') // remove the last character, only if it's a new line
             token.first.string.remove(token.first.string.size() - 1, 1);
+    }
 }
 
 
@@ -33,8 +36,8 @@ void DDLTokenizer::validate() {
     for (const auto& token : tokens)
         if (static_cast<bool>(token.first.type & enums::TokenType::Invalid))
             errors.emplace_back(debug::Error{ 
-                .message = "Invalid token '" + token.first.string + "' at line: " + QString::number(token.second) + ".\n", 
-                .code = debug::ErrorCode::Tokenizer_DDL_InvalidToken 
+                .message = debug::errorMessage<debug::ErrorCode::Tokenizer_DDL_InvalidToken>(token.first.string, token.second),
+                .code = debug::ErrorCode::Tokenizer_DDL_InvalidToken
             });
 }
 
@@ -130,6 +133,7 @@ void DDLTokenizer::tokenize(QTextStream& text_stream) {
                 tokens.push_back({ util::Token{ .string = c, .type = enums::TokenType::Invalid }, line });
         }
     }
+
     finalize();
     validate();
 }

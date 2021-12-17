@@ -1,5 +1,7 @@
 #include <ddnet/io/ddlparser.hpp>
 
+#include <ddnet/debug/error_message.hpp>
+#include <ddnet/debug/error.hpp>
 #include <ddnet/io/ddltokenizer.hpp>
 #include <ddnet/util/enums.hpp>
 
@@ -7,8 +9,8 @@ namespace ddnet::io {
 
 void DDLParser::parseIdentifier(const std::pair<util::Token, qint32>& token) {
     if (token.first.type != enums::TokenType::Identifier) [[unlikely]]
-        errors.push_back(debug::Error{ 
-            .message = "Missing identifier at line: " + QString::number(token.second),
+        errors.emplace_back(debug::Error{
+            .message = debug::errorMessage<debug::ErrorCode::Parser_DDL_MissingIdentifier>(token.second),
             .code = debug::ErrorCode::Parser_DDL_MissingIdentifier
         });
 }
@@ -17,8 +19,8 @@ void DDLParser::parseIdentifier(const std::pair<util::Token, qint32>& token) {
 
 void DDLParser::parseAssignment(const std::pair<util::Token, qint32>& token) {
     if (token.first != util::Token{ .string = "=", .type = enums::TokenType::Operator }) [[unlikely]]
-        errors.push_back(debug::Error{ 
-            .message = "Missing '=' at line: " + QString::number(token.second),
+        errors.emplace_back(debug::Error{
+            .message = debug::errorMessage<debug::ErrorCode::Parser_DDL_MissingAssignment>(token.second),
             .code = debug::ErrorCode::Parser_DDL_MissingAssignment
         });
 }
@@ -27,8 +29,8 @@ void DDLParser::parseAssignment(const std::pair<util::Token, qint32>& token) {
 
 void DDLParser::parseLiteralOperator(const std::pair<util::Token, qint32>& token) {
     if (token.first != util::Token{ .string = ":", .type = enums::TokenType::Operator }) [[unlikely]]
-        errors.push_back(debug::Error{ 
-            .message = "Missing ':' at line: " + QString::number(token.second),
+        errors.emplace_back(debug::Error{
+            .message = debug::errorMessage<debug::ErrorCode::Parser_DDL_MissingLiteralOperator>(token.second),
             .code = debug::ErrorCode::Parser_DDL_MissingLiteralOperator
         });
 }
@@ -36,8 +38,8 @@ void DDLParser::parseLiteralOperator(const std::pair<util::Token, qint32>& token
 
 
 void DDLParser::errorMissingOpenBracket(const std::pair<util::Token, qint32>& token) {
-    errors.push_back(debug::Error{
-        .message = "Missing '{' at line: " + QString::number(token.second),
+    errors.emplace_back(debug::Error{
+        .message = debug::errorMessage<debug::ErrorCode::Parser_DDL_MissingOpenBracket>(token.second),
         .code = debug::ErrorCode::Parser_DDL_MissingOpenBracket
     });
 }
@@ -45,8 +47,8 @@ void DDLParser::errorMissingOpenBracket(const std::pair<util::Token, qint32>& to
 
 
 void DDLParser::errorMissingCloseBracket(const std::pair<util::Token, qint32>& token) {
-    errors.push_back(debug::Error{
-        .message = "Missing '}' at line: " + QString::number(token.second),
+    errors.emplace_back(debug::Error{
+        .message = debug::errorMessage<debug::ErrorCode::Parser_DDL_MissingCloseBracket>(token.second),
         .code = debug::ErrorCode::Parser_DDL_MissingCloseBracket
     });
 }
@@ -54,8 +56,8 @@ void DDLParser::errorMissingCloseBracket(const std::pair<util::Token, qint32>& t
 
 
 void DDLParser::errorUnexpectedToken(const std::pair<util::Token, qint32>& token) {
-    errors.push_back(debug::Error{
-        .message = "Unexpected token '" + token.first.string + "' at line: " + QString::number(token.second),
+    errors.emplace_back(debug::Error{
+        .message = debug::errorMessage<debug::ErrorCode::Parser_DDL_UnexpectedToken>(token.first.string, token.second),
         .code = debug::ErrorCode::Parser_DDL_UnexpectedToken
     });
 }
