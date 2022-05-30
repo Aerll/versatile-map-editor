@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{37635A12-FD35-41EA-9738-BFBB29B36F89}</ProjectGuid>
+    <ProjectGuid>{67280703-CB14-4212-B9A1-FE3C18D18427}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
@@ -45,37 +45,61 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)vtLib\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)vtLib/include;$(SolutionDir)vtLib/libs/singleapplication;$(ProjectDir)vtLib/libs/sha-2;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)vtLib\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)vtLib/include;$(SolutionDir)vtLib/libs/singleapplication;$(ProjectDir)vtLib/libs/sha-2;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <EnableModules>false</EnableModules>
+      <PreprocessorDefinitions>NOMINMAX;QAPPLICATION_CLASS=QApplication;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WarningLevel>Level4</WarningLevel>
+      <ConformanceMode>Default</ConformanceMode>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      <LanguageStandard>
+      </LanguageStandard>
+    </QtMoc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <EnableModules>false</EnableModules>
+      <PreprocessorDefinitions>NOMINMAX;QAPPLICATION_CLASS=QApplication;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WarningLevel>Level4</WarningLevel>
+      <ConformanceMode>Default</ConformanceMode>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      <LanguageStandard>
+      </LanguageStandard>
+    </QtMoc>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>$(DefaultQtVersion)</QtInstall>
-    <QtModules>core</QtModules>
+    <QtModules>core;openglwidgets;gui;widgets;network;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
+    <QtPathBinaries>bin</QtPathBinaries>
+    <QtPathLibraryExecutables>bin</QtPathLibraryExecutables>
     <QMakeCodeLines>QMAKE_CXXFLAGS += /std:c++20</QMakeCodeLines>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>$(DefaultQtVersion)</QtInstall>
-    <QtModules>core</QtModules>
+    <QtModules>core;openglwidgets;gui;widgets;network;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
+    <QtPathBinaries>bin</QtPathBinaries>
+    <QtPathLibraryExecutables>bin</QtPathLibraryExecutables>
     <QMakeCodeLines>QMAKE_CXXFLAGS += /std:c++20</QMakeCodeLines>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
@@ -91,7 +115,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -105,30 +129,61 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\catch2.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">catch2.pch</PrecompiledHeaderFile>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">catch2.pch</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="source\io\ddl_test.cpp" />
-    <ClCompile Include="source\io\map_test.cpp" />
-    <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\util\tile_test.cpp" />
-    <ClCompile Include="source\util\utility_test.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="include\catch2.pch" />
+    <None Include="config.ddl" />
+    <None Include="data\lang\english.ddl" />
+    <None Include="data\lang\polish.ddl" />
+    <None Include="data\themes\darkdefault\darkdefault-assets.ddl" />
+    <None Include="data\themes\darkdefault\darkdefault-palette.ddl" />
+    <None Include="data\themes\darkdefault\darkdefault-widgets.ddl" />
+    <None Include="settings.ddl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\vtLib\vtLib.vcxproj">
       <Project>{d4cdfba4-3d72-4510-b174-22f8914edf40}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="include\editor\mainwindow.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="include\editor\openglwidget.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\editor\app.cpp" />
+    <ClCompile Include="source\editor\dockwindow.cpp" />
+    <ClCompile Include="source\editor\closebutton.cpp" />
+    <ClCompile Include="source\editor\dockpanel.cpp" />
+    <ClCompile Include="source\editor\sidebar.cpp" />
+    <ClCompile Include="source\editor\main.cpp" />
+    <ClCompile Include="source\editor\mainwindow.cpp" />
+    <ClCompile Include="source\editor\menu.cpp" />
+    <ClCompile Include="source\editor\openglwidget.cpp" />
+    <ClCompile Include="source\editor\resourcemanager.cpp" />
+    <ClCompile Include="source\editor\tablabel.cpp" />
+    <ClCompile Include="source\editor\tabbar.cpp" />
+    <ClCompile Include="source\editor\tabwidget.cpp" />
+    <ClCompile Include="source\editor\toolbar.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="include\editor\tabwidget.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\editor\app.hpp" />
+    <QtMoc Include="include\editor\dockwindow.hpp" />
+    <ClInclude Include="include\editor\constants.hpp" />
+    <QtMoc Include="include\editor\menu.hpp" />
+    <QtMoc Include="include\editor\dockpanel.hpp" />
+    <QtMoc Include="include\editor\sidebar.hpp" />
+    <ClInclude Include="include\editor\resourcemanager.hpp" />
+    <QtMoc Include="include\editor\toolbar.hpp" />
+    <QtMoc Include="include\editor\closebutton.hpp" />
+    <QtMoc Include="include\editor\tablabel.hpp" />
+    <QtMoc Include="include\editor\tabbar.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

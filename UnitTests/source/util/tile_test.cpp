@@ -1,8 +1,8 @@
 #include <catch2.pch>
 
-#include <ddnet/util/tile.hpp>
+#include <vt/util/tile.hpp>
 
-using namespace ddnet;
+using namespace vt;
 
 TEST_CASE("util::toTilesetCoords") {
     constexpr QPoint coords11 = util::toTilesetCoords(17);

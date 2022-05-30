@@ -1,10 +1,10 @@
 #include <catch2.pch>
 
-#include <ddnet/io/ddlfilestream.hpp>
-#include <ddnet/io/ddltokenizer.hpp>
-#include <ddnet/io/ddlparser.hpp>
-#include <ddnet/io/ddldata.hpp>
-#include <ddnet/util/constants.hpp>
+#include <vt/io/ddlfilestream.hpp>
+#include <vt/io/ddltokenizer.hpp>
+#include <vt/io/ddlparser.hpp>
+#include <vt/io/ddldata.hpp>
+#include <vt/util/constants.hpp>
 
 #include <QFileInfo>
 #include <QTextStream>
@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <string_view>
 
-using namespace ddnet;
+using namespace vt;
 
 namespace test_util {
 

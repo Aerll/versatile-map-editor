@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="libs">
+      <UniqueIdentifier>{dce8e0bf-2236-4132-b8a1-5d6f862fcc35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="libs\singleapplication">
+      <UniqueIdentifier>{878d2044-d876-42bd-8872-d510b37bf48b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\vt">
+      <UniqueIdentifier>{1518a49c-aa70-4625-9be8-7aa7595f3018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\vt\debug">
+      <UniqueIdentifier>{10ec7eda-42ad-463a-b52a-5cf47a786053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\vt\io">
+      <UniqueIdentifier>{e1f93c9a-85d0-4e45-9365-f8ef8052a95d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\vt\map">
+      <UniqueIdentifier>{0e4741f3-d3ad-46e4-99a3-6a2d05e5522c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\vt\util">
+      <UniqueIdentifier>{de6aacfe-fe35-4191-ad4f-5d5805d25cb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\vt">
+      <UniqueIdentifier>{0b81862a-b310-476f-9b70-50947026ac78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\vt\io">
+      <UniqueIdentifier>{30f1b862-47de-4a30-9bb5-0db63c7d63da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\vt\util">
+      <UniqueIdentifier>{0d207977-6369-4c5f-9257-03550b36768b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="libs\singleapplication\singleapplication.cpp">
+      <Filter>libs\singleapplication</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\singleapplication\singleapplication_p.cpp">
+      <Filter>libs\singleapplication</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\io\ddldata.cpp">
+      <Filter>source\vt\io</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\io\ddlfilestream.cpp">
+      <Filter>source\vt\io</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\io\ddlparser.cpp">
+      <Filter>source\vt\io</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\io\ddltokenizer.cpp">
+      <Filter>source\vt\io</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\io\ddmdata.cpp">
+      <Filter>source\vt\io</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\io\ddmfilestream.cpp">
+      <Filter>source\vt\io</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\io\mapdata.cpp">
+      <Filter>source\vt\io</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\io\mapfilestream.cpp">
+      <Filter>source\vt\io</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\util\graphics.cpp">
+      <Filter>source\vt\util</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\util\tile.cpp">
+      <Filter>source\vt\util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="libs\singleapplication\singleapplication.h">
+      <Filter>libs\singleapplication</Filter>
+    </QtMoc>
+    <QtMoc Include="libs\singleapplication\singleapplication_p.h">
+      <Filter>libs\singleapplication</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\vt\debug\error.hpp">
+      <Filter>include\vt\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\debug\error_code.hpp">
+      <Filter>include\vt\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\debug\error_message.hpp">
+      <Filter>include\vt\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\io\ddldata.hpp">
+      <Filter>include\vt\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\io\ddlfilestream.hpp">
+      <Filter>include\vt\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\io\ddlparser.hpp">
+      <Filter>include\vt\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\io\ddltokenizer.hpp">
+      <Filter>include\vt\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\io\ddmdata.hpp">
+      <Filter>include\vt\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\io\ddmfilestream.hpp">
+      <Filter>include\vt\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\io\mapdata.hpp">
+      <Filter>include\vt\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\io\mapfilestream.hpp">
+      <Filter>include\vt\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\map\asset.hpp">
+      <Filter>include\vt\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\map\envelope.hpp">
+      <Filter>include\vt\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\map\group.hpp">
+      <Filter>include\vt\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\map\layer.hpp">
+      <Filter>include\vt\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\map\map.hpp">
+      <Filter>include\vt\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\map\node.hpp">
+      <Filter>include\vt\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\map\quad.hpp">
+      <Filter>include\vt\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\map\sound_source.hpp">
+      <Filter>include\vt\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\map\tile.hpp">
+      <Filter>include\vt\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\map\tileset.hpp">
+      <Filter>include\vt\map</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\util\concepts.hpp">
+      <Filter>include\vt\util</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\util\constants.hpp">
+      <Filter>include\vt\util</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\util\enums.hpp">
+      <Filter>include\vt\util</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\util\graphics.hpp">
+      <Filter>include\vt\util</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\util\macros.hpp">
+      <Filter>include\vt\util</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\util\tile.hpp">
+      <Filter>include\vt\util</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\util\token.hpp">
+      <Filter>include\vt\util</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\util\types.hpp">
+      <Filter>include\vt\util</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\util\utility.hpp">
+      <Filter>include\vt\util</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

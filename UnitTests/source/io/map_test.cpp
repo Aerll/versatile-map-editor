@@ -1,19 +1,19 @@
 #include <catch2.pch>
 
-#include <ddnet/debug/error_codes.hpp>
-#include <ddnet/io/mapdata.hpp>
-#include <ddnet/io/mapfilestream.hpp>
-#include <ddnet/map/tile.hpp>
-#include <ddnet/util/constants.hpp>
-#include <ddnet/util/enums.hpp>
-#include <ddnet/util/utility.hpp>
+#include <vt/debug/error_code.hpp>
+#include <vt/io/mapdata.hpp>
+#include <vt/io/mapfilestream.hpp>
+#include <vt/map/tile.hpp>
+#include <vt/util/constants.hpp>
+#include <vt/util/enums.hpp>
+#include <vt/util/utility.hpp>
 
 #include <QFileInfo>
 #include <QString>
 
 #include <algorithm>
 
-using namespace ddnet;
+using namespace vt;
 
 TEST_CASE("io::MAPData") {
     SECTION("Counting layers of each type") {

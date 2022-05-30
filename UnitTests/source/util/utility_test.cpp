@@ -1,11 +1,11 @@
 #include <catch2.pch>
 
-#include <ddnet/util/utility.hpp>
+#include <vt/util/utility.hpp>
 
 #include <QByteArray>
 #include <QIODevice>
 
-using namespace ddnet;
+using namespace vt;
 
 std::variant<short, int, float, double> v;
 static_assert(util::typeIndex<short>(v) == 0);
