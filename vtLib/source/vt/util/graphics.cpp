@@ -31,16 +31,4 @@ QImage recolor(const QImage& image, const QColor& color) {
     return new_image;
 }
 
-
-
-QImage crop(const QImage& image, const QSize& size, const QPoint& spacing, const QPoint& coord) {
-    QRect rect = {
-        coord.y() * size.width() + (coord.y() + 1) * spacing.x(),
-        coord.x() * size.height() + (coord.x() + 1) * spacing.y(),
-        size.width(),
-        size.height()
-    };
-    return image.copy(rect);
-}
-
 }

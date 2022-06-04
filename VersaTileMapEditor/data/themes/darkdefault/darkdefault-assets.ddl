@@ -9,13 +9,6 @@ Assets = :Config
  */
 Ui = :Normal
 {
-    AtlasFile = :normal_16x16.png
-
-    /* :x,y */
-    Size      = :16,16
-    Spacing   = :8,8
-    
-    /* :row,column,color */
     ArrowFold           = :
     ArrowUnfold         = :
     ArrowScrollBarUp    = :
@@ -23,26 +16,19 @@ Ui = :Normal
     ArrowScrollBarLeft  = :
     ArrowScrollBarRight = :
     ArrowDropDown       = :
-    ArrowMenu           = :0,2,#d1d1d7
+    ArrowMenu           = :ui_arrowmenu.png,#d1d1d7
     ButtonMinimize      = :
     ButtonMaximize      = :
-    ButtonClose         = :0,0,#d1d1d7
+    ButtonClose         = :ui_buttonclose.png,#d1d1d7
     RadioButton         = :
     CheckBox            = :
-    CheckMenu           = :0,1,#d1d1d7
+    CheckMenu           = :ui_checkmenu.png,#d1d1d7
     ToggleShow          = :
     ToggleHide          = :
 }
 
 Ui = :Hover
 {
-    AtlasFile = :normal_16x16.png
-
-    /* :x,y */
-    Size      = :16,16
-    Spacing   = :8,8
-    
-    /* :row,column,color */
     ArrowFold           = :
     ArrowUnfold         = :
     ArrowScrollBarUp    = :
@@ -50,26 +36,19 @@ Ui = :Hover
     ArrowScrollBarLeft  = :
     ArrowScrollBarRight = :
     ArrowDropDown       = :
-    ArrowMenu           = :0,2,#d1d1d7
+    ArrowMenu           = :ui_arrowmenu_hover.png,#d1d1d7
     ButtonMinimize      = :
     ButtonMaximize      = :
-    ButtonClose         = :0,0,#d1d1d7
+    ButtonClose         = :ui_buttonclose_hover.png,#d1d1d7
     RadioButton         = :
     CheckBox            = :
-    CheckMenu           = :0,1,#d1d1d7
+    CheckMenu           = :ui_checkmenu_hover.png,#d1d1d7
     ToggleShow          = :
     ToggleHide          = :
 }
 
 Ui = :Pressed
 {
-    AtlasFile = :normal_16x16.png
-
-    /* :x,y */
-    Size      = :16,16
-    Spacing   = :8,8
-    
-    /* :row,column,color */
     ArrowFold           = :
     ArrowUnfold         = :
     ArrowScrollBarUp    = :
@@ -77,13 +56,13 @@ Ui = :Pressed
     ArrowScrollBarLeft  = :
     ArrowScrollBarRight = :
     ArrowDropDown       = :
-    ArrowMenu           = :0,2,#d1d1d7
+    ArrowMenu           = :ui_arrowmenu_pressed.png,#d1d1d7
     ButtonMinimize      = :
     ButtonMaximize      = :
-    ButtonClose         = :0,0,#d1d1d7
+    ButtonClose         = :ui_buttonclose_pressed.png,#d1d1d7
     RadioButton         = :
     CheckBox            = :
-    CheckMenu           = :0,1,#d1d1d7
+    CheckMenu           = :ui_checkmenu_pressed.png,#d1d1d7
     ToggleShow          = :
     ToggleHide          = :
 }
@@ -101,27 +80,20 @@ Ui = :Textures
  */
 Icons = :Normal_16
 {
-    AtlasFile = :normal_16x16.png
-
-    /* :x,y */
-    Size      = :16,16
-    Spacing   = :8,8
-    
-    /* :row,column,color */
-    NewFile     = :0,0,#d1d1d7
-    OpenFile    = :0,1,#d1d1d7
-    SaveFile    = :0,2,#d1d1d7
-    Import      = :0,4,#d1d1d7
-    Export      = :0,3,#d1d1d7
-    LayerTile   = :0,11,#d1d1d7
-    LayerQuad   = :0,10,#d1d1d7
-    LayerSound  = :0,9,#d1d1d7
-    MapresImage = :0,12,#d1d1d7
-    MapresSound = :0,9,#d1d1d7
-    Grid        = :0,13,#d1d1d7
-    Undo        = :0,7,#d1d1d7
-    Redo        = :0,8,#d1d1d7
-    Delete      = :0,6,#d1d1d7
+    NewFile     = :icon_small_newfile.png,#d1d1d7
+    OpenFile    = :icon_small_openfile.png,#d1d1d7
+    SaveFile    = :icon_small_savefile.png,#d1d1d7
+    Import      = :icon_small_import.png,#d1d1d7
+    Export      = :icon_small_export.png,#d1d1d7
+    LayerTile   = :icon_small_layertile.png,#d1d1d7
+    LayerQuad   = :icon_small_layerquad.png,#d1d1d7
+    LayerSound  = :icon_small_layersound.png,#d1d1d7
+    MapresImage = :icon_small_mapresimage.png,#d1d1d7
+    MapresSound = :icon_small_mapressound.png,#d1d1d7
+    Grid        = :icon_small_grid.png,#d1d1d7
+    Undo        = :icon_small_undo.png,#d1d1d7
+    Redo        = :icon_small_redo.png,#d1d1d7
+    Delete      = :icon_small_delete.png,#d1d1d7
 }
 
 Icons = :Disabled_16
@@ -130,27 +102,20 @@ Icons = :Disabled_16
 
 Icons = :Normal_24
 {
-    AtlasFile = :normal_16x16.png
-
-    /* :x,y */
-    Size      = :16,16
-    Spacing   = :8,8
-    
-    /* :row,column,color */
-    NewFile     = :0,0,#d1d1d7
-    OpenFile    = :0,1,#d1d1d7
-    SaveFile    = :0,2,#d1d1d7
-    Import      = :0,4,#d1d1d7
-    Export      = :0,3,#d1d1d7
-    LayerTile   = :0,11,#d1d1d7
-    LayerQuad   = :0,10,#d1d1d7
-    LayerSound  = :0,9,#d1d1d7
-    MapresImage = :0,12,#d1d1d7
-    MapresSound = :0,9,#d1d1d7
-    Grid        = :0,13,#d1d1d7
-    Undo        = :0,7,#d1d1d7
-    Redo        = :0,8,#d1d1d7
-    Delete      = :0,6,#d1d1d7
+    NewFile     = :icon_big_newfile.png,#d1d1d7
+    OpenFile    = :icon_big_openfile.png,#d1d1d7
+    SaveFile    = :icon_big_savefile.png,#d1d1d7
+    Import      = :icon_big_import.png,#d1d1d7
+    Export      = :icon_big_export.png,#d1d1d7
+    LayerTile   = :icon_big_layertile.png,#d1d1d7
+    LayerQuad   = :icon_big_layerquad.png,#d1d1d7
+    LayerSound  = :icon_big_layersound.png,#d1d1d7
+    MapresImage = :icon_big_mapresimage.png,#d1d1d7
+    MapresSound = :icon_big_mapressound.png,#d1d1d7
+    Grid        = :icon_big_grid.png,#d1d1d7
+    Undo        = :icon_big_undo.png,#d1d1d7
+    Redo        = :icon_big_redo.png,#d1d1d7
+    Delete      = :icon_big_delete.png,#d1d1d7
 }
 
 Icons = :Disabled_24

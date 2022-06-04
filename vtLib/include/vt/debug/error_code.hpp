@@ -56,9 +56,7 @@ enum class [[nodiscard]] ErrorCode : qint32 {
 
 
     // resource manager values
-    Resource_Value_InvalidSize,
-    Resource_Value_InvalidSpacing,
-    Resource_Value_InvalidCoordColor,
+    Resource_Value_InvalidNameColor,
 
     // resource manager config
     Resource_Config_NoEntryPoint,
