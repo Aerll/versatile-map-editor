@@ -49,6 +49,12 @@
     <Filter Include="source\vt\io\ddnet">
       <UniqueIdentifier>{dfb56f23-2df0-4813-b8e7-ad45494b3679}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\vt\util\ddnet">
+      <UniqueIdentifier>{2c0349d7-0675-4fb2-9eb1-c5550e9a57e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\vt\util\ddnet">
+      <UniqueIdentifier>{4b100a40-5f05-404f-a2de-61926d756588}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="libs\singleapplication\singleapplication.cpp">
@@ -86,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="source\vt\io\ddnet\mapfilestream.cpp">
       <Filter>source\vt\io\ddnet</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\util\ddnet\validate.cpp">
+      <Filter>source\vt\util\ddnet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +201,9 @@
     </ClInclude>
     <ClInclude Include="include\vt\io\ddnet\mapfilestream.hpp">
       <Filter>include\vt\io\ddnet</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\util\ddnet\validate.hpp">
+      <Filter>include\vt\util\ddnet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

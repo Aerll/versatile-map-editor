@@ -25,6 +25,7 @@
     <ClCompile Include="source\vt\io\ddltokenizer.cpp" />
     <ClCompile Include="source\vt\io\ddmdata.cpp" />
     <ClCompile Include="source\vt\io\ddmfilestream.cpp" />
+    <ClCompile Include="source\vt\util\ddnet\validate.cpp" />
     <ClCompile Include="source\vt\util\graphics.cpp" />
     <ClCompile Include="source\vt\util\tile.cpp" />
   </ItemGroup>
@@ -54,6 +55,7 @@
     <ClInclude Include="include\vt\map\tileset.hpp" />
     <ClInclude Include="include\vt\util\concepts.hpp" />
     <ClInclude Include="include\vt\util\constants.hpp" />
+    <ClInclude Include="include\vt\util\ddnet\validate.hpp" />
     <ClInclude Include="include\vt\util\enums.hpp" />
     <ClInclude Include="include\vt\util\graphics.hpp" />
     <ClInclude Include="include\vt\util\macros.hpp" />

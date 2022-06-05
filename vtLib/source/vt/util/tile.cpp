@@ -2,46 +2,6 @@
 
 namespace vt::util {
 
-bool canRotate(const Tile& tile) noexcept {
-    // TODO
-    return {};
-}
-
-bool canMirror(const Tile& tile) noexcept {
-    // TODO
-    return {};
-}
-
-bool isGameEntity(const Tile& tile) noexcept {
-    // TODO
-    return false;
-}
-
-bool isFrontEntity(const Tile& tile) noexcept {
-    // TODO
-    return false;
-}
-
-bool isTeleEntity(const Tile& tile) noexcept {
-    // TODO
-    return false;
-}
-
-bool isTuneEntity(const Tile& tile) noexcept {
-    // TODO
-    return false;
-}
-
-bool isSwitchEntity(const Tile& tile) noexcept {
-    // TODO
-    return false;
-}
-
-bool isSpeedupEntity(const Tile& tile) noexcept {
-    // TODO
-    return false;
-}
-
 void rotateTile(Tile& tile, enums::Rotate direction) noexcept {
     switch (direction) {
         case enums::Rotate::Clockwise:
