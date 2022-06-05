@@ -7,11 +7,11 @@
 
 using namespace vt;
 
-std::variant<short, int, float, double> v;
-static_assert(util::typeIndex<short>(v) == 0);
-static_assert(util::typeIndex<int>(v) == 1);
-static_assert(util::typeIndex<float>(v) == 2);
-static_assert(util::typeIndex<double>(v) == 3);
+std::variant<short, int, float, double> variant;
+static_assert(util::typeIndex<short>(variant) == 0);
+static_assert(util::typeIndex<int>(variant) == 1);
+static_assert(util::typeIndex<float>(variant) == 2);
+static_assert(util::typeIndex<double>(variant) == 3);
 
 enum class Enum_qint16 : qint16 { Value };
 enum class Enum_qint64 : qint64 { Value };

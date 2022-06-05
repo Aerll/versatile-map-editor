@@ -3,6 +3,8 @@
 #include <vt/util/macros.hpp>
 #include <vt/util/utility.hpp>
 
+#include <QtGlobal>
+
 namespace vt::editor {
 
 enum class ButtonState {
@@ -28,7 +30,7 @@ enum class WidgetStyleType {
     Vt,
 };
 
-enum class AssetIndex : std::size_t {
+enum class AssetIndex : qsizetype {
     // ui
     Ui16_Normal_ArrowFold = 0,
     Ui16_Normal_ArrowUnfold,
@@ -102,7 +104,7 @@ enum class AssetIndex : std::size_t {
     TotalCount,
 };
 
-enum class IconIndex : std::size_t {
+enum class IconIndex : qsizetype {
     Icon16_Normal_NewFile = 0,
     Icon16_Normal_OpenFile,
     Icon16_Normal_SaveFile,
@@ -124,7 +126,7 @@ enum class IconIndex : std::size_t {
     TotalCount,
 };
 
-enum class StringIndex : std::size_t {
+enum class StringIndex : qsizetype {
     MenuFile = 0,
     MenuFileNew,
     MenuFileOpen,
@@ -165,7 +167,7 @@ enum class StringIndex : std::size_t {
     TotalCount,
 };
 
-enum class SettingIndex : std::size_t {
+enum class SettingIndex : qsizetype {
     Language = 0,
     Theme,
     FontFamily,

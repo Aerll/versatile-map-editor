@@ -70,7 +70,7 @@ void TabBar::closeTab() {
 
 
 
-bool TabBar::eventFilter(QObject* object, QEvent* event) {
+bool TabBar::eventFilter(QObject* object [[maybe_unused]], QEvent* event) {
 	if (event->type() == QEvent::Paint || event->type() == QEvent::HoverLeave)
 		updateCloseButtons(mapFromGlobal(QCursor::pos()));
 

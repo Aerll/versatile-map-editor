@@ -6,7 +6,7 @@
 
 namespace vt::io {
 
-qint32 DDLData::attributesCount(const DDLProperty& property) const {
+qsizetype DDLData::attributesCount(const DDLProperty& property) const {
     auto iter = properties.find(property);
 
     if (iter == properties.cend())
@@ -16,7 +16,7 @@ qint32 DDLData::attributesCount(const DDLProperty& property) const {
 
 
 
-qint32 DDLData::attributesCount(const std::pair<QString, QString>& property) const {
+qsizetype DDLData::attributesCount(const std::pair<QString, QString>& property) const {
     return attributesCount({ .name = property.first, .value = property.second });
 }
 

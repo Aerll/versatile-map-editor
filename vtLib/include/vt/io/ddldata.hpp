@@ -34,9 +34,9 @@ public:
     using const_iterator = type::const_iterator;
 
 public:
-    inline qint32 propertiesCount() const noexcept { return properties.size(); }
-    qint32 attributesCount(const DDLProperty& property) const;
-    qint32 attributesCount(const std::pair<QString, QString>& property) const;
+    inline qsizetype propertiesCount() const noexcept { return properties.size(); }
+    qsizetype attributesCount(const DDLProperty& property) const;
+    qsizetype attributesCount(const std::pair<QString, QString>& property) const;
     const_iterator property(const std::pair<QString, QString>& attribute) const;
 
     QByteArray toQss() const;
