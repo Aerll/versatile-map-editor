@@ -61,42 +61,42 @@ void ToolBar::initActions() {
 
     // initialize buttons
     action_new = new QAction{ this }; // TODO load shortcuts from DDL
-    action_new->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon24_Normal_NewFile)));
+    action_new->setIcon(App::resources.icon(IconIndex::Icon24_Normal_NewFile));
     action_new->setToolTip(App::resources.string(StringIndex::ToolTipFileNew));
     action_new->startTimer(500ms);
 
     action_open = new QAction{ this };
-    action_open->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon24_Normal_OpenFile)));
+    action_open->setIcon(App::resources.icon(IconIndex::Icon24_Normal_OpenFile));
     action_open->setToolTip(App::resources.string(StringIndex::ToolTipFileOpen));
     action_open->startTimer(500ms);
 
     action_save = new QAction{ this };
-    action_save->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon24_Normal_SaveFile)));
+    action_save->setIcon(App::resources.icon(IconIndex::Icon24_Normal_SaveFile));
     action_save->setToolTip(App::resources.string(StringIndex::ToolTipFileSave));
     action_save->startTimer(500ms);
 
     action_import = new QAction{ this };
-    action_import->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon24_Normal_Import)));
+    action_import->setIcon(App::resources.icon(IconIndex::Icon24_Normal_Import));
     action_import->setToolTip(App::resources.string(StringIndex::ToolTipFileImport));
     action_import->startTimer(500ms);
 
     action_export = new QAction{ this };
-    action_export->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon24_Normal_Export)));
+    action_export->setIcon(App::resources.icon(IconIndex::Icon24_Normal_Export));
     action_export->setToolTip(App::resources.string(StringIndex::ToolTipFileExport));
     action_export->startTimer(500ms);
 
     action_undo = new QAction{ this };
-    action_undo->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon24_Normal_Undo)));
+    action_undo->setIcon(App::resources.icon(IconIndex::Icon24_Normal_Undo));
     action_undo->setToolTip(App::resources.string(StringIndex::ToolTipEditUndo));
     action_undo->startTimer(500ms);
 
     action_redo = new QAction{ this };
-    action_redo->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon24_Normal_Redo)));
+    action_redo->setIcon(App::resources.icon(IconIndex::Icon24_Normal_Redo));
     action_redo->setToolTip(App::resources.string(StringIndex::ToolTipEditRedo));
     action_redo->startTimer(500ms);
 
     action_delete = new QAction{ this };
-    action_delete->setIcon(QPixmap::fromImage(App::resources.asset(AssetIndex::Icon24_Normal_Delete)));
+    action_delete->setIcon(App::resources.icon(IconIndex::Icon24_Normal_Delete));
     action_delete->setToolTip(App::resources.string(StringIndex::ToolTipEditDelete));
     action_delete->startTimer(500ms);
 

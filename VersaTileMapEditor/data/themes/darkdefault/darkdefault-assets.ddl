@@ -80,44 +80,36 @@ Ui = :Textures
  */
 Icons = :Normal_16
 {
-    NewFile     = :icon_small_newfile.png,#d1d1d7
-    OpenFile    = :icon_small_openfile.png,#d1d1d7
-    SaveFile    = :icon_small_savefile.png,#d1d1d7
-    Import      = :icon_small_import.png,#d1d1d7
-    Export      = :icon_small_export.png,#d1d1d7
+    NewFile     = :newfile.svg
+    OpenFile    = :openfile.svg
+    SaveFile    = :savefile.svg
+    Import      = :import.svg
+    Export      = :export.svg
     LayerTile   = :icon_small_layertile.png,#d1d1d7
     LayerQuad   = :icon_small_layerquad.png,#d1d1d7
     LayerSound  = :icon_small_layersound.png,#d1d1d7
     MapresImage = :icon_small_mapresimage.png,#d1d1d7
     MapresSound = :icon_small_mapressound.png,#d1d1d7
     Grid        = :icon_small_grid.png,#d1d1d7
-    Undo        = :icon_small_undo.png,#d1d1d7
-    Redo        = :icon_small_redo.png,#d1d1d7
-    Delete      = :icon_small_delete.png,#d1d1d7
-}
-
-Icons = :Disabled_16
-{
+    Undo        = :undo.svg
+    Redo        = :redo.svg
+    Delete      = :delete.svg
 }
 
 Icons = :Normal_24
 {
-    NewFile     = :icon_big_newfile.png,#d1d1d7
-    OpenFile    = :icon_big_openfile.png,#d1d1d7
-    SaveFile    = :icon_big_savefile.png,#d1d1d7
-    Import      = :icon_big_import.png,#d1d1d7
-    Export      = :icon_big_export.png,#d1d1d7
+    NewFile     = :newfile.svg
+    OpenFile    = :openfile.svg
+    SaveFile    = :savefile.svg
+    Import      = :import.svg
+    Export      = :export.svg
     LayerTile   = :icon_big_layertile.png,#d1d1d7
     LayerQuad   = :icon_big_layerquad.png,#d1d1d7
     LayerSound  = :icon_big_layersound.png,#d1d1d7
     MapresImage = :icon_big_mapresimage.png,#d1d1d7
     MapresSound = :icon_big_mapressound.png,#d1d1d7
     Grid        = :icon_big_grid.png,#d1d1d7
-    Undo        = :icon_big_undo.png,#d1d1d7
-    Redo        = :icon_big_redo.png,#d1d1d7
-    Delete      = :icon_big_delete.png,#d1d1d7
-}
-
-Icons = :Disabled_24
-{
+    Undo        = :undo.svg
+    Redo        = :redo.svg
+    Delete      = :delete.svg
 }

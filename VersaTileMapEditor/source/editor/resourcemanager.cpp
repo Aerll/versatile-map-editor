@@ -105,25 +105,6 @@ QString ResourceManager::relativePath(ResourceType resource_type, const QString&
 }
 
 
-
-const QString& ResourceManager::setting(SettingIndex setting_index) const {
-    return settings[util::toUnderlying(setting_index)];
-}
-
-
-
-const QString& ResourceManager::string(StringIndex string_index) const {
-    return strings[util::toUnderlying(string_index)];
-}
-
-
-
-const QImage& ResourceManager::asset(AssetIndex asset_index) const {
-    return assets[util::toUnderlying(asset_index)];
-}
-
-
-
 std::map<QString, QString>& ResourceManager::widgetStyles(WidgetStyleType style_type, const QString& widget_name) {
     if (style_type == WidgetStyleType::Vt)
         return widget_styles.properties[{ .name = "Vt", .value = widget_name }];
@@ -324,6 +305,7 @@ debug::ErrorCode ResourceManager::initTranslationStrings() {
 
 debug::ErrorCode ResourceManager::createAssets(io::DDLData& data, const QString& sub_dir) {
     assets.resize(util::toUnderlying(AssetIndex::TotalCount));
+    icons.resize(util::toUnderlying(IconIndex::TotalCount));
 
     debug::ErrorCode error_code = debug::ErrorCode::NoError;
     auto _CreateAsset = [&](const io::DDLProperty& property, AssetIndex asset_index, ResourceType resource_type, const QString& attribute_name) -> void {
@@ -334,7 +316,7 @@ debug::ErrorCode ResourceManager::createAssets(io::DDLData& data, const QString&
         }
 
         QString file_name = std::move(value[0]);
-        if (QFileInfo{ file_name }.exists()) [[unlikely]] {
+        if (!QFileInfo{ relativePath(resource_type, sub_dir + file_name) }.exists()) [[unlikely]] {
             error_code = debug::ErrorCode::File_FailedToRead;
             return;
         }
@@ -348,6 +330,19 @@ debug::ErrorCode ResourceManager::createAssets(io::DDLData& data, const QString&
         QImage image{ relativePath(resource_type, sub_dir + file_name) };
         util::recolor(image, color);
         assets[util::toUnderlying(asset_index)] = std::move(image);
+    };
+    
+    auto _CreateIcon = [&](const io::DDLProperty& property, IconIndex icon_index, ResourceType resource_type, const QString& attribute_name) -> void {
+        auto value = data.properties[property][attribute_name];
+
+        QString file_name = std::move(value);
+        if (!QFileInfo{ relativePath(resource_type, sub_dir + file_name) }.exists()) [[unlikely]] {
+            error_code = debug::ErrorCode::File_FailedToRead;
+            return;
+        }
+
+        QIcon icon{ relativePath(resource_type, sub_dir + file_name) };
+        icons[util::toUnderlying(icon_index)] = std::move(icon);
     };
 
     { // ui assets normal
@@ -391,20 +386,20 @@ debug::ErrorCode ResourceManager::createAssets(io::DDLData& data, const QString&
         if (util::failed(error_code))
             return error_code;
         
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_NewFile,     ResourceType::AssetIcon, "NewFile"    ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_OpenFile,    ResourceType::AssetIcon, "OpenFile"   ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_SaveFile,    ResourceType::AssetIcon, "SaveFile"   ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Import,      ResourceType::AssetIcon, "Import"     ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Export,      ResourceType::AssetIcon, "Export"     ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_16, IconIndex::Icon16_Normal_NewFile,     ResourceType::AssetIcon, "NewFile"    ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_16, IconIndex::Icon16_Normal_OpenFile,    ResourceType::AssetIcon, "OpenFile"   ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_16, IconIndex::Icon16_Normal_SaveFile,    ResourceType::AssetIcon, "SaveFile"   ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_16, IconIndex::Icon16_Normal_Import,      ResourceType::AssetIcon, "Import"     ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_16, IconIndex::Icon16_Normal_Export,      ResourceType::AssetIcon, "Export"     ); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_LayerTile,   ResourceType::AssetIcon, "LayerTile"  ); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_LayerQuad,   ResourceType::AssetIcon, "LayerQuad"  ); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_LayerSound,  ResourceType::AssetIcon, "LayerSound" ); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_MapresImage, ResourceType::AssetIcon, "MapresImage"); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_MapresSound, ResourceType::AssetIcon, "MapresSound"); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Grid,        ResourceType::AssetIcon, "Grid"       ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Undo,        ResourceType::AssetIcon, "Undo"       ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Redo,        ResourceType::AssetIcon, "Redo"       ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_16, AssetIndex::Icon16_Normal_Delete,      ResourceType::AssetIcon, "Delete"     ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_16, IconIndex::Icon16_Normal_Undo,        ResourceType::AssetIcon, "Undo"       ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_16, IconIndex::Icon16_Normal_Redo,        ResourceType::AssetIcon, "Redo"       ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_16, IconIndex::Icon16_Normal_Delete,      ResourceType::AssetIcon, "Delete"     ); if (util::failed(error_code)) return error_code;
     }
 
     { // icon assets normal 24x24
@@ -412,20 +407,20 @@ debug::ErrorCode ResourceManager::createAssets(io::DDLData& data, const QString&
         if (util::failed(error_code))
             return error_code;
         
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_NewFile,     ResourceType::AssetIcon, "NewFile"    ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_OpenFile,    ResourceType::AssetIcon, "OpenFile"   ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_SaveFile,    ResourceType::AssetIcon, "SaveFile"   ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Import,      ResourceType::AssetIcon, "Import"     ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Export,      ResourceType::AssetIcon, "Export"     ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_24, IconIndex::Icon24_Normal_NewFile,     ResourceType::AssetIcon, "NewFile"    ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_24, IconIndex::Icon24_Normal_OpenFile,    ResourceType::AssetIcon, "OpenFile"   ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_24, IconIndex::Icon24_Normal_SaveFile,    ResourceType::AssetIcon, "SaveFile"   ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_24, IconIndex::Icon24_Normal_Import,      ResourceType::AssetIcon, "Import"     ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_24, IconIndex::Icon24_Normal_Export,      ResourceType::AssetIcon, "Export"     ); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_LayerTile,   ResourceType::AssetIcon, "LayerTile"  ); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_LayerQuad,   ResourceType::AssetIcon, "LayerQuad"  ); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_LayerSound,  ResourceType::AssetIcon, "LayerSound" ); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_MapresImage, ResourceType::AssetIcon, "MapresImage"); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_MapresSound, ResourceType::AssetIcon, "MapresSound"); if (util::failed(error_code)) return error_code;
         _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Grid,        ResourceType::AssetIcon, "Grid"       ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Undo,        ResourceType::AssetIcon, "Undo"       ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Redo,        ResourceType::AssetIcon, "Redo"       ); if (util::failed(error_code)) return error_code;
-        _CreateAsset(icons_normal_24, AssetIndex::Icon24_Normal_Delete,      ResourceType::AssetIcon, "Delete"     ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_24, IconIndex::Icon24_Normal_Undo,        ResourceType::AssetIcon, "Undo"       ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_24, IconIndex::Icon24_Normal_Redo,        ResourceType::AssetIcon, "Redo"       ); if (util::failed(error_code)) return error_code;
+        _CreateIcon(icons_normal_24, IconIndex::Icon24_Normal_Delete,      ResourceType::AssetIcon, "Delete"     ); if (util::failed(error_code)) return error_code;
     }
 
     return error_code;

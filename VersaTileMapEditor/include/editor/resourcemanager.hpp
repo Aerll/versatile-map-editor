@@ -8,6 +8,7 @@
 #include <QString>
 #include <QPalette>
 #include <QImage>
+#include <QIcon>
 
 #include <map>
 #include <vector>
@@ -31,9 +32,10 @@ public:
 
     QString relativePath(ResourceType resource_type, const QString& file_name);
 
-    const QString& setting(SettingIndex setting_index) const;
-    const QString& string(StringIndex string_index) const;
-    const QImage& asset(AssetIndex asset_index) const;
+    inline const QString& setting(SettingIndex setting_index) const { return settings[util::toUnderlying(setting_index)]; }
+    inline const QString& string(StringIndex string_index) const { return strings[util::toUnderlying(string_index)]; }
+    inline const QImage& asset(AssetIndex asset_index) const { return assets[util::toUnderlying(asset_index)]; }
+    inline const QIcon& icon(IconIndex icon_index) const { return icons[util::toUnderlying(icon_index)]; }
     std::map<QString, QString>& widgetStyles(WidgetStyleType style_type, const QString& widget_name);
 
     std::vector<QString> fonts(debug::ErrorCode& error_code);
@@ -56,6 +58,7 @@ public:
     std::vector<QString> settings;
     std::vector<QString> strings;
     std::vector<QImage> assets;
+    std::vector<QIcon> icons;
 
     io::DDLData widget_styles;
 };

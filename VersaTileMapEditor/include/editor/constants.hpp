@@ -82,17 +82,32 @@ enum class AssetIndex : std::size_t {
     Ui16_Pressed_ToggleHide,
 
     // icons
-    Icon16_Normal_NewFile,
-    Icon16_Normal_OpenFile,
-    Icon16_Normal_SaveFile,
-    Icon16_Normal_Import,
-    Icon16_Normal_Export,
     Icon16_Normal_LayerTile,
     Icon16_Normal_LayerQuad,
     Icon16_Normal_LayerSound,
     Icon16_Normal_MapresImage,
     Icon16_Normal_MapresSound,
     Icon16_Normal_Grid,
+    
+    Icon24_Normal_LayerTile,
+    Icon24_Normal_LayerQuad,
+    Icon24_Normal_LayerSound,
+    Icon24_Normal_MapresImage,
+    Icon24_Normal_MapresSound,
+    Icon24_Normal_Grid,
+
+    // textures
+    Ui_Texture_Checker,
+
+    TotalCount,
+};
+
+enum class IconIndex : std::size_t {
+    Icon16_Normal_NewFile = 0,
+    Icon16_Normal_OpenFile,
+    Icon16_Normal_SaveFile,
+    Icon16_Normal_Import,
+    Icon16_Normal_Export,
     Icon16_Normal_Undo,
     Icon16_Normal_Redo,
     Icon16_Normal_Delete,
@@ -102,18 +117,9 @@ enum class AssetIndex : std::size_t {
     Icon24_Normal_SaveFile,
     Icon24_Normal_Import,
     Icon24_Normal_Export,
-    Icon24_Normal_LayerTile,
-    Icon24_Normal_LayerQuad,
-    Icon24_Normal_LayerSound,
-    Icon24_Normal_MapresImage,
-    Icon24_Normal_MapresSound,
-    Icon24_Normal_Grid,
     Icon24_Normal_Undo,
     Icon24_Normal_Redo,
     Icon24_Normal_Delete,
-
-    // textures
-    Ui_Texture_Checker,
 
     TotalCount,
 };

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="16" version="1.1" viewBox="0 0 4.2333 4.2333" xmlns="http://www.w3.org/2000/svg">
+    <g stroke-linecap="round" stroke-linejoin="round">
+        <path d="m1.4552 2.249 0.79375 0.79375 0.79375-0.79375" fill="none" stop-color="#040404" stroke="#e5aa4d" stroke-width=".26458" style="font-variation-settings:normal;paint-order:stroke fill markers"/>
+        <path d="m2.249 0.39688 1e-6 2.6458" fill="#e1e1e1" stop-color="#040404" stroke="#e5aa4d" stroke-width=".26458" style="font-variation-settings:normal;paint-order:stroke fill markers"/>
+        <path transform="rotate(-90)" d="m-3.9688 0.26458h0.52917v3.9688h-0.52917z" fill="#e1e1e1" stop-color="#040404" stroke-width=".52917" style="paint-order:stroke fill markers"/>
+    </g>
+</svg>

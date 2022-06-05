@@ -152,8 +152,8 @@ Vt = :ToolBar::separator
 
 Vt = :ToolBar QToolButton
 {
-	max-width  = :18
-	max-height = :18
+	max-width  = :16
+	max-height = :16
 	border     = :none
 	margin     = :0 2 0 2
 	padding    = :3
