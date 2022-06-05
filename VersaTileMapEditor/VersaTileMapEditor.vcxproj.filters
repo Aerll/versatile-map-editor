@@ -141,7 +141,7 @@
     <ClInclude Include="include\editor\resourcemanager.hpp">
       <Filter>include\editor</Filter>
     </ClInclude>
-    <ClInclude Include="include\editor\constants.hpp">
+    <ClInclude Include="include\editor\enums.hpp">
       <Filter>include\editor</Filter>
     </ClInclude>
   </ItemGroup>

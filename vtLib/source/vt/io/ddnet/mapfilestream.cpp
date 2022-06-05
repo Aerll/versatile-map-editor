@@ -1,4 +1,4 @@
-#include <vt/io/mapfilestream.hpp>
+#include <vt/io/ddnet/mapfilestream.hpp>
 
 #include <vt/util/concepts.hpp>
 #include <vt/util/enums.hpp>
@@ -12,7 +12,7 @@
 #include <utility>
 #include <zlib.h>
 
-namespace vt::io {
+namespace vt::io::ddnet {
 
 debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
 

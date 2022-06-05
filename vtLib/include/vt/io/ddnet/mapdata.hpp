@@ -15,6 +15,12 @@
 
 namespace vt::io {
 
+class DDMData;
+
+}
+
+namespace vt::io::ddnet {
+
 struct MAPHeader;
 struct MAPFile;
 struct MAPFileInfo;
@@ -425,8 +431,6 @@ struct MAPItemData {
 
 
 
-class DDMData;
-
 class MAPData {
 private:
     template <typename _Type>
@@ -453,7 +457,7 @@ public:
     inline qint32 quadLayersCount() const { return layersCountImpl<MAPLayerQuad>(); }
     inline qint32 soundLayersCount() const { return layersCountImpl<MAPLayerSound>(); }
 
-    DDMData toDDM() const;
+    io::DDMData toDDM() const;
 
 public:
     MAPHeader header;

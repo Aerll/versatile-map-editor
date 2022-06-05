@@ -43,6 +43,12 @@
     <Filter Include="source\vt\util">
       <UniqueIdentifier>{0d207977-6369-4c5f-9257-03550b36768b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\vt\io\ddnet">
+      <UniqueIdentifier>{e8a8314c-056e-4f74-b32f-3b12ca9445b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\vt\io\ddnet">
+      <UniqueIdentifier>{dfb56f23-2df0-4813-b8e7-ad45494b3679}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="libs\singleapplication\singleapplication.cpp">
@@ -69,17 +75,17 @@
     <ClCompile Include="source\vt\io\ddmfilestream.cpp">
       <Filter>source\vt\io</Filter>
     </ClCompile>
-    <ClCompile Include="source\vt\io\mapdata.cpp">
-      <Filter>source\vt\io</Filter>
-    </ClCompile>
-    <ClCompile Include="source\vt\io\mapfilestream.cpp">
-      <Filter>source\vt\io</Filter>
-    </ClCompile>
     <ClCompile Include="source\vt\util\graphics.cpp">
       <Filter>source\vt\util</Filter>
     </ClCompile>
     <ClCompile Include="source\vt\util\tile.cpp">
       <Filter>source\vt\util</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\io\ddnet\mapdata.cpp">
+      <Filter>source\vt\io\ddnet</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vt\io\ddnet\mapfilestream.cpp">
+      <Filter>source\vt\io\ddnet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,12 +122,6 @@
       <Filter>include\vt\io</Filter>
     </ClInclude>
     <ClInclude Include="include\vt\io\ddmfilestream.hpp">
-      <Filter>include\vt\io</Filter>
-    </ClInclude>
-    <ClInclude Include="include\vt\io\mapdata.hpp">
-      <Filter>include\vt\io</Filter>
-    </ClInclude>
-    <ClInclude Include="include\vt\io\mapfilestream.hpp">
       <Filter>include\vt\io</Filter>
     </ClInclude>
     <ClInclude Include="include\vt\map\asset.hpp">
@@ -180,6 +180,18 @@
     </ClInclude>
     <ClInclude Include="include\vt\util\utility.hpp">
       <Filter>include\vt\util</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\ddnet\io\mapdata.hpp">
+      <Filter>include\vt\io\ddnet</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\ddnet\io\mapfilestream.hpp">
+      <Filter>include\vt\io\ddnet</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\io\ddnet\mapdata.hpp">
+      <Filter>include\vt\io\ddnet</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\io\ddnet\mapfilestream.hpp">
+      <Filter>include\vt\io\ddnet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

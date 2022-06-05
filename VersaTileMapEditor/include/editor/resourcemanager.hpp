@@ -1,6 +1,6 @@
 #pragma once
 
-#include <editor/constants.hpp>
+#include <editor/enums.hpp>
 #include <vt/debug/error_code.hpp>
 #include <vt/io/ddldata.hpp>
 
