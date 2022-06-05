@@ -1,17 +1,19 @@
 #include <catch2.pch>
 
-#include <ddnet/debug/error_codes.hpp>
-#include <ddnet/io/mapdata.hpp>
-#include <ddnet/io/mapfilestream.hpp>
-#include <ddnet/map/tile.hpp>
-#include <ddnet/util/utility.hpp>
+#include <vt/debug/error_code.hpp>
+#include <vt/io/mapdata.hpp>
+#include <vt/io/mapfilestream.hpp>
+#include <vt/map/tile.hpp>
+#include <vt/util/constants.hpp>
+#include <vt/util/enums.hpp>
+#include <vt/util/utility.hpp>
 
 #include <QFileInfo>
 #include <QString>
 
 #include <algorithm>
 
-using namespace ddnet;
+using namespace vt;
 
 TEST_CASE("io::MAPData") {
     SECTION("Counting layers of each type") {
@@ -19,21 +21,21 @@ TEST_CASE("io::MAPData") {
 
         data.groups.push_back({}); // first group with 2 tile, 3 quad, 1 sound
         data.groups.back().layers.reserve(6);
-        data.groups.back().layers.push_back(io::LayerQuad{});
-        data.groups.back().layers.push_back(io::LayerTile{});
-        data.groups.back().layers.push_back(io::LayerQuad{});
-        data.groups.back().layers.push_back(io::LayerSound{});
-        data.groups.back().layers.push_back(io::LayerQuad{});
-        data.groups.back().layers.push_back(io::LayerTile{});
+        data.groups.back().layers.push_back(io::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::MAPLayerTile{});
+        data.groups.back().layers.push_back(io::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::MAPLayerSound{});
+        data.groups.back().layers.push_back(io::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::MAPLayerTile{});
 
         data.groups.push_back({}); // second group with 3 tile, 1 quad, 2 sound
         data.groups.back().layers.reserve(6);
-        data.groups.back().layers.push_back(io::LayerTile{});
-        data.groups.back().layers.push_back(io::LayerQuad{});
-        data.groups.back().layers.push_back(io::LayerSound{});
-        data.groups.back().layers.push_back(io::LayerTile{});
-        data.groups.back().layers.push_back(io::LayerSound{});
-        data.groups.back().layers.push_back(io::LayerTile{});
+        data.groups.back().layers.push_back(io::MAPLayerTile{});
+        data.groups.back().layers.push_back(io::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::MAPLayerSound{});
+        data.groups.back().layers.push_back(io::MAPLayerTile{});
+        data.groups.back().layers.push_back(io::MAPLayerSound{});
+        data.groups.back().layers.push_back(io::MAPLayerTile{});
 
         CHECK(data.tileLayersCount() == 5);
         CHECK(data.quadLayersCount() == 4);
@@ -45,12 +47,12 @@ TEST_CASE("io::MAPFileStream") {
     SECTION("Reading data from a map file") {
         auto _TestMapData = [](QFileInfo path, QFileInfo output_path) {
             io::MAPFileStream file_stream;
-            REQUIRE_FALSE(debug::failed(file_stream.loadFile(path)));
+            REQUIRE_FALSE(util::failed(file_stream.loadFile(path)));
 
             { // file header
                 const auto& header = file_stream.data.header;
-                CHECK(header.id == map::_id);
-                CHECK(header.version == map::_version);
+                CHECK(header.id == constants::_map_id);
+                CHECK(header.version == constants::_map_version);
             }
 
             { // map info
@@ -115,11 +117,11 @@ TEST_CASE("io::MAPFileStream") {
                 CHECK(envelopes[0].is_synchronized);
                 { // envelope points
                     const auto& points = envelopes[0].points;
-                    CHECK(points[0].curve_type == map::CurveType::Linear);
+                    CHECK(points[0].curve_type == enums::CurveType::Linear);
                     CHECK(points[0].time == 0);
                     CHECK((points[0].values == std::array<qint32, 4>{ 55, 187, 357, 0 }));
 
-                    CHECK(points[1].curve_type == map::CurveType::Linear);
+                    CHECK(points[1].curve_type == enums::CurveType::Linear);
                     CHECK(points[1].time == 1000);
                     CHECK((points[1].values == std::array<qint32, 4>{ 296, 514, 817, 0 }));
                 }
@@ -129,11 +131,11 @@ TEST_CASE("io::MAPFileStream") {
                 CHECK_FALSE(envelopes[1].is_synchronized);
                 { // envelope points
                     const auto& points = envelopes[1].points;
-                    CHECK(points[0].curve_type == map::CurveType::Slow);
+                    CHECK(points[0].curve_type == enums::CurveType::Slow);
                     CHECK(points[0].time == 0);
                     CHECK((points[0].values == std::array<qint32, 4>{ 262, 450, 840, 653 }));
 
-                    CHECK(points[1].curve_type == map::CurveType::Linear);
+                    CHECK(points[1].curve_type == enums::CurveType::Linear);
                     CHECK(points[1].time == 1000);
                     CHECK((points[1].values == std::array<qint32, 4>{ 104, 268, 466, 765 }));
                 }
@@ -143,11 +145,11 @@ TEST_CASE("io::MAPFileStream") {
                 CHECK_FALSE(envelopes[2].is_synchronized);
                 { // envelope points
                     const auto& points = envelopes[2].points;
-                    CHECK(points[0].curve_type == map::CurveType::Fast);
+                    CHECK(points[0].curve_type == enums::CurveType::Fast);
                     CHECK(points[0].time == 0);
                     CHECK((points[0].values == std::array<qint32, 4>{ 426, 0, 0, 0 }));
 
-                    CHECK(points[1].curve_type == map::CurveType::Linear);
+                    CHECK(points[1].curve_type == enums::CurveType::Linear);
                     CHECK(points[1].time == 1000);
                     CHECK((points[1].values == std::array<qint32, 4>{ 799, 0, 0, 0 }));
                 }
@@ -157,11 +159,11 @@ TEST_CASE("io::MAPFileStream") {
                 CHECK_FALSE(envelopes[3].is_synchronized);
                 { // envelope points
                     const auto& points = envelopes[3].points;
-                    CHECK(points[0].curve_type == map::CurveType::Smooth);
+                    CHECK(points[0].curve_type == enums::CurveType::Smooth);
                     CHECK(points[0].time == 0);
                     CHECK((points[0].values == std::array<qint32, 4>{ 0, 0, 0, 0 }));
 
-                    CHECK(points[1].curve_type == map::CurveType::Linear);
+                    CHECK(points[1].curve_type == enums::CurveType::Linear);
                     CHECK(points[1].time == 690);
                     CHECK((points[1].values == std::array<qint32, 4>{ 0, 0, 0, 0 }));
                 }
@@ -171,11 +173,11 @@ TEST_CASE("io::MAPFileStream") {
                 CHECK_FALSE(envelopes[4].is_synchronized);
                 { // envelope points
                     const auto& points = envelopes[4].points;
-                    CHECK(points[0].curve_type == map::CurveType::Step);
+                    CHECK(points[0].curve_type == enums::CurveType::Step);
                     CHECK(points[0].time == 0);
                     CHECK((points[0].values == std::array<qint32, 4>{ 1024, 1024, 1024, 1024 }));
 
-                    CHECK(points[1].curve_type == map::CurveType::Linear);
+                    CHECK(points[1].curve_type == enums::CurveType::Linear);
                     CHECK(points[1].time == 695);
                     CHECK((points[1].values == std::array<qint32, 4>{ 1024, 1024, 1024, 1024 }));
                 }
@@ -185,11 +187,11 @@ TEST_CASE("io::MAPFileStream") {
                 CHECK_FALSE(envelopes[5].is_synchronized);
                 { // envelope points
                     const auto& points = envelopes[5].points;
-                    CHECK(points[0].curve_type == map::CurveType::Linear);
+                    CHECK(points[0].curve_type == enums::CurveType::Linear);
                     CHECK(points[0].time == 0);
                     CHECK((points[0].values == std::array<qint32, 4>{ 0, 0, 0, 0 }));
 
-                    CHECK(points[1].curve_type == map::CurveType::Linear);
+                    CHECK(points[1].curve_type == enums::CurveType::Linear);
                     CHECK(points[1].time == 699);
                     CHECK((points[1].values == std::array<qint32, 4>{ 0, 0, 0, 0 }));
                 }
@@ -216,13 +218,13 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[0];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Game" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
                         CHECK(layer.width == 50);
                         CHECK(layer.height == 50);
-                        CHECK(layer.special_type == map::SpecialLayerType::Game);
+                        CHECK(layer.special_type == enums::SpecialLayerType::Game);
                         CHECK(layer.color == util::Color{ 255, 255, 255, 255 });
                         CHECK(layer.color_envelope_index == -1);
                         CHECK(layer.color_envelope_offset == 0);
@@ -236,13 +238,13 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[1];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Front" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
                         CHECK(layer.width == 50);
                         CHECK(layer.height == 50);
-                        CHECK(layer.special_type == map::SpecialLayerType::Front);
+                        CHECK(layer.special_type == enums::SpecialLayerType::Front);
                         CHECK(layer.color == util::Color{ 255, 255, 255, 255 });
                         CHECK(layer.color_envelope_index == -1);
                         CHECK(layer.color_envelope_offset == 0);
@@ -256,13 +258,13 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[2];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Tele" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
                         CHECK(layer.width == 50);
                         CHECK(layer.height == 50);
-                        CHECK(layer.special_type == map::SpecialLayerType::Tele);
+                        CHECK(layer.special_type == enums::SpecialLayerType::Tele);
                         CHECK(layer.color == util::Color{ 255, 255, 255, 255 });
                         CHECK(layer.color_envelope_index == -1);
                         CHECK(layer.color_envelope_offset == 0);
@@ -276,13 +278,13 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[3];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Switch" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
                         CHECK(layer.width == 50);
                         CHECK(layer.height == 50);
-                        CHECK(layer.special_type == map::SpecialLayerType::Switch);
+                        CHECK(layer.special_type == enums::SpecialLayerType::Switch);
                         CHECK(layer.color == util::Color{ 255, 255, 255, 255 });
                         CHECK(layer.color_envelope_index == -1);
                         CHECK(layer.color_envelope_offset == 0);
@@ -296,13 +298,13 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[4];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Speedup" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
                         CHECK(layer.width == 50);
                         CHECK(layer.height == 50);
-                        CHECK(layer.special_type == map::SpecialLayerType::Speedup);
+                        CHECK(layer.special_type == enums::SpecialLayerType::Speedup);
                         CHECK(layer.color == util::Color{ 255, 255, 255, 255 });
                         CHECK(layer.color_envelope_index == -1);
                         CHECK(layer.color_envelope_offset == 0);
@@ -316,13 +318,13 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[5];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Tune" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
                         CHECK(layer.width == 50);
                         CHECK(layer.height == 50);
-                        CHECK(layer.special_type == map::SpecialLayerType::Tune);
+                        CHECK(layer.special_type == enums::SpecialLayerType::Tune);
                         CHECK(layer.color == util::Color{ 255, 255, 255, 255 });
                         CHECK(layer.color_envelope_index == -1);
                         CHECK(layer.color_envelope_offset == 0);
@@ -348,7 +350,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[1].layers[0];
                         REQUIRE(layer_variant.index() == 2);
 
-                        const auto& layer = std::get<io::LayerSound>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerSound>(layer_variant);
                         REQUIRE(layer.sound_sources.size() == 2);
 
                         CHECK(layer.name == QString{ "SoundLayer" });
@@ -368,7 +370,7 @@ TEST_CASE("io::MAPFileStream") {
                             CHECK(sound_source.sound_envelope_offset == 0);
 
                             const auto& shape = sound_source.shape;
-                            REQUIRE(shape.type == map::SoundSourceShapeType::Rectangle);
+                            REQUIRE(shape.type == enums::SoundSourceShapeType::Rectangle);
 
                             const auto& size = std::get<util::RectangleSize>(shape.size);
                             CHECK(size == util::RectangleSize{ util::floatToFixed(970.0), util::floatToFixed(734.0) });
@@ -387,7 +389,7 @@ TEST_CASE("io::MAPFileStream") {
                             CHECK(sound_source.sound_envelope_offset == 0);
 
                             const auto& shape = sound_source.shape;
-                            REQUIRE(shape.type == map::SoundSourceShapeType::Circle);
+                            REQUIRE(shape.type == enums::SoundSourceShapeType::Circle);
 
                             const auto& radius = std::get<util::CircleRadius>(shape.size);
                             CHECK(radius == util::CircleRadius{ 1500 });
@@ -398,13 +400,13 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[1].layers[1];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::LayerTile>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "TileLayer" });
                         CHECK(layer.asset_index == 0);
                         CHECK(layer.is_detail);
                         CHECK(layer.width == 50);
                         CHECK(layer.height == 50);
-                        CHECK(layer.special_type == map::SpecialLayerType::None);
+                        CHECK(layer.special_type == enums::SpecialLayerType::None);
                         CHECK(layer.color == util::Color{ 189, 116, 141, 59 });
                         CHECK(layer.color_envelope_index == 1);
                         CHECK(layer.color_envelope_offset == -546);
@@ -412,35 +414,35 @@ TEST_CASE("io::MAPFileStream") {
                         REQUIRE(layer.tiles.size() == 2500);
 
                         CHECK(layer.tiles[0].index == 1);
-                        CHECK(layer.tiles[0].flags == util::toUnderlying(Rotation::N));
+                        CHECK(layer.tiles[0].flags == util::toUnderlying(enums::Rotation::N));
 
                         CHECK(layer.tiles[1].index == 1);
-                        CHECK(layer.tiles[1].flags == util::toUnderlying(Rotation::VHR));
+                        CHECK(layer.tiles[1].flags == util::toUnderlying(enums::Rotation::VHR));
 
                         CHECK(layer.tiles[2].index == 1);
-                        CHECK(layer.tiles[2].flags == util::toUnderlying(Rotation::VH));
+                        CHECK(layer.tiles[2].flags == util::toUnderlying(enums::Rotation::VH));
 
                         CHECK(layer.tiles[3].index == 1);
-                        CHECK(layer.tiles[3].flags == util::toUnderlying(Rotation::R));
+                        CHECK(layer.tiles[3].flags == util::toUnderlying(enums::Rotation::R));
 
                         CHECK(layer.tiles[4].index == 1);
-                        CHECK(layer.tiles[4].flags == util::toUnderlying(Rotation::V));
+                        CHECK(layer.tiles[4].flags == util::toUnderlying(enums::Rotation::V));
 
                         CHECK(layer.tiles[5].index == 1);
-                        CHECK(layer.tiles[5].flags == util::toUnderlying(Rotation::HR));
+                        CHECK(layer.tiles[5].flags == util::toUnderlying(enums::Rotation::HR));
 
                         CHECK(layer.tiles[6].index == 1);
-                        CHECK(layer.tiles[6].flags == util::toUnderlying(Rotation::H));
+                        CHECK(layer.tiles[6].flags == util::toUnderlying(enums::Rotation::H));
 
                         CHECK(layer.tiles[7].index == 1);
-                        CHECK(layer.tiles[7].flags == util::toUnderlying(Rotation::VR));
+                        CHECK(layer.tiles[7].flags == util::toUnderlying(enums::Rotation::VR));
                     }
 
                     { // quad layer
                         const auto& layer_variant = groups[1].layers[2];
                         REQUIRE(layer_variant.index() == 1);
 
-                        const auto& layer = std::get<io::LayerQuad>(layer_variant);
+                        const auto& layer = std::get<io::MAPLayerQuad>(layer_variant);
                         REQUIRE(layer.quads.size() == 1);
 
                         CHECK(layer.name == QString{ "QuadLayer" });
@@ -473,7 +475,7 @@ TEST_CASE("io::MAPFileStream") {
             }
 
             if (!output_path.path().isEmpty())
-                REQUIRE_FALSE(debug::failed(file_stream.saveFile(output_path)));
+                REQUIRE_FALSE(util::failed(file_stream.saveFile(output_path)));
         };
 
         _TestMapData(QFileInfo{ "data/map/input.map" }, QFileInfo{ "data/map/output.map" });

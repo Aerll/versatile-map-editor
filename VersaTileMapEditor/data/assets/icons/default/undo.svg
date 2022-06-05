@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="16" version="1.1" viewBox="0 0 4.2333 4.2333" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#e1e1e1" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26458">
+        <path d="m0.92604 0.66146-0.79375 0.79375 0.79375 0.79375" stop-color="#040404" style="font-variation-settings:normal;paint-order:stroke fill markers"/>
+        <path d="m0.13229 1.4552 2.9104 1e-6c0.5845 0 1.0583 0.47383 1.0583 1.0583s-0.47383 1.0583-1.0583 1.0583l-0.52917-1e-6" stop-color="#040404" style="paint-order:stroke fill markers"/>
+    </g>
+</svg>
