@@ -205,5 +205,8 @@
     <ClInclude Include="include\vt\util\ddnet\validate.hpp">
       <Filter>include\vt\util\ddnet</Filter>
     </ClInclude>
+    <ClInclude Include="include\vt\util\ddnet\enums.hpp">
+      <Filter>include\vt\util\ddnet</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

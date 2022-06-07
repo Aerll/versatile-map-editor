@@ -55,6 +55,7 @@
     <ClInclude Include="include\vt\map\tileset.hpp" />
     <ClInclude Include="include\vt\util\concepts.hpp" />
     <ClInclude Include="include\vt\util\constants.hpp" />
+    <ClInclude Include="include\vt\util\ddnet\enums.hpp" />
     <ClInclude Include="include\vt\util\ddnet\validate.hpp" />
     <ClInclude Include="include\vt\util\enums.hpp" />
     <ClInclude Include="include\vt\util\graphics.hpp" />
