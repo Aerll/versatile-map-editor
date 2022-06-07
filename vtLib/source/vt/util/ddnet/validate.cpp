@@ -3,6 +3,8 @@
 #include <vt/map/tile.hpp>
 #include <vt/util/ddnet/enums.hpp>
 
+#include <QString>
+
 namespace vt::util::ddnet {
 /*
 bool canRotate(const Tile& tile, _T layer_type) noexcept {
