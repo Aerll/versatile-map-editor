@@ -2,7 +2,7 @@
 
 #include <editor/mainwindow.hpp>
 
-#include <vt/util/utility.hpp>
+#include <vt/util/common.hpp>
 
 #include <QApplication>
 #include <QStyleFactory>

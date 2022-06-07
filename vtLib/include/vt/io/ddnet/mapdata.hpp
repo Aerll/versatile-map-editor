@@ -1,9 +1,9 @@
 #pragma once
 
+#include <vt/util/common.hpp>
 #include <vt/util/constants.hpp>
 #include <vt/util/enums.hpp>
 #include <vt/util/types.hpp>
-#include <vt/util/utility.hpp>
 
 #include <QByteArray>
 

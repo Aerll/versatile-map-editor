@@ -187,9 +187,6 @@
     <ClInclude Include="include\vt\util\types.hpp">
       <Filter>include\vt\util</Filter>
     </ClInclude>
-    <ClInclude Include="include\vt\util\utility.hpp">
-      <Filter>include\vt\util</Filter>
-    </ClInclude>
     <ClInclude Include="include\vt\ddnet\io\mapdata.hpp">
       <Filter>include\vt\io\ddnet</Filter>
     </ClInclude>
@@ -207,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="include\vt\util\ddnet\enums.hpp">
       <Filter>include\vt\util\ddnet</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vt\util\common.hpp">
+      <Filter>include\vt\util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

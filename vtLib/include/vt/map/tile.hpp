@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vt/util/enums.hpp>
-#include <vt/util/utility.hpp>
+#include <vt/util/common.hpp>
 
 #include <QtGlobal>
 

@@ -1,7 +1,7 @@
 #pragma once
 
+#include <vt/util/common.hpp>
 #include <vt/util/macros.hpp>
-#include <vt/util/utility.hpp>
 
 #include <QtGlobal>
 

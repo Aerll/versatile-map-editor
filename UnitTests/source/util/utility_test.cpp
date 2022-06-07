@@ -1,6 +1,6 @@
 #include <catch2.pch>
 
-#include <vt/util/utility.hpp>
+#include <vt/util/common.hpp>
 
 #include <QByteArray>
 #include <QIODevice>

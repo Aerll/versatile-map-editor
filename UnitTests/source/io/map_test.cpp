@@ -4,9 +4,9 @@
 #include <vt/io/ddnet/mapdata.hpp>
 #include <vt/io/ddnet/mapfilestream.hpp>
 #include <vt/map/tile.hpp>
+#include <vt/util/common.hpp>
 #include <vt/util/constants.hpp>
 #include <vt/util/enums.hpp>
-#include <vt/util/utility.hpp>
 
 #include <QFileInfo>
 #include <QString>

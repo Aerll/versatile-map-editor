@@ -1,9 +1,9 @@
 #include <vt/io/ddnet/mapfilestream.hpp>
 
+#include <vt/util/common.hpp>
 #include <vt/util/concepts.hpp>
 #include <vt/util/enums.hpp>
 #include <vt/util/macros.hpp>
-#include <vt/util/utility.hpp>
 
 #include <QByteArrayList>
 #include <QFile>

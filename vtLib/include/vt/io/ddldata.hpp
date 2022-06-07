@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vt/util/utility.hpp>
+#include <vt/util/common.hpp>
 
 #include <QtGlobal>
 #include <QString>

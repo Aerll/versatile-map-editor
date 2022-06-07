@@ -63,7 +63,7 @@
     <ClInclude Include="include\vt\util\tile.hpp" />
     <ClInclude Include="include\vt\util\token.hpp" />
     <ClInclude Include="include\vt\util\types.hpp" />
-    <ClInclude Include="include\vt\util\utility.hpp" />
+    <ClInclude Include="include\vt\util\common.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D4CDFBA4-3D72-4510-B174-22F8914EDF40}</ProjectGuid>
