@@ -24,6 +24,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="source\util\ddnet">
+      <UniqueIdentifier>{5496f4ff-5ee0-404b-99da-ee9611a9f6a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\catch2.cpp">
@@ -43,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="source\util\tile_test.cpp">
       <Filter>source\util</Filter>
+    </ClCompile>
+    <ClCompile Include="source\util\ddnet\validate_test.cpp">
+      <Filter>source\util\ddnet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

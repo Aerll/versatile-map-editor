@@ -1,12 +1,12 @@
 #include <catch2.pch>
 
 #include <vt/debug/error_code.hpp>
-#include <vt/io/mapdata.hpp>
-#include <vt/io/mapfilestream.hpp>
+#include <vt/io/ddnet/mapdata.hpp>
+#include <vt/io/ddnet/mapfilestream.hpp>
 #include <vt/map/tile.hpp>
+#include <vt/util/common.hpp>
 #include <vt/util/constants.hpp>
 #include <vt/util/enums.hpp>
-#include <vt/util/utility.hpp>
 
 #include <QFileInfo>
 #include <QString>
@@ -15,27 +15,27 @@
 
 using namespace vt;
 
-TEST_CASE("io::MAPData") {
+TEST_CASE("io::ddnet::MAPData") {
     SECTION("Counting layers of each type") {
-        io::MAPData data;
+        io::ddnet::MAPData data;
 
         data.groups.push_back({}); // first group with 2 tile, 3 quad, 1 sound
         data.groups.back().layers.reserve(6);
-        data.groups.back().layers.push_back(io::MAPLayerQuad{});
-        data.groups.back().layers.push_back(io::MAPLayerTile{});
-        data.groups.back().layers.push_back(io::MAPLayerQuad{});
-        data.groups.back().layers.push_back(io::MAPLayerSound{});
-        data.groups.back().layers.push_back(io::MAPLayerQuad{});
-        data.groups.back().layers.push_back(io::MAPLayerTile{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerTile{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerSound{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerTile{});
 
         data.groups.push_back({}); // second group with 3 tile, 1 quad, 2 sound
         data.groups.back().layers.reserve(6);
-        data.groups.back().layers.push_back(io::MAPLayerTile{});
-        data.groups.back().layers.push_back(io::MAPLayerQuad{});
-        data.groups.back().layers.push_back(io::MAPLayerSound{});
-        data.groups.back().layers.push_back(io::MAPLayerTile{});
-        data.groups.back().layers.push_back(io::MAPLayerSound{});
-        data.groups.back().layers.push_back(io::MAPLayerTile{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerTile{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerQuad{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerSound{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerTile{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerSound{});
+        data.groups.back().layers.push_back(io::ddnet::MAPLayerTile{});
 
         CHECK(data.tileLayersCount() == 5);
         CHECK(data.quadLayersCount() == 4);
@@ -43,10 +43,10 @@ TEST_CASE("io::MAPData") {
     }
 }
 
-TEST_CASE("io::MAPFileStream") {
+TEST_CASE("io::ddnet::MAPFileStream") {
     SECTION("Reading data from a map file") {
         auto _TestMapData = [](QFileInfo path, QFileInfo output_path) {
-            io::MAPFileStream file_stream;
+            io::ddnet::MAPFileStream file_stream;
             REQUIRE_FALSE(util::failed(file_stream.loadFile(path)));
 
             { // file header
@@ -218,7 +218,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[0];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
+                        const auto& layer = std::get<io::ddnet::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Game" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -238,7 +238,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[1];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
+                        const auto& layer = std::get<io::ddnet::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Front" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -258,7 +258,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[2];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
+                        const auto& layer = std::get<io::ddnet::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Tele" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -278,7 +278,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[3];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
+                        const auto& layer = std::get<io::ddnet::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Switch" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -298,7 +298,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[4];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
+                        const auto& layer = std::get<io::ddnet::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Speedup" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -318,7 +318,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[0].layers[5];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
+                        const auto& layer = std::get<io::ddnet::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "Tune" });
                         CHECK(layer.asset_index == -1);
                         CHECK_FALSE(layer.is_detail);
@@ -350,7 +350,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[1].layers[0];
                         REQUIRE(layer_variant.index() == 2);
 
-                        const auto& layer = std::get<io::MAPLayerSound>(layer_variant);
+                        const auto& layer = std::get<io::ddnet::MAPLayerSound>(layer_variant);
                         REQUIRE(layer.sound_sources.size() == 2);
 
                         CHECK(layer.name == QString{ "SoundLayer" });
@@ -400,7 +400,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[1].layers[1];
                         REQUIRE(layer_variant.index() == 0);
 
-                        const auto& layer = std::get<io::MAPLayerTile>(layer_variant);
+                        const auto& layer = std::get<io::ddnet::MAPLayerTile>(layer_variant);
                         CHECK(layer.name == QString{ "TileLayer" });
                         CHECK(layer.asset_index == 0);
                         CHECK(layer.is_detail);
@@ -442,7 +442,7 @@ TEST_CASE("io::MAPFileStream") {
                         const auto& layer_variant = groups[1].layers[2];
                         REQUIRE(layer_variant.index() == 1);
 
-                        const auto& layer = std::get<io::MAPLayerQuad>(layer_variant);
+                        const auto& layer = std::get<io::ddnet::MAPLayerQuad>(layer_variant);
                         REQUIRE(layer.quads.size() == 1);
 
                         CHECK(layer.name == QString{ "QuadLayer" });

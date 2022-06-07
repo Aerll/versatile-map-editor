@@ -291,7 +291,7 @@ debug::ErrorCode ResourceManager::initTranslationStrings() {
     if (util::failed(language_ddl.loadFile(QFileInfo{ relativePath(ResourceType::Lang, language_file_name) }))) [[unlikely]]
         return debug::ErrorCode::Resource_Lang_FailedToReadTranslations;
 
-    qint32 count = 0;
+    qsizetype count = 0;
     for (const auto& property : language_ddl.data.properties)
         count += property.second.size();
 

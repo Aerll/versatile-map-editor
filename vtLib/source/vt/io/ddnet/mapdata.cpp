@@ -1,11 +1,11 @@
-#include <vt/io/mapdata.hpp>
+#include <vt/io/ddnet/mapdata.hpp>
 
 #include <vt/io/ddmdata.hpp>
 
-namespace vt::io {
+namespace vt::io::ddnet {
 
-DDMData MAPData::toDDM() const {
-    DDMData ddm;
+io::DDMData MAPData::toDDM() const {
+    io::DDMData ddm;
     ddm.map.author = details.author;
     ddm.map.credits = details.credits;
     ddm.map.license = details.license;
@@ -20,7 +20,7 @@ DDMData MAPData::toDDM() const {
         for (const auto& current_layer : map_group.layers) {
             switch (current_layer.index()) {
                 case 0: { // tile layer
-                    const auto& map_tile_layer = std::get<io::MAPLayerTile>(current_layer);
+                    const auto& map_tile_layer = std::get<io::ddnet::MAPLayerTile>(current_layer);
                     if (map_tile_layer.special_type == enums::SpecialLayerType::Game) {
                         GameLayer game_layer;
                         // TODO
@@ -54,7 +54,7 @@ DDMData MAPData::toDDM() const {
                 }
 
                 case 1: { // quad layer
-                    const auto& map_quad_layer = std::get<io::MAPLayerQuad>(current_layer);
+                    const auto& map_quad_layer = std::get<io::ddnet::MAPLayerQuad>(current_layer);
                     QuadLayer quad_layer;
 
                     // TODO
@@ -62,7 +62,7 @@ DDMData MAPData::toDDM() const {
                 }
 
                 case 2: { // sound layer
-                    const auto& map_sound_layer = std::get<io::MAPLayerSound>(current_layer);
+                    const auto& map_sound_layer = std::get<io::ddnet::MAPLayerSound>(current_layer);
                     SoundLayer sound_layer;
 
                     // TODO

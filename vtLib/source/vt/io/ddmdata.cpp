@@ -1,10 +1,10 @@
 #include <vt/io/ddmdata.hpp>
 
-#include <vt/io/mapdata.hpp>
+#include <vt/io/ddnet/mapdata.hpp>
 
 namespace vt::io {
 
-MAPData DDMData::toMAP() const {
+io::ddnet::MAPData DDMData::toMAP() const {
     // TODO
     return {};
 }

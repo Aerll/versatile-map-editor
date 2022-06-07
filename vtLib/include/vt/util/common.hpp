@@ -22,7 +22,7 @@ consteval _Type flag(_Type bit) noexcept {
 
 
 template <typename _ContainerType>
-[[nodiscard]] inline qint32 byteSize(const _ContainerType& container) noexcept {
+[[nodiscard]] inline qsizetype byteSize(const _ContainerType& container) noexcept {
     return container.size() * sizeof(_ContainerType::value_type);
 }
 

@@ -1,9 +1,9 @@
-#include <vt/io/mapfilestream.hpp>
+#include <vt/io/ddnet/mapfilestream.hpp>
 
+#include <vt/util/common.hpp>
 #include <vt/util/concepts.hpp>
 #include <vt/util/enums.hpp>
 #include <vt/util/macros.hpp>
-#include <vt/util/utility.hpp>
 
 #include <QByteArrayList>
 #include <QFile>
@@ -12,7 +12,7 @@
 #include <utility>
 #include <zlib.h>
 
-namespace vt::io {
+namespace vt::io::ddnet {
 
 debug::ErrorCode MAPFileStream::loadFile(const QFileInfo& file_info) {
 
@@ -591,34 +591,33 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
         if (!data.details.author.isEmpty()) {
             ADD_UNCOMPRESSED_SIZE_(uncompressed_size, data.details.author.size());
             COMPRESS_(data.details.author);
-            item_info.author_index = DATAS_.size() - 1;
+            item_info.author_index = static_cast<qint32>(DATAS_.size()) - 1;
         }
         if (!data.details.map_version.isEmpty()) {
             ADD_UNCOMPRESSED_SIZE_(uncompressed_size, data.details.map_version.size());
             COMPRESS_(data.details.map_version);
-            item_info.map_version_index = DATAS_.size() - 1;
+            item_info.map_version_index = static_cast<qint32>(DATAS_.size()) - 1;
         }
         if (!data.details.credits.isEmpty()) {
             ADD_UNCOMPRESSED_SIZE_(uncompressed_size, data.details.credits.size());
             COMPRESS_(data.details.credits);
-            item_info.credits_index = DATAS_.size() - 1;
+            item_info.credits_index = static_cast<qint32>(DATAS_.size()) - 1;
         }
         if (!data.details.license.isEmpty()) {
             ADD_UNCOMPRESSED_SIZE_(uncompressed_size, data.details.license.size());
             COMPRESS_(data.details.license);
-            item_info.license_index = DATAS_.size() - 1;
+            item_info.license_index = static_cast<qint32>(DATAS_.size()) - 1;
         }
         if (!data.settings.empty()) {
-            ADD_UNCOMPRESSED_SIZE_(uncompressed_size, util::totalSize(data.settings) + data.settings.size());
+            ADD_UNCOMPRESSED_SIZE_(uncompressed_size, static_cast<qint32>(util::totalSize(data.settings) + data.settings.size()));
             QByteArray commands;
             commands.reserve(uncompressed_size);
-            qint32 test = commands.capacity();
             for (const auto& command : data.settings) {
                 commands.push_back(command);
                 commands.push_back('\0');
             }
             COMPRESS_(commands);
-            item_info.settings_index = DATAS_.size() - 1;
+            item_info.settings_index = static_cast<qint32>(DATAS_.size()) - 1;
         }
         _AddItem(item_info);
         _AddItemType(enums::ItemType::Info, 1);
@@ -638,18 +637,18 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
 
         ADD_UNCOMPRESSED_SIZE_(name_uncompressed_size, image_asset.name.size());
         COMPRESS_(image_asset.name);
-        item_image.image_name_index = DATAS_.size() - 1;
+        item_image.image_name_index = static_cast<qint32>(DATAS_.size()) - 1;
 
         if (image_asset.is_external)
             item_image.image_data_index = -1;
         else {
             ADD_UNCOMPRESSED_SIZE_(data_uncompressed_size, image_asset.data.size());
             COMPRESS_(image_asset.data);
-            item_image.image_data_index = DATAS_.size() - 1;
+            item_image.image_data_index = static_cast<qint32>(DATAS_.size()) - 1;
         }
         _AddItem(item_image);
     }
-    _AddItemType(enums::ItemType::Image, data.assets.images.size());
+    _AddItemType(enums::ItemType::Image, static_cast<qint32>(data.assets.images.size()));
 
     // save sound assets
     for (qint32 i = 0; i < data.assets.sounds.size(); ++i) {
@@ -663,7 +662,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
 
         ADD_UNCOMPRESSED_SIZE_(name_uncompressed_size, sound_asset.name.size());
         COMPRESS_(sound_asset.name);
-        item_sound.sound_name_index = DATAS_.size() - 1;
+        item_sound.sound_name_index = static_cast<qint32>(DATAS_.size()) - 1;
 
         if (sound_asset.is_external) {
             item_sound.sound_data_index = -1;
@@ -672,12 +671,12 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
         else {
             ADD_UNCOMPRESSED_SIZE_(data_uncompressed_size, sound_asset.data.size());
             COMPRESS_(sound_asset.data);
-            item_sound.sound_data_index = DATAS_.size() - 1;
+            item_sound.sound_data_index = static_cast<qint32>(DATAS_.size()) - 1;
             item_sound.sound_data_size = data_uncompressed_size;
         }
         _AddItem(item_sound);
     }
-    _AddItemType(enums::ItemType::Sound, data.assets.sounds.size());
+    _AddItemType(enums::ItemType::Sound, static_cast<qint32>(data.assets.sounds.size()));
 
 
 
@@ -701,7 +700,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
     }                                                                             \
         ADD_UNCOMPRESSED_SIZE_(tile_info_uncompressed_size, buffer_name_.size()); \
         COMPRESS_(buffer_name_);                                                  \
-        data_index_ = DATAS_.size() - 1
+        data_index_ = static_cast<qint32>(DATAS_.size()) - 1
 
     // save groups
     {
@@ -722,7 +721,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
             item_group.parallax_y = group.parallax_y;
 
             item_group.start_layer = layer_count;
-            item_group.layers_count = group.layers.size();
+            item_group.layers_count = static_cast<qint32>(group.layers.size());
             item_group.has_clipping = group.has_clipping;
 
             item_group.clip_x = group.clip_x;
@@ -730,10 +729,10 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
             item_group.clip_w = group.clip_w;
             item_group.clip_h = group.clip_h;
 
-            layer_count += group.layers.size();
+            layer_count += static_cast<quint32>(group.layers.size());
             _AddItem(item_group);
         }
-        _AddItemType(enums::ItemType::Group, data.groups.size());
+        _AddItemType(enums::ItemType::Group, static_cast<qint32>(data.groups.size()));
     }
 
     // save layers
@@ -773,7 +772,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
                         QByteArray tile_buffer = QByteArray::fromRawData(reinterpret_cast<const char*>(layer_tile.tiles.data()), util::byteSize(layer_tile.tiles));
                         ADD_UNCOMPRESSED_SIZE_(tile_uncompressed_size, tile_buffer.size());
                         COMPRESS_(tile_buffer);
-                        item_layer_tile.data_index = DATAS_.size() - 1;
+                        item_layer_tile.data_index = static_cast<qint32>(DATAS_.size()) - 1;
 
                         item_layer_tile.tele_index = -1;
                         item_layer_tile.speedup_index = -1;
@@ -840,7 +839,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
                         item_layer_quad.info.type = enums::LayerType::Quad;
                         item_layer_quad.info.is_detail = layer_quad.is_detail;
                         item_layer_quad.version = constants::_map_item_layer_quad_version;
-                        item_layer_quad.quads_count = layer_quad.quads.size();
+                        item_layer_quad.quads_count = static_cast<qint32>(layer_quad.quads.size());
                         item_layer_quad.image_index = layer_quad.asset_index;
                         item_layer_quad.data_index = -1;
 
@@ -854,7 +853,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
 
                             ADD_UNCOMPRESSED_SIZE_(quad_uncompressed_size, quad_buffer.size());
                             COMPRESS_(quad_buffer);
-                            item_layer_quad.data_index = DATAS_.size() - 1;
+                            item_layer_quad.data_index = static_cast<qint32>(DATAS_.size()) - 1;
                         }
                         _AddItem(item_layer_quad);
                         break;
@@ -871,7 +870,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
                         item_layer_sound.info.type = enums::LayerType::Sound;
                         item_layer_sound.info.is_detail = layer_sound.is_detail;
                         item_layer_sound.version = constants::_map_item_layer_sound_version;
-                        item_layer_sound.sources_count = layer_sound.sound_sources.size();
+                        item_layer_sound.sources_count = static_cast<qint32>(layer_sound.sound_sources.size());
                         item_layer_sound.sound_index = layer_sound.asset_index;
                         item_layer_sound.data_index = -1;
 
@@ -902,7 +901,7 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
 
                             ADD_UNCOMPRESSED_SIZE_(quad_uncompressed_size, sound_buffer.size());
                             COMPRESS_(sound_buffer);
-                            item_layer_sound.data_index = DATAS_.size() - 1;
+                            item_layer_sound.data_index = static_cast<qint32>(DATAS_.size()) - 1;
                         }
                         _AddItem(item_layer_sound);
                         break;
@@ -927,20 +926,20 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
             item_envelope.version = constants::_map_item_envelope_version;
             item_envelope.channels = envelope.channels;
             item_envelope.start_point = point_count;
-            item_envelope.points_count = envelope.points.size();
+            item_envelope.points_count = static_cast<qint32>(envelope.points.size());
             item_envelope.is_synchronized = envelope.is_synchronized;
 
-            point_count += envelope.points.size();
+            point_count += static_cast<qint32>(envelope.points.size());
             _AddItem(item_envelope);
         }
-        _AddItemType(enums::ItemType::Envelope, data.envelopes.size());
+        _AddItemType(enums::ItemType::Envelope, static_cast<qint32>(data.envelopes.size()));
 
     // save envelope points
         MAPDataFileItem data_file_item;
         data_file_item.type_and_id = (enums::ItemType::EnvelopePoints << 16);
         data_file_item.size = sizeof(MAPItemEnvelopePoint) * point_count;
 
-        QByteArray temp_buffer;
+        temp_buffer.clear();
         temp_buffer.reserve(sizeof(MAPDataFileItem) + sizeof(MAPItemEnvelopePoint) * point_count);
         temp_buffer.push_back(_ToQByteArray(data_file_item));
 
@@ -987,14 +986,14 @@ debug::ErrorCode MAPFileStream::saveFile(const QFileInfo& file_info) {
     // write header
     qint32 data_total_size = util::totalSize(DATAS_);
     qint32 item_data_total_size = util::totalSize(items);
-    qint32 file_size = sizeof(MAPHeader) + item_data_total_size + util::byteSize(data.file_info.item_offsets) + util::byteSize(data.file_info.item_types) + data_total_size + util::byteSize(data.file_info.data_sizes) * 2;
+    qint32 file_size = static_cast<qint32>(sizeof(MAPHeader) + item_data_total_size + util::byteSize(data.file_info.item_offsets) + util::byteSize(data.file_info.item_types) + data_total_size + util::byteSize(data.file_info.data_sizes) * 2);
     data.header.id = constants::_map_id; // DATA
     data.header.version = constants::_map_version;
     data.header.size = file_size - 16;
     data.header.swaplen = file_size - data_total_size - 16;
-    data.header.item_types_count = data.file_info.item_types.size();
-    data.header.items_count = items.size();
-    data.header.raw_data_count = DATAS_.size();
+    data.header.item_types_count = static_cast<qint32>(data.file_info.item_types.size());
+    data.header.items_count = static_cast<qint32>(items.size());
+    data.header.raw_data_count = static_cast<qint32>(DATAS_.size());
     data.header.item_size = item_data_total_size;
     data.header.data_size = data_total_size;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <editor/constants.hpp>
+#include <editor/enums.hpp>
 
 #include <QPushButton>
 

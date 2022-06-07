@@ -175,7 +175,7 @@
   <ItemGroup>
     <ClInclude Include="include\editor\app.hpp" />
     <QtMoc Include="include\editor\dockwindow.hpp" />
-    <ClInclude Include="include\editor\constants.hpp" />
+    <ClInclude Include="include\editor\enums.hpp" />
     <QtMoc Include="include\editor\menu.hpp" />
     <QtMoc Include="include\editor\dockpanel.hpp" />
     <QtMoc Include="include\editor\sidebar.hpp" />

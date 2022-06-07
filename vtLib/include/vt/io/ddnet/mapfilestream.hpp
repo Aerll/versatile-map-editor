@@ -1,11 +1,11 @@
 #pragma once
 
 #include <vt/debug/error_code.hpp>
-#include <vt/io/mapdata.hpp>
+#include <vt/io/ddnet/mapdata.hpp>
 
 class QFileInfo;
 
-namespace vt::io {
+namespace vt::io::ddnet {
 
 class MAPFileStream {
 public:
