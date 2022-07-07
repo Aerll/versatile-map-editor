@@ -1,15 +1,14 @@
 #pragma once
 
-#include <vt/map/tile.hpp>
-
 #include <QtGlobal>
 
 #include <array>
 
-namespace vt {
+namespace vt::core {
 
-class Node {
-    inline Node(quint16 id)
+template <typename _TileT, qsizetype _SideLength = 128>
+class Chunk {
+    inline Chunk(quint16 id)
         : tiles{}
         , id{ id }
     {
@@ -18,7 +17,7 @@ class Node {
     inline quint16 getID() { return id; }
 
 public:
-    std::array<Tile, 256 * 256> tiles;
+    std::array<_TileT, _SideLength * _SideLength> tiles;
 
 protected:
     quint16 id;

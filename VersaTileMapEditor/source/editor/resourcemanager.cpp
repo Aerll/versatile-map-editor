@@ -1,9 +1,9 @@
 #include <editor/resourcemanager.hpp>
 
 #include <vt/io/ddlfilestream.hpp>
+#include <vt/util/common.hpp>
 #include <vt/util/macros.hpp>
 #include <vt/util/graphics.hpp>
-#include <vt/util/utility.hpp>
 
 #include <QFileInfo>
 #include <QDirIterator>
