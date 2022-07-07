@@ -6,7 +6,7 @@
 
 #include <array>
 
-namespace vt {
+namespace vt::core {
 
 struct QuadVertex {
     QPointF position;

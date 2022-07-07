@@ -1,8 +1,9 @@
 #pragma once
 
-#include <vt/map/node.hpp>
-#include <vt/map/quad.hpp>
-#include <vt/map/sound_source.hpp>
+#include <vt/core/chunk.hpp>
+#include <vt/core/quad.hpp>
+#include <vt/core/sound_source.hpp>
+#include <vt/core/tile.hpp>
 
 #include <QFileInfo>
 #include <QColor>
@@ -12,7 +13,7 @@
 #include <memory>
 #include <vector>
 
-namespace vt {
+namespace vt::core {
 
 class Asset;
 
@@ -28,7 +29,7 @@ protected:
 
 
 class BaseTileLayer : public BaseLayer {
-    using node_iterator = std::vector<std::shared_ptr<Node>>::iterator;
+    using node_iterator = std::vector<std::shared_ptr<core::Chunk<core::Tile>>>::iterator;
 
 public:
     virtual ~BaseTileLayer() = default;
@@ -38,13 +39,13 @@ public:
     bool hasNode(qint32 id);
     bool hasNode(QPoint coords);
 
-    void addNode(std::shared_ptr<Node>& node);
+    void addNode(std::shared_ptr<core::Chunk<core::Tile>>& node);
 
     inline QSize getSize() noexcept { return size; }
     void updateSize();
 
 protected:
-    std::vector<std::shared_ptr<Node>> nodes;
+    std::vector<std::shared_ptr<core::Chunk<core::Tile>>> nodes;
     QSize size = { 0, 0 };
 };
 

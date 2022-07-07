@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vt/map/map.hpp>
+#include <vt/core/map.hpp>
 
 namespace vt::io {
 
@@ -8,7 +8,7 @@ class DDMData {
 public:
 
 public:
-    Map map;
+    core::Map map;
 };
 
 }

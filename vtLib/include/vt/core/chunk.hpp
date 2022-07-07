@@ -1,26 +1,32 @@
 #pragma once
 
-#include <QtGlobal>
+#include <vt/util/constants.hpp>
+
+#include <QPoint>
 
 #include <array>
 
 namespace vt::core {
 
-template <typename _TileT, qsizetype _SideLength = 128>
+template <typename _TileT>
 class Chunk {
-    inline Chunk(quint16 id)
-        : tiles{}
-        , id{ id }
+public:
+    inline Chunk() = delete;
+
+    inline Chunk(quint16 x, quint16 y)
+        : id{ static_cast<quint32>(y * constants::_grid_size + x) }
     {
     }
 
-    inline quint16 getID() { return id; }
+    inline auto& tileAt(quint16 x, quint16 y) { return tiles[y * constants::_chunk_size + x]; }
+    inline const auto& tileAt(quint16 x, quint16 y) const { return tiles[y * constants::_chunk_size + x]; }
+    inline auto getID() { return id; }
 
 public:
-    std::array<_TileT, _SideLength * _SideLength> tiles;
+    std::array<_TileT, constants::_chunk_size * constants::_chunk_size> tiles{};
 
-protected:
-    quint16 id;
+private:
+    quint32 id;
 };
 
 }

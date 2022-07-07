@@ -116,6 +116,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">catch2.pch</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="source\core\chunk_test.cpp" />
     <ClCompile Include="source\io\ddl_test.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\util\tile_test.cpp" />

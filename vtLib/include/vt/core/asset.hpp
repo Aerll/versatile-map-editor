@@ -2,7 +2,7 @@
 
 #include <QFileInfo>
 
-namespace vt {
+namespace vt::core {
 
 class Asset {
     QFileInfo file_info;

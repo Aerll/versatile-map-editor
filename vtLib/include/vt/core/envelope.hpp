@@ -10,7 +10,7 @@
 
 #include <vector>
 
-namespace vt {
+namespace vt::core {
 
 struct EnvelopePoint {
     qreal time_point;

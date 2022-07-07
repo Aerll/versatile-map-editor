@@ -14,7 +14,7 @@ TEST_CASE("util::toTilesetCoords") {
 
 TEST_CASE("util::rotateTile") {
     SECTION("enums::Rotate clockwise") {
-        Tile tile;
+        core::Tile tile;
 
         // non-mirrored
         tile.rotation = enums::Rotation::N;
@@ -48,7 +48,7 @@ TEST_CASE("util::rotateTile") {
     }
 
     SECTION("enums::Rotate counter-clockwise") {
-        Tile tile;
+        core::Tile tile;
 
         // non-mirrored
         tile.rotation = enums::Rotation::N;
@@ -84,7 +84,7 @@ TEST_CASE("util::rotateTile") {
 
 TEST_CASE("util::mirrorTile") {
     SECTION("In relation to vertical axis") {
-        Tile tile;
+        core::Tile tile;
 
         // N <-> V
         tile.rotation = enums::Rotation::N;
@@ -124,7 +124,7 @@ TEST_CASE("util::mirrorTile") {
     }
 
     SECTION("In relation to horizontal axis") {
-        Tile tile;
+        core::Tile tile;
 
         // N <-> H
         tile.rotation = enums::Rotation::N;

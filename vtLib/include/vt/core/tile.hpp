@@ -5,7 +5,7 @@
 
 #include <QtGlobal>
 
-namespace vt {
+namespace vt::core {
 
 struct Tile {
     quint8 index;

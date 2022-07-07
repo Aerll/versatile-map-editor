@@ -4,7 +4,7 @@
 #include <QPoint>
 #include <QSize>
 
-namespace vt {
+namespace vt::core {
 
 struct SoundSource {
     QPointF position;

@@ -2,7 +2,7 @@
 
 namespace vt::util {
 
-void rotateTile(Tile& tile, enums::Rotate direction) noexcept {
+void rotateTile(core::Tile& tile, enums::Rotate direction) noexcept {
     switch (direction) {
         case enums::Rotate::Clockwise:
             if (static_cast<bool>(tile.rotation & enums::Rotation::R))
@@ -19,7 +19,7 @@ void rotateTile(Tile& tile, enums::Rotate direction) noexcept {
     tile.rotation ^= enums::Rotation::R;
 }
 
-void mirrorTile(Tile& tile, enums::Mirror axis) noexcept {
+void mirrorTile(core::Tile& tile, enums::Mirror axis) noexcept {
     switch (axis) {
         case enums::Mirror::VerticalAxis:
             if (static_cast<bool>(tile.rotation & enums::Rotation::R))

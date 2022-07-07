@@ -1,14 +1,14 @@
 #pragma once
 
-#include <vt/map/envelope.hpp>
-#include <vt/map/group.hpp>
-#include <vt/map/layer.hpp>
+#include <vt/core/envelope.hpp>
+#include <vt/core/group.hpp>
+#include <vt/core/layer.hpp>
 
 #include <QString>
 
 #include <vector>
 
-namespace vt {
+namespace vt::core {
 
 class Map {
 public:

@@ -1,13 +1,13 @@
 #pragma once
 
-#include <vt/map/layer.hpp>
+#include <vt/core/layer.hpp>
 
 #include <QString>
 
 #include <memory>
 #include <vector>
 
-namespace vt {
+namespace vt::core {
 
 class Group {
 public:

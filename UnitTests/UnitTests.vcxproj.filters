@@ -24,6 +24,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="source\core">
+      <UniqueIdentifier>{52169bd7-773a-4f55-b954-f683ac6a9324}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\catch2.cpp">
@@ -40,6 +43,9 @@
     </ClCompile>
     <ClCompile Include="source\util\tile_test.cpp">
       <Filter>source\util</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\chunk_test.cpp">
+      <Filter>source\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

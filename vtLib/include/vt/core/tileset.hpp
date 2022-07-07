@@ -1,6 +1,6 @@
 #pragma once
 
-namespace vt {
+namespace vt::core {
 
 class Tileset {
     // TODO

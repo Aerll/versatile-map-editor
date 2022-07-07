@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vt/map/tile.hpp>
+#include <vt/core/tile.hpp>
 #include <vt/util/enums.hpp>
 
 #include <QtGlobal>
@@ -8,8 +8,8 @@
 
 namespace vt::util {
 
-void rotateTile(Tile& tile, enums::Rotate direction) noexcept;
-void mirrorTile(Tile& tile, enums::Mirror axis) noexcept;
+void rotateTile(core::Tile& tile, enums::Rotate direction) noexcept;
+void mirrorTile(core::Tile& tile, enums::Mirror axis) noexcept;
 
 
 
