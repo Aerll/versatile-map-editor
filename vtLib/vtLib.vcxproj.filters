@@ -43,6 +43,9 @@
     <Filter Include="include\vt\core">
       <UniqueIdentifier>{0e4741f3-d3ad-46e4-99a3-6a2d05e5522c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\vt\core">
+      <UniqueIdentifier>{7a1dda99-7a5f-4217-a861-cb517c8446bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="libs\singleapplication\singleapplication.cpp">
