@@ -23,11 +23,12 @@ public:
     {
     }
 
-    inline auto& tileAt(qint32 x, qint32 y) { return tiles[y * constants::_chunk_size + x]; }
-    inline auto& tileAt(QPoint pos) { return tileAt(pos.x(), pos.y()); }
-    inline const auto& tileAt(qint32 x, qint32 y) const { return tiles[y * constants::_chunk_size + x]; }
-    inline const auto& tileAt(QPoint pos) const { return tileAt(pos.x(), pos.y()); }
-    inline auto getID() { return id; }
+    [[nodiscard]] inline auto getID() const noexcept { return id; }
+
+    [[nodiscard]] inline auto& tileAt(qint32 x, qint32 y) { return tiles[y * constants::_chunk_size + x]; }
+    [[nodiscard]] inline auto& tileAt(QPoint pos) { return tileAt(pos.x(), pos.y()); }
+    [[nodiscard]] inline const auto& tileAt(qint32 x, qint32 y) const { return tiles[y * constants::_chunk_size + x]; }
+    [[nodiscard]] inline const auto& tileAt(QPoint pos) const { return tileAt(pos.x(), pos.y()); }
 
     inline void clearAt(qint32 x, qint32 y) { tiles[y * constants::_chunk_size + x] = {}; }
     inline void clearAt(QPoint pos) { clearAt(pos.x(), pos.y()); }
