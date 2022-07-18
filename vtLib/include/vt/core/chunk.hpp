@@ -80,6 +80,26 @@ public:
     [[nodiscard]] inline std::vector<QPoint> findAll(QRect rect, const _TileT& tile) const { return findAll(rect.x(), rect.y(), rect.width(), rect.height(), tile); }
     [[nodiscard]] inline std::vector<QPoint> findAll(const _TileT& tile) const { return findAll(0, 0, constants::_chunk_size, constants::_chunk_size, tile); }
 
+    void selectArea(qint32 x, qint32 y, qint32 width, qint32 height) {
+        assert((QRect{ 0, 0, constants::_chunk_size, constants::_chunk_size }.contains(QRect{ x, y, width, height })));
+        for (qint32 pos_x = x; pos_x < x + width; ++pos_x) {
+            for (qint32 pos_y = y; pos_y < y + height; ++pos_y)
+                tileAt(pos_x, pos_y).select();
+        }
+    }
+    inline void selectArea(QPoint pos, QSize size) { return selectArea(pos.x(), pos.y(), size.width(), size.height()); }
+    inline void selectArea(QRect rect) { return selectArea(rect.x(), rect.y(), rect.width(), rect.height()); }
+
+    void unselectArea(qint32 x, qint32 y, qint32 width, qint32 height) {
+        assert((QRect{ 0, 0, constants::_chunk_size, constants::_chunk_size }.contains(QRect{ x, y, width, height })));
+        for (qint32 pos_x = x; pos_x < x + width; ++pos_x) {
+            for (qint32 pos_y = y; pos_y < y + height; ++pos_y)
+                tileAt(pos_x, pos_y).unselect();
+        }
+    }
+    inline void unselectArea(QPoint pos, QSize size) { return unselectArea(pos.x(), pos.y(), size.width(), size.height()); }
+    inline void unselectArea(QRect rect) { return unselectArea(rect.x(), rect.y(), rect.width(), rect.height()); }
+
 public:
     std::array<_TileT, constants::_chunk_size * constants::_chunk_size> tiles{};
 

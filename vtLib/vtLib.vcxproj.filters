@@ -76,7 +76,7 @@
       <Filter>source\vt\util</Filter>
     </ClCompile>
     <ClCompile Include="source\vt\core\tile.cpp">
-      <Filter>source</Filter>
+      <Filter>source\vt\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #include <catch2.pch>
 
 #include <vt/core/chunk.hpp>
+#include <vt/core/tile.hpp>
 
 using namespace vt;
 
@@ -111,5 +112,18 @@ TEST_CASE("core::Chunk") {
         found = chunk.findAll(QRect{ QPoint{ 1, 1 }, QSize{ 3, 7 } }, 69);
         REQUIRE(found.size() == 1);
         CHECK(found[0] == QPoint{ 1, 1 });
+    }
+
+    SECTION("Selecting") {
+        QPoint pos = { 7, 37 };
+        core::Chunk<core::Tile> chunk{ pos };
+
+        CHECK(std::ranges::all_of(chunk.tiles, [](const core::Tile& tile) { return !tile.is_selected; }));
+
+        chunk.selectArea(QRect{ QPoint{ 1, 1 }, QSize{ 3, 7 } });
+        CHECK(std::ranges::count_if(chunk.tiles, [](const core::Tile& tile) { return tile.is_selected; }) == 3 * 7);
+        
+        chunk.unselectArea(QRect{ QPoint{ 2, 2 }, QSize{ 1, 3 } });
+        CHECK(std::ranges::count_if(chunk.tiles, [](const core::Tile& tile) { return tile.is_selected; }) == 3 * 7 - 3);
     }
 }

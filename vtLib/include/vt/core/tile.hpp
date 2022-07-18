@@ -9,7 +9,7 @@ namespace vt::core {
 
 class Tile {
 public:
-    [[nodiscard]] inline QPoint getTilesetCoords() noexcept { return { index / 16, index % 16 }; }
+    [[nodiscard]] inline QPoint getTilesetCoords() const noexcept { return { index / 16, index % 16 }; }
     inline void select() noexcept { is_selected = true; }
     inline void unselect() noexcept { is_selected = false; }
 
