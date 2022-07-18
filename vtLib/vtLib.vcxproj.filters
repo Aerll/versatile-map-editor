@@ -75,8 +75,8 @@
     <ClCompile Include="source\vt\util\graphics.cpp">
       <Filter>source\vt\util</Filter>
     </ClCompile>
-    <ClCompile Include="source\vt\util\tile.cpp">
-      <Filter>source\vt\util</Filter>
+    <ClCompile Include="source\vt\core\tile.cpp">
+      <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +158,6 @@
       <Filter>include\vt\util</Filter>
     </ClInclude>
     <ClInclude Include="include\vt\util\macros.hpp">
-      <Filter>include\vt\util</Filter>
-    </ClInclude>
-    <ClInclude Include="include\vt\util\tile.hpp">
       <Filter>include\vt\util</Filter>
     </ClInclude>
     <ClInclude Include="include\vt\util\token.hpp">

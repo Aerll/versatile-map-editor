@@ -41,10 +41,10 @@
     <ClCompile Include="source\io\ddl_test.cpp">
       <Filter>source\io</Filter>
     </ClCompile>
-    <ClCompile Include="source\util\tile_test.cpp">
-      <Filter>source\util</Filter>
-    </ClCompile>
     <ClCompile Include="source\core\chunk_test.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\tile_test.cpp">
       <Filter>source\core</Filter>
     </ClCompile>
   </ItemGroup>

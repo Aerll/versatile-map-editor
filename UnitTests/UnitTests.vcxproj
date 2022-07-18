@@ -119,7 +119,7 @@
     <ClCompile Include="source\core\chunk_test.cpp" />
     <ClCompile Include="source\io\ddl_test.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\util\tile_test.cpp" />
+    <ClCompile Include="source\core\tile_test.cpp" />
     <ClCompile Include="source\util\utility_test.cpp" />
   </ItemGroup>
   <ItemGroup>

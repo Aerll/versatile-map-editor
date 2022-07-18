@@ -17,6 +17,7 @@
   <ItemGroup>
     <ClCompile Include="libs\singleapplication\singleapplication.cpp" />
     <ClCompile Include="libs\singleapplication\singleapplication_p.cpp" />
+    <ClCompile Include="source\vt\core\tile.cpp" />
     <ClCompile Include="source\vt\io\ddldata.cpp" />
     <ClCompile Include="source\vt\io\ddlfilestream.cpp" />
     <ClCompile Include="source\vt\io\ddlparser.cpp" />
@@ -24,7 +25,6 @@
     <ClCompile Include="source\vt\io\ddmdata.cpp" />
     <ClCompile Include="source\vt\io\ddmfilestream.cpp" />
     <ClCompile Include="source\vt\util\graphics.cpp" />
-    <ClCompile Include="source\vt\util\tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\vt\debug\error.hpp" />
@@ -51,7 +51,6 @@
     <ClInclude Include="include\vt\util\enums.hpp" />
     <ClInclude Include="include\vt\util\graphics.hpp" />
     <ClInclude Include="include\vt\util\macros.hpp" />
-    <ClInclude Include="include\vt\util\tile.hpp" />
     <ClInclude Include="include\vt\util\token.hpp" />
     <ClInclude Include="include\vt\util\types.hpp" />
     <ClInclude Include="include\vt\util\common.hpp" />
