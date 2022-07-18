@@ -73,6 +73,7 @@ TEST_CASE("core::Chunk") {
         core::Chunk<qint32> chunk{ pos };
 
         chunk.replaceArea(QRect{ QPoint{ 3, 3 }, QSize{ 7, 7 } }, 37);
+        
         auto found = chunk.findAll(37);
         REQUIRE(found.size() == found.capacity());
         REQUIRE(found.size() == 7 * 7);
