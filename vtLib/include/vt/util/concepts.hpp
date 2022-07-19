@@ -17,4 +17,7 @@ template <typename _Type>
 template <typename _Type>
     concept Integral = std::integral<_Type>;
 
+template <typename _FunctionT, typename... _ArgsT>
+    concept Invocable = std::invocable<_FunctionT, _ArgsT...>;
+
 }

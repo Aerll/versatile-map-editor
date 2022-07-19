@@ -32,6 +32,7 @@
 
 # Visual Studio
 *.vs
+*.vscode
 *.aps
 *bin/
 *x64/

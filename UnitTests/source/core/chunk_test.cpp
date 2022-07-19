@@ -1,129 +1,164 @@
 #include <catch2.pch>
 
 #include <vt/core/chunk.hpp>
-#include <vt/core/tile.hpp>
 
 using namespace vt;
 
 TEST_CASE("core::Chunk") {
     SECTION("Initialize from position") {
         QPoint pos = { 7, 37 };
-        core::Chunk<qint32> chunk{ pos };
+        core::Chunk<core::Tile> chunk{ pos };
 
         CHECK(chunk.getID() == static_cast<quint32>(pos.y() * constants::_grid_size + pos.x()));
 
         REQUIRE(chunk.tiles.size() == constants::_chunk_size * constants::_chunk_size);
         
-        chunk.tiles[3 * constants::_chunk_size + 7] = 37;
-        CHECK(chunk.tileAt(7, 3) == 37);
+        chunk.tiles[3 * constants::_chunk_size + 7].index = 37;
+        CHECK(chunk.tileAt(7, 3).index == 37);
     }
 
-    SECTION("Editing") {
+    SECTION("Accessing individual tiles") {
         QPoint pos = { 7, 37 };
-        core::Chunk<qint32> chunk{ pos };
+        core::Chunk<core::Tile> chunk{ pos };
 
-        CHECK(chunk.tiles[9 * constants::_chunk_size + 6] == 0);
-        chunk.tileAt({ 6, 9 }) = 69;
-        CHECK(chunk.tiles[9 * constants::_chunk_size + 6] == 69);
-        CHECK(chunk.tileAt({ 6, 9 }) == 69);
-
-        CHECK(chunk.tileAt({ 3, 7 }) == 0);
-        chunk.replaceAt({ 3, 7 }, 37);
-        CHECK(chunk.tileAt({ 3, 7 }) == 37);
-
-        std::ranges::fill(chunk.tiles, 0);
-        chunk.replaceArea(QRect{ QPoint{ 1, 1 }, QSize{ 2, 3 } }, 37);
-        for (qint32 x = 0; x < 4; ++x) {
-            for (qint32 y = 0; y < 4; ++y) {
-                if (x >= 1 && x <= 2 && y >= 1 && y <= 3)
-                    CHECK(chunk.tileAt(x, y) == 37);
-                else
-                    CHECK(chunk.tileAt(x, y) == 0);
-            }
-        }
+        CHECK(chunk.tiles[9 * constants::_chunk_size + 6].index == 0);
+        chunk.tileAt({ 6, 9 }).index = 69;
+        CHECK(chunk.tiles[9 * constants::_chunk_size + 6].index == 69);
+        CHECK(chunk.tileAt({ 6, 9 }).index == 69);
     }
-    
-    SECTION("Erasing") {
+
+    SECTION("Modifying tiles") {
         QPoint pos = { 7, 37 };
-        core::Chunk<qint32> chunk{ pos };
+        core::Chunk<core::Tile> chunk{ pos };
 
-        chunk.tileAt(6, 9) = 69;
-        chunk.clearAt(6, 9);
-        CHECK(chunk.tileAt(6, 9) == 0);
+        core::Tile default_tile;
+        core::Tile check_tile = { .index = 69, .rotation = enums::Rotation::VHR, .is_selected = true };
 
-        for (qint32 x = 0; x < 4; ++x) {
-            for (qint32 y = 0; y < 4; ++y) {
-                chunk.tileAt(x, y) = 44;
-            }
-        }
+        // modifyAt
+        chunk.modifyAt({ 6, 9 }, [&](core::Tile& tile) { 
+            tile = check_tile;
+        });
+        CHECK(chunk.tileAt(6, 9) == check_tile);
 
-        chunk.clearArea(QRect{ QPoint{ 1, 1 }, QSize{ 2, 3 } });
+        // modifyAtIf
+        chunk.modifyAtIf({ 6, 9 }, [&](core::Tile& tile) {
+            tile = default_tile;
+        }, [&](const core::Tile& tile) {
+            return tile != check_tile;
+        });
+        CHECK(chunk.tileAt(6, 9) == check_tile);
+        chunk.modifyAtIf({ 6, 9 }, [&](core::Tile& tile) {
+            tile = default_tile;
+        }, [&](const core::Tile& tile) {
+            return tile == check_tile;
+        });
+        CHECK(chunk.tileAt(6, 9) == default_tile);
 
-        for (qint32 x = 0; x < 4; ++x) {
-            for (qint32 y = 0; y < 4; ++y) {
-                if (x >= 1 && x <= 2 && y >= 1 && y <= 3)
-                    CHECK(chunk.tileAt(x, y) == 0);
-                else
-                    CHECK(chunk.tileAt(x, y) == 44);
-            }
-        }
+        // modifyArea
+        chunk.modifyArea(QRect{ 1, 1, 3, 7 }, [&](core::Tile& tile) { 
+            tile = check_tile;
+        });
+        CHECK(chunk.tileAt(0, 0) == default_tile);
+        CHECK(chunk.tileAt(0, 0) != chunk.tileAt(1, 1));
+        CHECK(std::ranges::count(chunk.tiles, check_tile) == 3 * 7);
+
+        // modifyAreaIf
+        chunk.modifyAreaIf(QRect{ 0, 0, constants::_chunk_size, constants::_chunk_size }, [&](core::Tile& tile) { 
+            tile = check_tile;
+        }, [&](const core::Tile& tile) {
+            return tile != check_tile;
+        });
+        CHECK(std::ranges::count(chunk.tiles, check_tile) == qsizetype(chunk.tiles.size()));
+        chunk.modifyAreaIf(QRect{ 0, 0, constants::_chunk_size, constants::_chunk_size }, [&](core::Tile& tile) { 
+            tile = default_tile;
+        }, [&](const core::Tile& tile) {
+            return tile == check_tile;
+        });
+        CHECK(std::ranges::count(chunk.tiles, default_tile) == qsizetype(chunk.tiles.size()));
+    }
+
+    SECTION("Basic modifiers") {
+        QPoint pos = { 7, 37 };
+        core::Chunk<core::Tile> chunk{ pos };
+
+        // _Clear
+        chunk.tileAt(6, 9) = { .index = 69, .rotation = enums::Rotation::VHR, .is_selected = true };
+        chunk.modifyAt(6, 9, core::Chunk<core::Tile>::_Clear);
+        CHECK(chunk.tileAt(6, 9) == core::Tile{});
+
+        // _Select
+        chunk.modifyAt(6, 9, core::Chunk<core::Tile>::_Select);
+        CHECK(chunk.tileAt(6, 9).is_selected);
+
+        // _Unselect
+        chunk.modifyAt(6, 9, core::Chunk<core::Tile>::_Unselect);
+        CHECK_FALSE(chunk.tileAt(6, 9).is_selected);
+
+        // _RotateClockwise
+        chunk.modifyAt(6, 9, core::Chunk<core::Tile>::_RotateClockwise);
+        CHECK(chunk.tileAt(6, 9).rotation != enums::Rotation::N);
+
+        // _RotateCounterClockwise
+        chunk.modifyAt(6, 9, core::Chunk<core::Tile>::_RotateCounterClockwise);
+        CHECK(chunk.tileAt(6, 9).rotation == enums::Rotation::N);
+
+        // _MirrorVerticalAxis
+        chunk.modifyAt(6, 9, core::Chunk<core::Tile>::_MirrorVerticalAxis);
+        CHECK(chunk.tileAt(6, 9).rotation != enums::Rotation::N);
+        chunk.modifyAt(6, 9, core::Chunk<core::Tile>::_MirrorVerticalAxis);
+        CHECK(chunk.tileAt(6, 9).rotation == enums::Rotation::N);
+
+        // _MirrorHorizontalAxis
+        chunk.modifyAt(6, 9, core::Chunk<core::Tile>::_MirrorHorizontalAxis);
+        CHECK(chunk.tileAt(6, 9).rotation != enums::Rotation::N);
+        chunk.modifyAt(6, 9, core::Chunk<core::Tile>::_MirrorHorizontalAxis);
+        CHECK(chunk.tileAt(6, 9).rotation == enums::Rotation::N);
     }
 
     SECTION("Search count") {
         QPoint pos = { 7, 37 };
-        core::Chunk<qint32> chunk{ pos };
+        core::Chunk<core::Tile> chunk{ pos };
 
-        chunk.replaceArea(QRect{ QPoint{ 3, 3 }, QSize{ 7, 7 } }, 37);
+        chunk.modifyArea(QRect{ 3, 3, 7, 7 }, [](core::Tile& tile) {
+            tile.index = 37;
+        });
         
-        auto found = chunk.findAll(37);
+        auto found = chunk.findAll({ .index = 37 });
         REQUIRE(found.size() == found.capacity());
         REQUIRE(found.size() == 7 * 7);
 
-        found = chunk.findAll(0);
+        found = chunk.findAll({ .index = 0 });
         REQUIRE(found.size() == found.capacity());
         REQUIRE(found.size() == chunk.tiles.size() - 7 * 7);
 
-        found = chunk.findAll(QRect{ QPoint{ 1, 1 }, QSize{ 4, 6 } }, 37);
+        found = chunk.findAll(QRect{ 1, 1, 4, 6 }, { .index = 37 });
         REQUIRE(found.size() == found.capacity());
         REQUIRE(found.size() == 2 * 4);
     }
 
     SECTION("Search result") {
         QPoint pos = { 7, 37 };
-        core::Chunk<qint32> chunk{ pos };
+        core::Chunk<core::Tile> chunk{ pos };
 
-        chunk.tileAt(1, 1) = 69;
-        chunk.tileAt(3, 7) = 37;
-        chunk.tileAt(6, 9) = 69;
+        chunk.tileAt(1, 1) = { .index = 69 };
+        chunk.tileAt(3, 7) = { .index = 37 };
+        chunk.tileAt(6, 9) = { .index = 69 };
 
-        auto found = chunk.findAll(37);
+        auto found = chunk.findAll({ .index = 37 });
         REQUIRE(found.size() == 1);
         CHECK(found[0] == QPoint{ 3, 7 });
 
-        found = chunk.findAll(69);
+        found = chunk.findAll({ .index = 69 });
         REQUIRE(found.size() == 2);
         CHECK(found[0] == QPoint{ 1, 1 });
         CHECK(found[1] == QPoint{ 6, 9 });
 
-        found = chunk.findAll(QRect{ QPoint{ 1, 1 }, QSize{ 3, 7 } }, 37);
+        found = chunk.findAll(QRect{ 1, 1, 3, 7 }, { .index = 37 });
         REQUIRE(found.size() == 1);
         CHECK(found[0] == QPoint{ 3, 7 });
 
-        found = chunk.findAll(QRect{ QPoint{ 1, 1 }, QSize{ 3, 7 } }, 69);
+        found = chunk.findAll(QRect{ 1, 1, 3, 7 }, { .index = 69 });
         REQUIRE(found.size() == 1);
         CHECK(found[0] == QPoint{ 1, 1 });
-    }
-
-    SECTION("Selecting") {
-        QPoint pos = { 7, 37 };
-        core::Chunk<core::Tile> chunk{ pos };
-
-        CHECK(std::ranges::all_of(chunk.tiles, [](const core::Tile& tile) { return !tile.is_selected; }));
-
-        chunk.selectArea(QRect{ QPoint{ 1, 1 }, QSize{ 3, 7 } });
-        CHECK(std::ranges::count_if(chunk.tiles, [](const core::Tile& tile) { return tile.is_selected; }) == 3 * 7);
-        
-        chunk.unselectArea(QRect{ QPoint{ 2, 2 }, QSize{ 1, 3 } });
-        CHECK(std::ranges::count_if(chunk.tiles, [](const core::Tile& tile) { return tile.is_selected; }) == 3 * 7 - 3);
     }
 }

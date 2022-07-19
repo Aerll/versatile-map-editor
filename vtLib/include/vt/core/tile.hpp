@@ -9,6 +9,8 @@ namespace vt::core {
 
 class Tile {
 public:
+    [[nodiscard]] inline bool operator==(const Tile&) const noexcept = default;
+
     [[nodiscard]] inline QPoint getTilesetCoords() const noexcept { return { index / 16, index % 16 }; }
     inline void select() noexcept { is_selected = true; }
     inline void unselect() noexcept { is_selected = false; }
